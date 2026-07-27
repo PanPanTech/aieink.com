@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>Do Electronic Shelf Labels Work With My POS/ERP? API, MQTT &amp; Database Explained &mdash; AiESL Blog</title>
+<meta name="description" content="A plain-English guide to connecting electronic shelf labels to your POS, ERP or database. What API, MQTT and TCP actually mean, which one fits you, what to prepare, and how we integrate an old system that only has a database.">
+<meta name="keywords" content="esl integration, electronic shelf label pos erp, esl api, esl mqtt, esl database integration, connect electronic shelf labels, esl pos integration">
+<link rel="canonical" href="https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Do Electronic Shelf Labels Work With My POS/ERP? API, MQTT &amp; Database Explained">
+<meta property="og:description" content="Plain-English guide to connecting ESLs to your POS, ERP or database — what API, MQTT and TCP mean, which fits you, and how we integrate a legacy database.">
+<meta property="og:image" content="https://www.aiesl.com/assets/blog/electronic-price-tags-hero.jpg">
+<meta property="og:url" content="https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Do Electronic Shelf Labels Work With My POS/ERP? API, MQTT & Database Explained","description":"A plain-English guide to connecting electronic shelf labels to your POS, ERP or database: what API, MQTT and TCP mean, which fits you, what to prepare, and how to integrate a legacy database.","datePublished":"2026-07-27","dateModified":"2026-07-27","author":{"@type":"Organization","name":"AiESL"},"publisher":{"@type":"Organization","name":"AiESL"},"image":"https://www.aiesl.com/assets/blog/electronic-price-tags-hero.jpg","mainEntityOfPage":"https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.aiesl.com/blog.html"},{"@type":"ListItem","position":3,"name":"Do ESLs Work With My POS/ERP?","item":"https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can electronic shelf labels connect to my existing POS or ERP?","acceptedAnswer":{"@type":"Answer","text":"Almost always, yes. If your POS or ERP can share product and price data — through an API, an export, or its database — an ESL platform can read that data and drive the labels. You do not replace your POS or ERP; the labels sit alongside it and display whatever it already knows."}},{"@type":"Question","name":"What if I only have an old database and no API?","acceptedAnswer":{"@type":"Answer","text":"That is a common and fully supported case. We connect read-only to your database, map your columns to the label fields once, and use the database's own change log to detect price changes automatically, so an edit in your system refreshes the shelf label without anyone exporting a file."}},{"@type":"Question","name":"Will connecting ESLs change or damage my system's data?","acceptedAnswer":{"@type":"Answer","text":"No. A well-designed integration reads your data and never writes back to your POS, ERP or database. Access is read-only, your system stays the single source of truth, and the label platform only mirrors it."}},{"@type":"Question","name":"What is the difference between API and MQTT for my store?","acceptedAnswer":{"@type":"Answer","text":"For most stores an API is the simplest and most stable choice: your system and the label platform exchange data in a standard format on request. MQTT is a broadcast-style channel better suited to pushing many price changes in real time. You do not have to choose the jargon — you describe your goal and the supplier recommends the method."}},{"@type":"Question","name":"How long does an ESL integration take?","acceptedAnswer":{"@type":"Answer","text":"A standard API or database integration is typically set up in days to a few weeks once you provide access and a field list, because the field mapping is a one-time step. Building your own integration from scratch usually takes about a year, which is why most retailers use ready middleware instead."}},{"@type":"Question","name":"Is the connection secure and stable if the network drops?","acceptedAnswer":{"@type":"Answer","text":"Yes, with a properly built system. Data moves over encrypted connections, access is read-only, and the gateway keeps working and re-syncs automatically after a network outage, so a brief drop does not scramble your shelf prices."}}]}</script>
+<style>
+.article-layout{display:grid;grid-template-columns:minmax(0,820px) 270px;gap:52px;align-items:start}
+.article-layout>*{min-width:0}
+.article{width:100%;max-width:100%}
+.article-cover{width:100%}
+.article-toc{position:sticky;top:96px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.article-toc b{display:block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue-hi);letter-spacing:.05em;margin-bottom:12px;text-transform:uppercase}
+.article-toc a{display:block;font-size:13.5px;color:var(--ink-mid);padding:8px 0;border-top:1px solid var(--line-soft)}
+.article-toc a:hover{color:var(--blue-hi)}
+.article-body .answer-box{background:linear-gradient(135deg,rgba(77,124,255,.12),rgba(77,124,255,.03));border:1px solid rgba(77,124,255,.28);border-radius:14px;padding:22px 24px;margin:0 0 28px;color:var(--ink);font-size:18px;line-height:1.7}
+.article-body .answer-box strong{color:var(--ink)}
+.article-body figure{margin:30px 0}
+.article-body figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;background:#f4f5f7}
+.article-body figcaption{font-size:12px;color:var(--ink-dim);text-align:center;margin-top:9px}
+.article-body .source-note{font-size:13px;color:var(--ink-dim);margin-top:-12px}
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.data-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.data-card .num{font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:700;color:var(--blue-hi);line-height:1.1}
+.data-card .lbl{font-size:13px;color:var(--ink-mid);margin-top:8px}
+.article-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:28px 0;background:var(--bg-card)}
+.article-table{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+.article-table th,.article-table td{padding:14px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft)}
+.article-table thead th{background:var(--bg-soft);border-top:none;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim)}
+.article-table td:first-child{color:var(--ink);font-weight:600}
+.article-body .source-list{padding-left:0;list-style:none;display:grid;gap:10px}
+.article-body .source-list li{display:block}
+.article-body .source-list li:before{display:none}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr}.article-toc{position:static;order:-1}.data-strip{grid-template-columns:1fr}}
+@media(max-width:640px){.article-layout,.article,.article-body,.article-body .answer-box,.article-toc{width:100%;max-width:min(calc(100vw - 40px),350px);min-width:0}.article-body,.article-body *{overflow-wrap:break-word}.article-body .answer-box{font-size:16px}.article-table{min-width:620px}.page-hero h1{font-size:32px}.article-meta{gap:7px 10px;font-size:12px}.article-meta span:nth-child(even){display:none}.wrap,.wrap.wide{padding-left:20px;padding-right:20px}.article-cover{max-width:350px}.article-cover img{height:230px}}
+</style>
+</head>
+<body>
+
+<nav data-screen-label="Article — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="index.html#roi"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="Resources.html#faq"><b>FAQ &amp; Guides</b><small>What is an AI ESL?</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="blog.html">Insights &amp; Blog</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<div class="page-hero" data-screen-label="Article esl-integration — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="article-hero">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:16px"><a href="blog.html" style="color:var(--blue-hi)">Blog</a> / PLAIN-ENGLISH GUIDE</div>
+      <h1>Do Electronic Shelf Labels Work With My POS/ERP? API, MQTT &amp; Database Explained</h1>
+      <div class="article-meta">
+        <span>July 27, 2026</span><span>&middot;</span><span>14 min read</span><span>&middot;</span><span>AiESL Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap wide"><div class="article-cover reveal"><img src="assets/blog/electronic-price-tags-hero.jpg" alt="A retail shelf of electronic price labels being updated from a store system with a handheld device"></div></div>
+
+<section data-screen-label="Article esl-integration — Body">
+  <div class="wrap wide">
+    <div class="article-layout">
+      <article class="article">
+        <div class="article-body">
+          <div class="answer-box"><strong>Yes &mdash; electronic shelf labels work with almost any POS or ERP, and even with an old system that only has a database.</strong> If your system can share product and price data, a label platform can read it and update the shelf. There are three ways to connect &mdash; an API, MQTT, or a direct database link &mdash; and which one you use simply depends on what you already have. This guide explains the jargon in plain English, helps you pick the right path, and shows exactly what to prepare, including the case where all you have is one aging database.</div>
+
+          <p>If a supplier has ever handed you a page full of &ldquo;TCP, MQTT, REST API, POS, ERP&rdquo; and left you more worried than before, this article is the antidote. You do not need to be technical to make a good decision here &mdash; you need to know what each term means for <em>you</em>, and what your side has to provide. For the broader picture of why open, documented connections matter, see our companion piece on <a href="open-vs-closed-esl-systems.html">open vs closed ESL systems</a>; if you are new to the hardware itself, start with <a href="what-are-electronic-shelf-labels.html">what electronic shelf labels are</a>.</p>
+
+          <div class="data-strip">
+            <div class="data-card"><div class="num">3 ways</div><div class="lbl">To connect: API, MQTT, or a direct database link &mdash; pick the one that fits what you have.</div></div>
+            <div class="data-card"><div class="num">Read-only</div><div class="lbl">A good integration only reads your data &mdash; it never changes your POS, ERP or database.</div></div>
+            <div class="data-card"><div class="num">Days&ndash;weeks</div><div class="lbl">Typical setup time once you provide access and a field list &mdash; not the ~1 year of building it yourself.</div></div>
+          </div>
+
+          <h2 id="jargon">First, the Jargon in Plain English</h2>
+          <p><strong>Every one of these words describes a way for two systems to talk to each other &mdash; nothing more.</strong> Here is each term as a plain sentence plus an everyday analogy, so the rest of the article makes sense.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Term</th><th>In plain English</th><th>Everyday analogy</th></tr></thead>
+              <tbody>
+                <tr><td>POS</td><td>Your point-of-sale &mdash; the checkout system that knows every product and its price.</td><td>The cash register and its price book.</td></tr>
+                <tr><td>ERP</td><td>The bigger system that manages inventory, purchasing and stock behind the store.</td><td>The back-office brain.</td></tr>
+                <tr><td>Database</td><td>The place your product and price data is actually stored (often MySQL, SQL Server, etc.).</td><td>The master ledger in the stockroom.</td></tr>
+                <tr><td>API</td><td>A standard &ldquo;service window&rdquo; one system offers so another can ask it for data.</td><td>A waiter: you order, they fetch it from the kitchen.</td></tr>
+                <tr><td>MQTT</td><td>A lightweight broadcast channel: publish a change once and every subscriber hears it instantly.</td><td>A radio station: announce once, everyone tuned in receives it.</td></tr>
+                <tr><td>TCP</td><td>The low-level pipe the others run over &mdash; the plumbing beneath the API or MQTT.</td><td>The water pipes under the floor.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Notice the pattern: POS, ERP and database are <em>where your prices live</em>; API, MQTT and TCP are <em>how the data travels</em> to the shelf. You care about the first group; a good supplier handles the second. Our note on <a href="open-vs-closed-esl-systems.html">open ESL platforms</a> explains why insisting on documented, standard connections (an open API or MQTT rather than a closed, undocumented one) protects you for years.</p>
+
+          <h2 id="which">Which Connection Is Right for Me?</h2>
+          <p><strong>You do not choose by the acronym &mdash; you choose by what you already have.</strong> Run down this short decision tree and you will land on the right path in under a minute.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>If you have&hellip;</th><th>Use&hellip;</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>A modern POS/ERP that can expose an API</td><td>API (REST)</td><td>Stable, standard, easy to maintain &mdash; the default for most stores.</td></tr>
+                <tr><td>A need to push many price changes in real time</td><td>MQTT</td><td>Broadcast-style: one change reaches every label at once.</td></tr>
+                <tr><td>Only an old database and no API</td><td>Direct database link</td><td>We read your database directly, read-only (covered in detail below).</td></tr>
+                <tr><td>No system at all (spreadsheets, paper)</td><td>Our built-in back office</td><td>Manage products and prices in our software until you are ready to connect.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure>
+            <img src="assets/blog/esl-integration-methods.svg" alt="Diagram showing three ways your systems connect to electronic shelf labels: API, MQTT, or a direct database link, all reaching the AiESL platform and the e-paper labels">
+            <figcaption>Three ways your data reaches the shelf edge. Diagram: AiESL.</figcaption>
+          </figure>
+          <p>A quick reassurance on the two that scare people most. <strong>An API is the simplest and most stable option</strong> for the majority of retailers: your systems exchange data in a clean, standard format, and it is easy to monitor and troubleshoot. <strong>MQTT</strong> is worth it when you change prices constantly and want them live instantly. If neither is available because your system is old, the database path below covers you &mdash; you are not stuck.</p>
+
+          <h2 id="prepare">What Do I Need to Prepare for an API Integration?</h2>
+          <p><strong>An API integration is mostly about giving the label platform read access to your product data and telling it what your fields mean.</strong> Here is the short checklist most projects need:</p>
+          <ul>
+            <li><strong>Read access to your product and price data</strong> &mdash; an API endpoint, or an export, or a database view. Read-only is enough.</li>
+            <li><strong>A field list</strong> &mdash; which columns hold SKU, product name, the price (or several prices), shelf location and stock.</li>
+            <li><strong>A test environment and a technical contact</strong> &mdash; someone (your IT or your POS/ERP vendor) who can answer questions and grant access.</li>
+            <li><strong>An update-frequency expectation</strong> &mdash; do prices need to reach the shelf in real time, or is a few times a day fine?</li>
+            <li><strong>Basic network and security conditions</strong> &mdash; whether outbound access is allowed, whether connections must use HTTPS, and any IP allowlist.</li>
+          </ul>
+          <p>That is genuinely most of it. The heavy lifting &mdash; translating your data into what each label shows &mdash; is a one-time mapping the supplier does with you, not ongoing work for your team. And because the connection is read-only, it cannot alter what is in your <a href="what-are-electronic-shelf-labels.html">POS or ERP</a>; your system stays the single source of truth.</p>
+
+          <h2 id="database">&ldquo;I Only Have an Old Database&rdquo; &mdash; Here&rsquo;s Exactly How We Connect It</h2>
+          <p><strong>This is one of the most common situations, and it is fully supported: if all you have is an aging system with a database and no API, we connect to the database directly, read-only, and keep the labels in sync automatically.</strong> No one has to export a spreadsheet every morning. The setup has four clear steps.</p>
+          <h3>Step 1 &mdash; Bring the base station online</h3>
+          <p>The gateway (base station) is the small box that talks wirelessly to the labels. It is placed in the store, connected to your network, and registered to the management software. Once it is online, it is ready to receive the product data and push it to the tags. Nothing about this touches your database yet &mdash; it is just the delivery hardware coming up.</p>
+          <h3>Step 2 &mdash; Read your product data (the &ldquo;metadata&rdquo;)</h3>
+          <p>We point the integration at your database with a <strong>read-only</strong> account. &ldquo;Metadata&rdquo; here just means your product records &mdash; codes, names, prices, locations, stock. We read them; we never write back. Your database remains exactly as it is, and it stays the single source of truth for every price.</p>
+          <h3>Step 3 &mdash; Map your columns to the label fields</h3>
+          <p>Your database uses its own column names; the label system has its own fields. So we agree a <strong>one-time mapping</strong> &mdash; a simple table saying &ldquo;this column of yours is the price, that one is the product name,&rdquo; and so on. A sanitized example (your real column names will differ):</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Your database column</th><th>&rarr;</th><th>Label field</th></tr></thead>
+              <tbody>
+                <tr><td>product_code</td><td>&rarr;</td><td>item code</td></tr>
+                <tr><td>product_name</td><td>&rarr;</td><td>name</td></tr>
+                <tr><td>retail_price</td><td>&rarr;</td><td>price field 1</td></tr>
+                <tr><td>member_price</td><td>&rarr;</td><td>price field 2</td></tr>
+                <tr><td>shelf_location</td><td>&rarr;</td><td>location</td></tr>
+                <tr><td>tag_id</td><td>&rarr;</td><td>label ID</td></tr>
+                <tr><td>template</td><td>&rarr;</td><td>label template</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Illustrative mapping only &mdash; the exact fields are agreed with you once, then reused automatically. It is set up a single time, then it just runs.</p>
+          <h3>Step 4 &mdash; Detect changes automatically</h3>
+          <p><strong>The final piece is what makes it feel automatic: instead of re-reading your whole database on a timer, the integration watches your database&rsquo;s own change log.</strong> Every serious database keeps a running record of what changed (in MySQL this is the binary log; other databases have equivalents). When a price is edited in your system, that change appears in the log within moments, the integration picks it up, and the matching shelf label refreshes &mdash; no export, no manual step, no delay you would notice. Change a price in the system you already use, and the shelf follows on its own.</p>
+          <p>That is the whole legacy-database path: gateway online, read the data, map it once, watch for changes. It is the same outcome as a modern API integration, reached from a starting point of &ldquo;we only have an old database.&rdquo;</p>
+
+          <h2 id="trust">Is It Stable, Secure and Simple?</h2>
+          <p>Those three worries &mdash; will it stay reliable, is my data safe, and is this going to be hard &mdash; are exactly the right questions. Straight answers:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Concern</th><th>How a good integration handles it</th></tr></thead>
+              <tbody>
+                <tr><td>Stable</td><td>Mature, standard protocols; the gateway keeps running and re-syncs automatically after a network drop, so a brief outage does not scramble shelf prices. Reliability at the label level is helped by long <a href="esl-battery-life.html">battery life</a> and low-power design.</td></tr>
+                <tr><td>Secure</td><td>Read-only access, encrypted connections, and &mdash; importantly &mdash; your data stays in your own stack. The platform mirrors your system rather than taking it over, which is the whole point of an <a href="open-vs-closed-esl-systems.html">open, non-lock-in approach</a>. On-premises deployment is available where policy requires it.</td></tr>
+                <tr><td>Simple</td><td>The one hard part &mdash; field mapping &mdash; is done once, with you, by the supplier. After that it runs automatically. Compare that with building it yourself, which typically takes about a year.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The security point deserves emphasis because it is where non-technical buyers feel most exposed: a correctly built ESL integration <strong>never writes back</strong> to your POS, ERP or database. It reads, it mirrors, it displays. If a supplier cannot clearly confirm that access is read-only and your data stays yours, treat that as a warning sign &mdash; the same signal we flag in our <a href="top-electronic-shelf-label-manufacturers.html">vendor comparison guide</a>.</p>
+
+          <h2 id="next">Putting It Together</h2>
+          <p>Step back and the picture is simple. Your prices already live in a POS, an ERP or a database. An electronic shelf label platform reads that data &mdash; through an API, MQTT, or a direct database link, whichever matches what you have &mdash; and shows it on the shelf, updating automatically when you change a price. It does not replace your systems, it does not write to them, and it does not require you to understand the plumbing. Once the labels are connected, the same shelf edge can also power <a href="ai-dynamic-pricing-esl.html">AI-driven pricing</a> and <a href="grocery-store-digital-price-tags.html">automatic markdowns</a> &mdash; but that is a later chapter; connection comes first.</p>
+
+          <div class="answer-box"><strong>The one-line answer:</strong> if your system can share its price data &mdash; even an old database &mdash; electronic shelf labels can connect to it, read-only and automatically. The acronyms are just different roads to the same destination; you pick the one that matches what you already own.</div>
+          <p><strong>Not sure which path fits your setup?</strong> <a href="javascript:void(0)" onclick="openModal()">Book an integration assessment call</a> &mdash; tell us what system you run (POS, ERP, or just a database) and we will map out exactly how it would connect, what to prepare, and how long it would take. You can also <a href="products.html">see the hardware</a> or explore the <a href="index.html#diff">open middleware</a> behind it.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ul class="source-list">
+            <li><a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html" target="_blank" rel="noopener">OASIS - MQTT Version 5.0 standard</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc9293" target="_blank" rel="noopener">IETF - RFC 9293 Transmission Control Protocol (TCP)</a></li>
+            <li><a href="https://datatracker.ietf.org/doc/html/rfc9110" target="_blank" rel="noopener">IETF - RFC 9110 HTTP Semantics</a></li>
+            <li><a href="https://docs.oracle.com/cd/E17952_01/mysql-8.4-en/binary-log.html" target="_blank" rel="noopener">Oracle MySQL - The binary log</a></li>
+          </ul>
+        </div>
+
+        <div class="article-share-panel" data-article-share aria-label="Share this article">
+          <div class="article-share-eyebrow">Share this article</div>
+          <p>Send this guide to your IT or retail operations team, or save the canonical link.</p>
+          <div class="article-share-actions" aria-label="Article sharing options"></div>
+        </div>
+
+        <div class="article-share">
+          <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Book an Integration Assessment</a>
+          <a href="blog.html" class="btn btn-ghost">&larr; All articles</a>
+        </div>
+      </article>
+
+      <aside class="article-toc" aria-label="Article contents">
+        <b>In this guide</b>
+        <a href="#jargon">The jargon in plain English</a>
+        <a href="#which">Which connection is right for me?</a>
+        <a href="#prepare">What to prepare for API</a>
+        <a href="#database">Connecting an old database</a>
+        <a href="#trust">Stable, secure &amp; simple?</a>
+        <a href="#next">Putting it together</a>
+        <a href="#sources">Sources</a>
+        <a href="#faq">FAQ</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Article esl-integration — FAQ">
+  <div class="wrap wide">
+    <div class="article">
+      <div class="sec-tag">// FAQ</div>
+      <h2 style="font-size:28px;margin:8px 0 24px">Frequently asked</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">Can electronic shelf labels connect to my existing POS or ERP?<span class="chev">+</span></button><div class="faq-a"><p>Almost always, yes. If your POS or ERP can share product and price data &mdash; through an API, an export, or its database &mdash; an ESL platform can read that data and drive the labels. You do not replace your POS or ERP; the labels sit alongside it and display whatever it already knows.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What if I only have an old database and no API?<span class="chev">+</span></button><div class="faq-a"><p>That is a common and fully supported case. We connect read-only to your database, map your columns to the label fields once, and use the database's own change log to detect price changes automatically, so an edit in your system refreshes the shelf label without anyone exporting a file.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Will connecting ESLs change or damage my system's data?<span class="chev">+</span></button><div class="faq-a"><p>No. A well-designed integration reads your data and never writes back to your POS, ERP or database. Access is read-only, your system stays the single source of truth, and the label platform only mirrors it.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What is the difference between API and MQTT for my store?<span class="chev">+</span></button><div class="faq-a"><p>For most stores an API is the simplest and most stable choice: your system and the label platform exchange data in a standard format on request. MQTT is a broadcast-style channel better suited to pushing many price changes in real time. You do not have to choose the jargon &mdash; you describe your goal and the supplier recommends the method.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">How long does an ESL integration take?<span class="chev">+</span></button><div class="faq-a"><p>A standard API or database integration is typically set up in days to a few weeks once you provide access and a field list, because the field mapping is a one-time step. Building your own integration from scratch usually takes about a year, which is why most retailers use ready middleware instead.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Is the connection secure and stable if the network drops?<span class="chev">+</span></button><div class="faq-a"><p>Yes, with a properly built system. Data moves over encrypted connections, access is read-only, and the gateway keeps working and re-syncs automatically after a network outage, so a brief drop does not scramble your shelf prices.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Article esl-integration — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal" style="margin-bottom:24px"><div class="sec-tag">// KEEP READING</div><h2>Related articles</h2></div>
+    <div class="related-grid">
+      <a class="res-card reveal" href="open-vs-closed-esl-systems.html"><div class="res-kind">PERSPECTIVE</div><h3>Open vs Closed ESL Systems: What AI Agents Change</h3><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="what-are-electronic-shelf-labels.html"><div class="res-kind">GUIDE</div><h3>What Are Electronic Shelf Labels? Benefits, Cost &amp; ROI</h3><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="ai-dynamic-pricing-esl.html"><div class="res-kind">TECHNOLOGY</div><h3>AI Dynamic Pricing with ESL: How It Works &amp; ROI Proof</h3><span class="res-link">Read article &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="Industries.html">Industries</a>
+        <a href="index.html#roi">ROI calculator</a>
+        <a href="Resources.html#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
