@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>How to Calculate ESL ROI: The Variables That Decide Your Payback | AiESL</title>
+<meta name="description" content="Why every ESL payback figure differs, the four inputs that decide yours, the formula with a worked example, how labour rates change payback across countries, and five ways retailers overestimate ROI.">
+<meta name="keywords" content="esl roi, electronic shelf label payback, esl payback period, benefits of electronic shelf labels, esl roi calculator, electronic price tags roi">
+<link rel="canonical" href="https://www.aiesl.com/esl-roi-calculator-payback.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Calculate ESL ROI: The Variables That Decide Your Payback">
+<meta property="og:description" content="Payback quotes range from 12 to 36 months because two variables dominate: how often prices change, and what labour costs where you operate. Here is the formula.">
+<meta property="og:image" content="https://www.aiesl.com/assets/blog/esl-roi-payback-model.png">
+<meta property="og:url" content="https://www.aiesl.com/esl-roi-calculator-payback.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to Calculate ESL ROI: The Variables That Actually Decide Your Payback","description":"Why ESL payback figures differ so widely, the four inputs that decide yours, a reusable formula with worked example, how statutory labour rates shift payback across countries, and five ways retailers overestimate ROI.","datePublished":"2026-07-31","dateModified":"2026-07-31","author":{"@type":"Organization","name":"AiESL"},"publisher":{"@type":"Organization","name":"AiESL"},"image":"https://www.aiesl.com/assets/blog/esl-roi-payback-model.png","mainEntityOfPage":"https://www.aiesl.com/esl-roi-calculator-payback.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.aiesl.com/blog.html"},{"@type":"ListItem","position":3,"name":"How to Calculate ESL ROI","item":"https://www.aiesl.com/esl-roi-calculator-payback.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the payback period for electronic shelf labels?","acceptedAnswer":{"@type":"Answer","text":"Industry sources commonly cite 12 to 36 months. The range is wide because payback is driven mainly by two variables: how often each label's price changes, and what an hour of re-pricing labour costs where you operate. A promo-heavy store in a high-wage market can pay back in about a year; a low-churn store in a low-wage market can take three years or more on labour savings alone."}},{"@type":"Question","name":"How do you calculate ESL ROI?","acceptedAnswer":{"@type":"Answer","text":"Payback in months = 12 × all-in cost per labelled position ÷ (price changes per label per year × minutes per manual re-tag ÷ 60 × labour-reduction rate × fully-loaded hourly wage). Because both the cost and the labour saving scale with the number of labels, store size cancels out — payback depends on the per-label economics, not how big the store is."}},{"@type":"Question","name":"Does store size change the ESL payback period?","acceptedAnswer":{"@type":"Answer","text":"Much less than most people expect. A bigger store buys more labels but also saves proportionally more re-pricing labour, so the two scale together and largely cancel. What changes payback is cost per label, price-change frequency, and the local wage — not SKU count on its own."}},{"@type":"Question","name":"Why does the same ESL system pay back faster in some countries?","acceptedAnswer":{"@type":"Answer","text":"Because ESL replaces recurring human labour with a one-time capital cost, so the more expensive that labour is, the faster the system pays for itself. Using statutory minimum wages as a proxy, the US federal floor of $7.25 versus Washington State's $17.13 is a 2.4x spread inside one country — enough to roughly double or halve the payback period on identical hardware."}},{"@type":"Question","name":"Can ESL pay for itself on labour savings alone?","acceptedAnswer":{"@type":"Answer","text":"Sometimes, but not always. In low-churn or low-wage settings the labour line alone can push payback past three years. Reaching the commonly quoted 12 to 36 month range often depends on also counting pricing-error elimination and better-executed markdowns. Any ROI case that reaches its target on labour alone should be stress-tested."}},{"@type":"Question","name":"What do retailers most often get wrong in an ESL business case?","acceptedAnswer":{"@type":"Answer","text":"Five recurring errors: counting labels but not gateways, software and installation; using best-case battery life; ignoring install and training time; treating dynamic-pricing revenue uplift as certain rather than optional; and ignoring the future migration cost of a closed, single-vendor system."}}]}</script>
+<style>
+.article-layout{display:grid;grid-template-columns:minmax(0,820px) 270px;gap:52px;align-items:start}
+.article-layout>*{min-width:0}
+.article{width:100%;max-width:100%}
+.article-cover{width:100%}
+.article-toc{position:sticky;top:96px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.article-toc b{display:block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue-hi);letter-spacing:.05em;margin-bottom:12px;text-transform:uppercase}
+.article-toc a{display:block;font-size:13.5px;color:var(--ink-mid);padding:8px 0;border-top:1px solid var(--line-soft)}
+.article-toc a:hover{color:var(--blue-hi)}
+.article-body .answer-box{background:linear-gradient(135deg,rgba(77,124,255,.12),rgba(77,124,255,.03));border:1px solid rgba(77,124,255,.28);border-radius:14px;padding:22px 24px;margin:0 0 28px;color:var(--ink);font-size:18px;line-height:1.7}
+.article-body .answer-box strong{color:var(--ink)}
+.article-body .formula{background:var(--bg-soft);border:1px solid var(--line);border-left:4px solid var(--blue-hi);border-radius:10px;padding:18px 22px;margin:24px 0;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.8;color:var(--ink);overflow-x:auto}
+.article-body figure{margin:30px 0}
+.article-body figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;background:#f4f5f7}
+.article-body figcaption{font-size:12px;color:var(--ink-dim);text-align:center;margin-top:9px}
+.article-body .source-note{font-size:13px;color:var(--ink-dim);margin-top:-12px}
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.data-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.data-card .num{font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:700;color:var(--blue-hi);line-height:1.1}
+.data-card .lbl{font-size:13px;color:var(--ink-mid);margin-top:8px}
+.article-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:28px 0;background:var(--bg-card)}
+.article-table{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+.article-table th,.article-table td{padding:14px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft)}
+.article-table thead th{background:var(--bg-soft);border-top:none;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim)}
+.article-table td:first-child{color:var(--ink);font-weight:600}
+.article-body .source-list{padding-left:0;list-style:none;display:grid;gap:10px}
+.article-body .source-list li{display:block}
+.article-body .source-list li:before{display:none}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr}.article-toc{position:static;order:-1}.data-strip{grid-template-columns:1fr}}
+@media(max-width:640px){.article-layout,.article,.article-body,.article-body .answer-box,.article-toc{width:100%;max-width:min(calc(100vw - 40px),350px);min-width:0}.article-body,.article-body *{overflow-wrap:break-word}.article-body .answer-box{font-size:16px}.article-table{min-width:620px}.article-body .formula{font-size:12.5px}.page-hero h1{font-size:32px}.article-meta{gap:7px 10px;font-size:12px}.article-meta span:nth-child(even){display:none}.wrap,.wrap.wide{padding-left:20px;padding-right:20px}.article-cover{max-width:350px}.article-cover img{height:230px}}
+</style>
+</head>
+<body>
+
+<nav data-screen-label="Article — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="Resources.html#faq"><b>FAQ &amp; Guides</b><small>What is an AI ESL?</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="blog.html">Insights &amp; Blog</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<div class="page-hero" data-screen-label="Article esl-roi — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="article-hero">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:16px"><a href="blog.html" style="color:var(--blue-hi)">Blog</a> / ROI &amp; BUSINESS CASE</div>
+      <h1>How to Calculate ESL ROI: The Variables That Actually Decide Your Payback</h1>
+      <div class="article-meta">
+        <span>July 31, 2026</span><span>&middot;</span><span>15 min read</span><span>&middot;</span><span>AiESL Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap wide"><div class="article-cover reveal"><img src="assets/blog/esl-roi-payback-model.png" alt="Two charts showing how electronic shelf label payback period falls as hourly labour rates rise and as price-change frequency increases"></div></div>
+
+<section data-screen-label="Article esl-roi — Body">
+  <div class="wrap wide">
+    <div class="article-layout">
+      <article class="article">
+        <div class="article-body">
+          <div class="answer-box"><strong>Electronic shelf label payback is commonly quoted at 12 to 36 months, and the reason that range is so wide is not the hardware &mdash; it is that payback is driven by two variables: how often each label&rsquo;s price changes, and what an hour of re-pricing labour costs where you operate.</strong> Change those two and the same system pays back in a year or in three. This guide gives you the formula, a worked example, and the labour-rate data to plug into it &mdash; so you can calculate your own number instead of borrowing someone else&rsquo;s.</div>
+
+          <p>There is a second, less obvious result buried in the arithmetic: <strong>store size largely cancels out.</strong> A bigger store buys more labels, but it also saves proportionally more re-pricing labour, so the two scale together. What actually moves your payback is the per-label economics. We show why below.</p>
+
+          <div class="data-strip">
+            <div class="data-card"><div class="num">2.4&times;</div><div class="lbl">Spread between the US federal minimum wage ($7.25) and Washington State ($17.13) &mdash; inside one country.</div></div>
+            <div class="data-card"><div class="num">&euro;2,638 / &euro;1,802</div><div class="lbl">Highest and lowest statutory monthly minimum wage in the EU tier we sampled (Luxembourg / France).</div></div>
+            <div class="data-card"><div class="num">12&ndash;36 mo</div><div class="lbl">The range the industry quotes &mdash; a range, not a number, for the reasons below.</div></div>
+          </div>
+
+          <h2 id="why-differ">Why Every ESL ROI Figure You Read Is Different</h2>
+          <p><strong>Search for &ldquo;ESL payback&rdquo; and you will get a different answer from every source &mdash; because each one silently assumes a different store, a different promo calendar and a different wage.</strong> Forrester&rsquo;s widely referenced study of a representative retail chain put the payback at 18 months. Elsewhere in the trade press and vendor material you will see 12&ndash;18 months, 18&ndash;30 months, and worked examples landing near 1.85 years. None of these are necessarily wrong; they are answers to different questions.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>What the figure usually assumes</th><th>Effect on payback</th><th>Is it stated?</th></tr></thead>
+              <tbody>
+                <tr><td>Price-change frequency per label</td><td>Largest single lever &mdash; doubling it roughly halves payback</td><td>Rarely</td></tr>
+                <tr><td>Local wage for re-pricing labour</td><td>Second largest &mdash; scales payback inversely</td><td>Almost never</td></tr>
+                <tr><td>Whether gateways, software and install are included</td><td>Can move the capital figure by 30&ndash;50%</td><td>Sometimes</td></tr>
+                <tr><td>Whether non-labour benefits are counted</td><td>Often the difference between 3 years and 18 months</td><td>Rarely broken out</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Source: comparison of publicly available ESL ROI material; the named 18-month figure is from the Forrester study commonly cited in industry coverage. Other ranges are cited by industry sources without a consistent stated methodology, which is precisely the problem this article addresses.</p>
+
+          <h2 id="four-inputs">The Four Inputs That Decide Your Payback</h2>
+          <p><strong>You only need four numbers, and you already have three of them.</strong></p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>#</th><th>Input</th><th>Where to get it</th><th>Typical range</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>All-in cost per labelled position</td><td>Vendor quote &mdash; insist it includes gateways, software and install, not just tags</td><td>$7&ndash;$15</td></tr>
+                <tr><td>2</td><td>Price changes per label per year</td><td>Your pricing/promo system &mdash; count actual changes, not planned campaigns</td><td>12&ndash;50+</td></tr>
+                <tr><td>3</td><td>Minutes per manual re-tag</td><td>Time it in your own aisle: print, walk, locate, swap</td><td>1&ndash;3 min</td></tr>
+                <tr><td>4</td><td>Fully-loaded hourly wage</td><td>Payroll &mdash; gross wage plus employer on-costs</td><td>See country table below</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Note what is <em>not</em> on the list: SKU count, store count, and floor area. They affect the size of the cheque, not the speed of the return.</p>
+
+          <h2 id="formula">The Formula, and a Worked Example</h2>
+          <p><strong>Because the capital cost and the labour saving both scale with the number of labels, the label count cancels and you are left with a compact per-label formula:</strong></p>
+          <div class="formula">
+            Payback (months) = 12 &times; C &divide; ( F &times; (m &divide; 60) &times; e &times; W )<br><br>
+            C = all-in cost per labelled position<br>
+            F = price changes per label per year<br>
+            m = minutes per manual re-tag<br>
+            e = labour-reduction rate achieved by ESL<br>
+            W = fully-loaded hourly wage
+          </div>
+          <p>A worked example for a mid-size supermarket. Every value here is an <strong>assumption</strong>, chosen to be plausible rather than flattering &mdash; substitute your own:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Variable</th><th>Assumed value</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>C &mdash; cost per position</td><td>$9</td><td>Mid-range of the $7&ndash;$15 all-in band</td></tr>
+                <tr><td>F &mdash; changes per label/year</td><td>25</td><td>Roughly one change every two weeks</td></tr>
+                <tr><td>m &mdash; minutes per re-tag</td><td>1.5</td><td>Print, walk, locate, swap</td></tr>
+                <tr><td>e &mdash; labour reduction</td><td>85%</td><td>Reduction rate commonly cited by industry sources</td></tr>
+                <tr><td>W &mdash; fully-loaded wage</td><td>$17.13</td><td>Washington State statutory minimum, 2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Running the numbers: 12 &times; 9 &divide; (25 &times; 0.025 &times; 0.85 &times; 17.13) = <strong>about 12 months</strong>.</p>
+          <p>Now change one variable &mdash; the wage &mdash; to the US federal floor of $7.25, and the same store, the same hardware and the same promo calendar give <strong>about 28 months</strong>. Nothing about the technology changed. Only the price of the labour it replaces.</p>
+
+          <h2 id="labour">The Labour Variable: Why the Same System Pays Back Twice as Fast in Another Country</h2>
+          <p><strong>An ESL deployment is fundamentally a trade: a one-time capital cost in exchange for removing a recurring human task. So the more expensive that human task is, the faster the trade pays off.</strong> This does not say which markets "need" automation most. It isolates the labour-substitution part of the case: holding the other inputs constant, a higher fully loaded hourly labour cost shortens the labour-only payback period.</p>
+          <p>To make that relationship reproducible, the table uses <strong>statutory adult minimum wages</strong> rather than estimated supermarket salaries. These are public wage-floor comparators, not estimates of what a retailer actually pays or of a fully loaded labour cost. For a real business case, replace them with your own payroll rate after employer contributions, benefits and local on-costs.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Country / jurisdiction</th><th>Statutory minimum</th><th>Basis</th></tr></thead>
+              <tbody>
+                <tr><td>Luxembourg</td><td>&euro;2,704 / month</td><td>Eurostat, Jan 2026 (skilled rate is higher)</td></tr>
+                <tr><td>Ireland</td><td>&euro;2,391 / month</td><td>Eurostat, Jan 2026</td></tr>
+                <tr><td>Netherlands</td><td>&euro;2,295 / month</td><td>Eurostat, Jan 2026</td></tr>
+                <tr><td>Germany</td><td>&euro;2,343 / month</td><td>Eurostat, Jan 2026</td></tr>
+                <tr><td>Belgium</td><td>&euro;2,112 / month</td><td>Eurostat, Jan 2026</td></tr>
+                <tr><td>France</td><td>&euro;1,823 / month</td><td>Eurostat, Jan 2026 (35-hour week)</td></tr>
+                <tr><td>United Kingdom</td><td>&pound;12.71 / hour</td><td>National Living Wage, 21+, from Apr 2026</td></tr>
+                <tr><td>Australia</td><td>A$26.44 / hour</td><td>National minimum wage, from Jul 2026</td></tr>
+                <tr><td>New Zealand</td><td>NZ$23.95 / hour</td><td>Adult rate, 16+, from Apr 2026</td></tr>
+                <tr><td>United States &mdash; Washington</td><td>$17.13 / hour</td><td>Highest state rate, 2026</td></tr>
+                <tr><td>United States &mdash; New York City</td><td>$17.00 / hour</td><td>NYC, Nassau, Suffolk, Westchester, 2026</td></tr>
+                <tr><td>United States &mdash; California</td><td>$16.90 / hour</td><td>State rate, 2026</td></tr>
+                <tr><td>United States &mdash; federal floor</td><td>$7.25 / hour</td><td>Unchanged since July 2009; ~20 states use it</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Sources: Eurostat minimum wage statistics (January 2026) for EU figures; national minimum wage authorities for the UK, Australia and New Zealand; US Department of Labor and state rates for 2026. <strong>Two cautions when comparing:</strong> weekly working hours differ by country (France 35 hours, others up to 48), so monthly-to-hourly conversions are not directly comparable; and these are legal floors, not fully loaded labour costs.</p>
+          <p>The most striking figure is not international at all. <strong>Within the United States, the federal floor of $7.25 and Washington State&rsquo;s $17.13 differ by 2.4&times;</strong> &mdash; enough, on the formula above, to swing an identical deployment from roughly 12 months to roughly 28. Any vendor quoting you a single global payback number is, at best, quoting you someone else&rsquo;s jurisdiction.</p>
+          <figure>
+            <img src="assets/blog/esl-roi-payback-model.png" alt="Chart showing ESL payback period falling as hourly labour rate rises, and separately as price-change frequency rises, with the 12 to 36 month industry range shaded">
+            <figcaption>How payback responds to the two dominant variables. Model and assumptions stated on the chart &mdash; illustrative, not measured results. Wage anchors: Eurostat and national authorities.</figcaption>
+          </figure>
+
+          <h2 id="benchmarks">Payback Benchmarks by Store Type</h2>
+          <p><strong>Format matters mainly because it predicts price-change frequency.</strong> Use these as starting brackets, then replace them with your own numbers from the formula:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Store type</th><th>Typical change frequency</th><th>Indicative payback*</th><th>What drives it</th></tr></thead>
+              <tbody>
+                <tr><td>Supermarket / grocery</td><td>High</td><td>Fastest in the 12&ndash;36 band</td><td>Dense promo calendar, fresh markdowns</td></tr>
+                <tr><td>Pharmacy</td><td>Medium</td><td>Middle of the band</td><td>Regulated pricing, frequent variant changes</td></tr>
+                <tr><td>Electronics / DIY</td><td>Medium&ndash;high</td><td>Middle of the band</td><td>Competitive repricing, spec-heavy labels</td></tr>
+                <tr><td>Convenience</td><td>Low&ndash;medium</td><td>Slowest in the band</td><td>Fewer SKUs, steadier prices</td></tr>
+                <tr><td>Warehouse / DC</td><td>Low price churn, high pick volume</td><td>Judge on picking accuracy, not repricing</td><td>Value is in <a href="warehouse-shelf-labels.html">location accuracy and pick-to-light</a>, not price changes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">* Indicative brackets within the commonly cited 12&ndash;36 month range, assuming a mid-to-high wage market. In a low-wage market shift every row later. Validate with the formula and your own labour rate.</p>
+
+          <h2 id="overestimate">Five Ways Retailers Overestimate Their ROI</h2>
+          <p>Every one of these makes the business case look better on paper and worse in year two.</p>
+          <ol>
+            <li><strong>Counting labels but not the system.</strong> Gateways, software licences, integration and installation are real capital. Ask for an all-in per-position figure &mdash; our <a href="electronic-shelf-label-cost.html">cost breakdown</a> lists the four components.</li>
+            <li><strong>Using best-case battery life.</strong> A "10-year" label quoted with no update frequency attached is not a specification. Life falls as refresh frequency rises &mdash; and high refresh frequency is exactly the scenario that makes your ROI look good. See <a href="esl-battery-life.html">what actually determines battery life</a>.</li>
+            <li><strong>Ignoring installation and training.</strong> Mounting rails, binding tags to products and training staff are one-time but not free, and they land in the same year as the hardware.</li>
+            <li><strong>Treating dynamic-pricing uplift as certain.</strong> Margin gains from <a href="ai-dynamic-pricing-esl.html">AI pricing</a> are real but they are a policy choice you have to implement, measure and defend &mdash; not an automatic property of the hardware. Model them separately, and be prepared to hit payback without them.</li>
+            <li><strong>Ignoring migration cost.</strong> If the platform only drives its own labels, the next upgrade is a rip-and-replace across every store. That cost belongs in the model even though it falls outside the payback window &mdash; see <a href="open-vs-closed-esl-systems.html">open vs closed ESL systems</a>.</li>
+          </ol>
+          <div class="answer-box"><strong>A stress test worth running:</strong> can your business case still clear its hurdle on the labour line alone, with conservative values? If yes, everything else is upside. If no, be explicit about which non-labour benefit is carrying the case &mdash; and how you will measure it.</div>
+
+          <h2 id="beyond-labour">What ROI Looks Like Beyond Labour</h2>
+          <p><strong>Labour is the line that is easiest to defend, but it is not the whole return.</strong> Three others are real and measurable if you set up the measurement in advance:</p>
+          <p><strong>Pricing accuracy.</strong> When the shelf and the register read from one source, shelf-versus-checkout mismatches stop happening. The saving is diffuse &mdash; refunds, disputes, staff time, and in regulated categories compliance exposure &mdash; but it is recurring. Our <a href="esl-vs-paper-labels.html">paper-versus-ESL comparison</a> treats accuracy as a cost line in its own right.</p>
+          <p><strong>Fresh-food markdowns.</strong> Scheduled markdowns fire on time instead of when someone gets round to the aisle, so short-dated stock sells rather than being written off. In grocery this can rival the labour line. Method and evidence in our <a href="grocery-store-digital-price-tags.html">grocery digital price tags guide</a> &mdash; which also covers the academic study of roughly 180 million price observations finding no rise in surge pricing after ESL adoption.</p>
+          <p><strong>Picking and replenishment.</strong> Pick-to-light and shelf-edge status cut search time for staff and online-order pickers. This is the dominant benefit in <a href="warehouse-shelf-labels.html">warehouse settings</a>, where price churn is low but pick volume is high.</p>
+
+          <h2 id="do-this">How to Build the Number for Your Own Estate</h2>
+          <ol>
+            <li>Pull actual price changes per label per year from your pricing system &mdash; not planned campaigns, executed changes.</li>
+            <li>Time a manual re-tag in your own aisle, three times, and average it.</li>
+            <li>Get an all-in per-position quote including gateways, software and install.</li>
+            <li>Use your fully-loaded hourly rate, not the headline wage.</li>
+            <li>Run the formula. Then run it again with the wage from each market you operate in &mdash; the spread will surprise you.</li>
+            <li>Only then add accuracy and markdown benefits, each with a stated measurement method.</li>
+          </ol>
+          <p>Want this done with your numbers? <a href="esl-roi-calculator.html">Run the ROI calculator</a> or <a href="javascript:void(0)" onclick="openModal()">book an assessment</a> and we will build the model with you &mdash; including the conservative labour-only case, so you can see what the business stands on before anything optional is added. To size the capital side first, start with <a href="electronic-shelf-label-cost.html">how much electronic shelf labels cost</a>; for the fundamentals, see <a href="what-are-electronic-shelf-labels.html">what electronic shelf labels are</a> and <a href="products.html">our label range</a>.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ul class="source-list">
+            <li><a href="https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260130-2" target="_blank" rel="noopener">Eurostat &mdash; Minimum wages in the EU, January 2026</a></li>
+            <li><a href="https://www.dol.gov/agencies/whd/minimum-wage" target="_blank" rel="noopener">US Department of Labor &mdash; Federal minimum wage</a></li>
+            <li><a href="https://www.dol.gov/agencies/whd/mw-consolidated" target="_blank" rel="noopener">US Department of Labor &mdash; Consolidated state minimum wage table, 2026</a></li>
+            <li><a href="https://www.lni.wa.gov/workers-rights/wages/minimum-wage/index" target="_blank" rel="noopener">Washington State Department of Labor &amp; Industries &mdash; 2026 minimum wage</a></li>
+            <li><a href="https://www.gov.uk/national-minimum-wage-rates" target="_blank" rel="noopener">GOV.UK &mdash; National Minimum and Living Wage rates</a></li>
+            <li><a href="https://www.fairwork.gov.au/pay-and-wages/minimum-wages" target="_blank" rel="noopener">Fair Work Ombudsman (Australia) &mdash; Minimum wages</a></li>
+            <li><a href="https://www.employment.govt.nz/pay-and-hours/pay-and-wages/minimum-wage/minimum-wage-rates-and-types" target="_blank" rel="noopener">Employment New Zealand &mdash; Minimum wage rates and types</a></li>
+          </ul>
+        </div>
+
+        <div class="article-share-panel" data-article-share aria-label="Share this article">
+          <div class="article-share-eyebrow">Share this article</div>
+          <p>Send the formula and wage-floor comparison to your finance or retail operations team.</p>
+          <div class="article-share-actions" aria-label="Article sharing options"></div>
+        </div>
+
+        <div class="article-share">
+          <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Book an ROI Assessment</a>
+          <a href="esl-roi-calculator.html" class="btn btn-ghost">ROI calculator</a>
+          <a href="blog.html" class="btn btn-ghost">&larr; All articles</a>
+        </div>
+      </article>
+
+      <aside class="article-toc" aria-label="Article contents">
+        <b>In this guide</b>
+        <a href="#why-differ">Why every ROI figure differs</a>
+        <a href="#four-inputs">The four inputs</a>
+        <a href="#formula">The formula &amp; worked example</a>
+        <a href="#labour">The labour variable by country</a>
+        <a href="#benchmarks">Benchmarks by store type</a>
+        <a href="#overestimate">Five ways ROI gets overestimated</a>
+        <a href="#beyond-labour">ROI beyond labour</a>
+        <a href="#do-this">Build your own number</a>
+        <a href="#faq">FAQ</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Article esl-roi — FAQ">
+  <div class="wrap wide">
+    <div class="article">
+      <div class="sec-tag">// FAQ</div>
+      <h2 style="font-size:28px;margin:8px 0 24px">Frequently asked</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">What is the payback period for electronic shelf labels?<span class="chev">+</span></button><div class="faq-a"><p>Industry sources commonly cite 12 to 36 months. The range is wide because payback is driven mainly by two variables: how often each label's price changes, and what an hour of re-pricing labour costs where you operate. A promo-heavy store in a high-wage market can pay back in about a year; a low-churn store in a low-wage market can take three years or more on labour savings alone.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">How do you calculate ESL ROI?<span class="chev">+</span></button><div class="faq-a"><p>Payback in months = 12 &times; all-in cost per labelled position &divide; (price changes per label per year &times; minutes per manual re-tag &divide; 60 &times; labour-reduction rate &times; fully-loaded hourly wage). Because both the cost and the labour saving scale with the number of labels, store size cancels out &mdash; payback depends on the per-label economics, not how big the store is.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Does store size change the ESL payback period?<span class="chev">+</span></button><div class="faq-a"><p>Much less than most people expect. A bigger store buys more labels but also saves proportionally more re-pricing labour, so the two scale together and largely cancel. What changes payback is cost per label, price-change frequency, and the local wage &mdash; not SKU count on its own.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Why does the same ESL system pay back faster in some countries?<span class="chev">+</span></button><div class="faq-a"><p>Because ESL replaces recurring human labour with a one-time capital cost, so the more expensive that labour is, the faster the system pays for itself. Using statutory minimum wages as a proxy, the US federal floor of $7.25 versus Washington State's $17.13 is a 2.4x spread inside one country &mdash; enough to roughly double or halve the payback period on identical hardware.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Can ESL pay for itself on labour savings alone?<span class="chev">+</span></button><div class="faq-a"><p>Sometimes, but not always. In low-churn or low-wage settings the labour line alone can push payback past three years. Reaching the commonly quoted 12 to 36 month range often depends on also counting pricing-error elimination and better-executed markdowns. Any ROI case that reaches its target on labour alone should be stress-tested.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What do retailers most often get wrong in an ESL business case?<span class="chev">+</span></button><div class="faq-a"><p>Five recurring errors: counting labels but not gateways, software and installation; using best-case battery life; ignoring install and training time; treating dynamic-pricing revenue uplift as certain rather than optional; and ignoring the future migration cost of a closed, single-vendor system.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Article esl-roi — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal" style="margin-bottom:24px"><div class="sec-tag">// KEEP READING</div><h2>Related articles</h2></div>
+    <div class="related-grid">
+      <a class="res-card reveal" href="electronic-shelf-label-cost.html"><div class="res-kind">PRICING</div><h3>How Much Do Electronic Shelf Labels Cost?</h3><p>The four cost components and how to build a realistic per-store budget.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="esl-vs-paper-labels.html"><div class="res-kind">COST ANALYSIS</div><h3>ESL vs Paper Labels: Full Cost Comparison</h3><p>Labor, paper, error and markdown costs over a five-year horizon.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="open-vs-closed-esl-systems.html"><div class="res-kind">PERSPECTIVE</div><h3>Open vs Closed ESL Systems</h3><p>Why migration cost belongs in your business case from day one.</p><span class="res-link">Read article &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="Industries.html">Industries</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="Resources.html#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

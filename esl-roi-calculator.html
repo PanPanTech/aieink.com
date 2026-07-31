@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://www.aiesl.com/esl-roi-calculator.html">
+<meta property="og:url" content="https://www.aiesl.com/esl-roi-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ESL ROI Calculator — Payback Period & 3-Year Net Savings">
+<meta property="og:description" content="A deliberately conservative electronic shelf label ROI calculator. Enter stores, SKUs, price-change frequency and hourly wage to model payback in months and 3-year net savings. Every assumption is published.">
+<title>ESL ROI Calculator: Payback Period &amp; 3-Year Savings | AiESL</title>
+<meta name="description" content="Free electronic shelf label ROI calculator. Model your payback period and 3-year net savings from labour alone, using a conservative 90-second re-tag and 85% labour-reduction assumption. All inputs and assumptions shown.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ESL ROI Calculator","url":"https://www.aiesl.com/esl-roi-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"A conservative electronic shelf label ROI calculator that models payback period, annual labour saved and three-year net savings from re-pricing labour alone.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"AiESL","url":"https://www.aiesl.com/"},"isAccessibleForFree":true}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Resources","item":"https://www.aiesl.com/Resources.html"},{"@type":"ListItem","position":3,"name":"ESL ROI Calculator","item":"https://www.aiesl.com/esl-roi-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does this ESL ROI calculator work?","acceptedAnswer":{"@type":"Answer","text":"It converts manual re-pricing labour into money, then divides the one-time hardware and software cost by that annual saving. Four inputs drive it: number of stores, labelled positions per store, price changes per label per year, and fully-loaded hourly wage. Four assumptions are fixed and published above: 90 seconds per manual re-tag, an 85% labour-reduction rate, $9 all-in per labelled position, and labour savings only."}},{"@type":"Question","name":"Why 90 seconds per price change instead of a few seconds?","acceptedAnswer":{"@type":"Answer","text":"Because a manual re-tag is not just the moment of swapping paper. It includes generating and printing the batch, walking the aisle, locating the correct facing, removing the old tag, fitting the new one and correcting mistakes found later. Timing only the physical swap produces payback figures that no retailer reproduces in practice."}},{"@type":"Question","name":"Why is the labour reduction 85% and not 100%?","acceptedAnswer":{"@type":"Answer","text":"Electronic labels remove the re-tagging round but not every related task. Staff still audit shelves, fix mis-mapped labels, replace damaged units and handle promotional signage that is not on an ESL. Assuming total elimination of re-pricing labour overstates the saving by roughly one sixth."}},{"@type":"Question","name":"What is not included in the calculated saving?","acceptedAnswer":{"@type":"Answer","text":"Four things, all of which are upside: elimination of shelf-versus-register pricing errors and the refunds and penalties they cause, paper and printer consumables, margin gained from faster and better-targeted markdowns, and labour saved on tasks beyond re-pricing such as stock-taking. The calculator counts re-pricing labour only."}},{"@type":"Question","name":"Is a calculated payback under 12 months realistic?","acceptedAnswer":{"@type":"Answer","text":"It is arithmetically possible in a high-wage, promotion-heavy operation, but treat it as a stress-test signal rather than a forecast. Check your price-change frequency first: figures below a year usually come from over-stating how often each individual label actually changes. Published industry ranges cluster between 12 and 36 months."}},{"@type":"Question","name":"Does the calculator include installation and gateway costs?","acceptedAnswer":{"@type":"Answer","text":"Yes. The $9 per labelled position is an all-in figure covering the label itself plus its share of gateways, software licensing and installation labour. Counting the label price alone is one of the most common ways an ESL business case understates real cost."}}]}</script>
+<style>
+.tool-note{font-size:13px;line-height:1.7;color:var(--ink-mid);margin-top:14px}
+.tool-table-wrap{overflow-x:auto;margin:26px 0;border:1px solid var(--line-soft);border-radius:12px}
+.tool-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.tool-table th,.tool-table td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tool-table th{background:var(--bg-soft);font-weight:650;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-mid)}
+.tool-table tr:last-child td{border-bottom:none}
+.tool-formula{background:var(--bg-soft);border:1px solid var(--line-soft);border-left:3px solid var(--blue-hi);border-radius:10px;padding:22px 24px;margin:26px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;line-height:2}
+.prose{max-width:800px}
+.prose h3{font-size:22px;margin:38px 0 12px}
+.prose p{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:16px}
+.prose ul{margin:0 0 18px 20px}
+.prose li{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:9px}
+.prose strong{color:var(--ink-hi);font-weight:640}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav data-screen-label="ROI Calculator — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="page-hero" data-screen-label="ROI Calculator — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="sec-tag">// FREE TOOL</div>
+    <h1>ESL ROI calculator</h1>
+    <p>Model the payback period and three-year net savings of moving from paper tags to electronic shelf labels. Deliberately conservative: it counts re-pricing labour only, and every assumption behind the number is published below.</p>
+  </div>
+</div>
+
+<!-- ===== CALCULATOR ===== -->
+<section id="roi" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="ROI Calculator — Tool">
+  <div class="wrap wide">
+    <div class="roi reveal">
+      <div class="roi-inputs">
+        <h3>Your store profile</h3>
+        <p>Drag the sliders to match your numbers.</p>
+        <div class="field"><label>Number of stores <b id="vStores">10</b></label><input type="range" id="stores" min="1" max="200" value="10" step="1"></div>
+        <div class="field"><label>SKUs (price tags) per store <b id="vSkus">8,000</b></label><input type="range" id="skus" min="500" max="40000" value="8000" step="500"></div>
+        <div class="field"><label>Price changes per label per year <b id="vChanges">20</b></label><input type="range" id="changes" min="5" max="100" value="20" step="1"></div>
+        <div class="field"><label>Staff hourly cost (USD) <b id="vWage">$18</b></label><input type="range" id="wage" min="8" max="45" value="18" step="1"></div>
+      </div>
+      <div class="roi-results">
+        <div class="rlabel">YOUR AiESL BUSINESS CASE</div>
+        <div class="roi-contrast">
+          <div class="roi-cbox invest"><div class="clabel">YOU INVEST</div><div class="cval" id="invest">$0</div><div class="chint">One-time deployment</div></div>
+          <div class="roi-cbox payback"><div class="clabel">YOU BREAK EVEN IN</div><div class="cval" id="payback">14 mo</div><div class="chint">Then it's pure savings</div></div>
+        </div>
+        <div class="roi-row"><span>Annual labor saved</span><span class="blue" id="laborSaved">$0</span></div>
+        <div class="roi-row"><span>Manual hours eliminated / year</span><span id="hoursSaved">0</span></div>
+        <div class="roi-row"><span>3-year net savings</span><span class="blue" id="netSavings">$0</span></div>
+        <p class="roi-caution" id="roiCaution" style="display:none"></p>
+        <p class="roi-note">Labour-only model. Excludes pricing-error reduction, paper savings and dynamic-pricing margin uplift &mdash; those are upside, not part of this number. Indicative estimate, not a quotation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section data-screen-label="ROI Calculator — Method">
+  <div class="wrap wide">
+    <div class="sec-head reveal"><div class="sec-tag">// METHOD</div><h2>What this calculator assumes</h2><p>Most ESL ROI calculators hide their constants. Here are ours, with the reasoning, so you can argue with them.</p></div>
+    <div class="prose reveal">
+
+      <div class="tool-table-wrap">
+        <table class="tool-table">
+          <thead><tr><th>Assumption</th><th>Value used</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Time per manual re-tag</strong></td><td>90 seconds</td><td>Counts the whole task, not the swap: generating and printing the batch, walking the aisle, finding the correct facing, removing the old tag, fitting the new one, and fixing errors found later. Timing only the physical swap is the single biggest source of inflated ESL business cases.</td></tr>
+            <tr><td><strong>Labour reduction achieved</strong></td><td>85%</td><td>Electronic labels remove the re-tagging round, not every adjacent task. Staff still audit shelves, correct mis-mapped labels, replace damaged units and handle promotional signage that never sat on an ESL.</td></tr>
+            <tr><td><strong>All-in cost per labelled position</strong></td><td>US$9</td><td>Label plus its share of gateways, software licensing and installation labour. Quoting the bare label price is the most common way a business case understates real capital cost.</td></tr>
+            <tr><td><strong>Benefits counted</strong></td><td>Re-pricing labour only</td><td>Pricing-error elimination, paper and consumables, and markdown margin uplift are real but harder to defend in a board paper. Leaving them out makes the number conservative by construction.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The formula behind the number</h3>
+      <p>Everything above collapses into one line. If you want to reproduce the result in a spreadsheet, this is all you need:</p>
+      <div class="tool-formula">
+        <strong>Payback (months) = 12 &times; C &divide; ( F &times; (m &divide; 60) &times; e &times; W )</strong><br>
+        C = all-in cost per labelled position ($9)<br>
+        F = price changes per label per year (your input)<br>
+        m = minutes per manual re-tag (1.5)<br>
+        e = labour-reduction rate (0.85)<br>
+        W = fully-loaded hourly wage (your input)
+      </div>
+      <p>Worked example at the default settings: 12 &times; 9 &divide; (25 &times; 1.5/60 &times; 0.85 &times; 18) = <strong>about 11 months</strong>. Drop the wage to the US federal minimum of $7.25 and the same hardware takes roughly <strong>28 months</strong> &mdash; on identical stores, identical labels.</p>
+
+      <h3>Why store count and SKU count barely move the answer</h3>
+      <p>Notice what is <em>not</em> in the formula: the number of stores and the number of labels. They cancel out. A bigger store buys proportionally more labels, but it also saves proportionally more re-pricing labour, so both sides of the ratio scale together.</p>
+      <p>The sliders for stores and SKUs still exist because they set the absolute size of the investment and the annual saving, which is what a finance team needs to see. But if you are only asking "how long until this pays for itself", the answer is decided by <strong>cost per label, price-change frequency and local wage</strong> &mdash; not by how big your estate is. The full derivation is in our guide on <a href="esl-roi-calculator-payback.html">how to calculate ESL ROI</a>.</p>
+
+      <h3>What the number deliberately leaves out</h3>
+      <p>Four sources of value are excluded. Each of them is genuine; none of them is in the figure above:</p>
+      <ul>
+        <li><strong>Pricing accuracy.</strong> Shelf-versus-register mismatches trigger refunds, goodwill gestures and, in some jurisdictions, regulatory penalties. Electronic labels driven from a single price source largely remove this class of error.</li>
+        <li><strong>Paper and consumables.</strong> Label stock, toner and printer maintenance disappear. Small per store, non-trivial across an estate.</li>
+        <li><strong>Markdown execution.</strong> When re-pricing costs almost nothing, you can mark down perishables in the afternoon rather than writing them off at close. This is often the largest excluded item &mdash; and the hardest to forecast honestly.</li>
+        <li><strong>Adjacent labour.</strong> Labels with locate functions cut the time spent hunting for a facing during stock-takes and pick tasks.</li>
+      </ul>
+      <p>If the calculator already clears your hurdle rate on labour alone, these four make the case stronger. If it does not, they are where the rest of the case has to come from &mdash; and they need evidence from your own operation, not from a vendor slide.</p>
+
+      <h3>How to sanity-check your result</h3>
+      <ul>
+        <li><strong>Under 12 months?</strong> Check your price-change frequency first. Most estates over-state how often an <em>individual</em> label changes. A store that runs 400 promotions a week is not changing every one of its 8,000 labels 400 times.</li>
+        <li><strong>Over 36 months?</strong> That is a legitimate outcome in a low-churn, low-wage operation. It means labour alone will not carry the case, and you should model accuracy and markdown benefits explicitly rather than hope.</li>
+        <li><strong>Wage input.</strong> Use fully-loaded cost, not the headline rate. Statutory minimums are legal floors before employer on-costs, which commonly add 15&ndash;30%.</li>
+        <li><strong>Multi-country estates.</strong> Run each market separately. Wage spreads inside a single country can be more than 2&times;, which is enough to double or halve payback on identical hardware.</li>
+      </ul>
+
+      <p class="tool-note">This tool produces an indicative model, not a quotation, and not measured results from a specific deployment. Figures depend entirely on inputs you supply. For a costed model of your own network &mdash; including hardware mix, gateway count and integration scope &mdash; <a href="javascript:void(0)" onclick="openModal()">request a detailed assessment</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== RELATED ===== -->
+<section style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="ROI Calculator — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal"><div class="sec-tag">// GO DEEPER</div><h2>Build the rest of the business case</h2></div>
+    <div class="res-grid">
+      <a href="esl-roi-calculator-payback.html" class="res-card reveal"><div class="res-kind">Guide</div><h3>How to calculate ESL ROI</h3><p>The four variables that actually decide payback, plus how statutory wage rates shift it across 13 jurisdictions.</p><span class="res-link">Read the method &rarr;</span></a>
+      <a href="electronic-shelf-label-cost.html" class="res-card reveal"><div class="res-kind">Costing</div><h3>What ESL actually cost</h3><p>Label, gateway, software and installation broken out &mdash; the inputs behind the $9 assumption.</p><span class="res-link">See the cost breakdown &rarr;</span></a>
+      <a href="esl-vs-paper-labels.html" class="res-card reveal"><div class="res-kind">Comparison</div><h3>ESL vs. paper labels</h3><p>Total cost, accuracy and labour compared over a five-year horizon.</p><span class="res-link">Compare them &rarr;</span></a>
+      <a href="esl-base-station-coverage-calculator.html" class="res-card reveal"><div class="res-kind">Interactive</div><h3>Base station coverage planner</h3><p>Size the gateway network your estate needs, with mounting-height correction.</p><span class="res-link">Open the planner &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" data-screen-label="ROI Calculator — FAQ">
+  <div class="wrap wide">
+    <div class="faq-2col">
+      <div class="faq-sticky reveal">
+        <div class="sec-tag">// FAQ</div>
+        <h2 style="font-size:34px;margin-bottom:14px">Questions about the model</h2>
+        <p style="font-size:15px;color:var(--ink-mid)">If one of our assumptions does not match your operation, tell us and we will re-run the model with your numbers.</p>
+        <a href="javascript:void(0)" class="btn btn-primary" style="margin-top:20px" onclick="openModal()">Talk to an engineer</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">How does this ESL ROI calculator work?<span class="chev">+</span></button><div class="faq-a"><p>It converts manual re-pricing labour into money, then divides the one-time hardware and software cost by that annual saving. Four inputs drive it: number of stores, labelled positions per store, price changes per label per year, and fully-loaded hourly wage. Four assumptions are fixed and published above: 90 seconds per manual re-tag, an 85% labour-reduction rate, $9 all-in per labelled position, and labour savings only.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Why 90 seconds per price change instead of a few seconds?<span class="chev">+</span></button><div class="faq-a"><p>Because a manual re-tag is not just the moment of swapping paper. It includes generating and printing the batch, walking the aisle, locating the correct facing, removing the old tag, fitting the new one and correcting mistakes found later. Timing only the physical swap produces payback figures that no retailer reproduces in practice.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Why is the labour reduction 85% and not 100%?<span class="chev">+</span></button><div class="faq-a"><p>Electronic labels remove the re-tagging round but not every related task. Staff still audit shelves, fix mis-mapped labels, replace damaged units and handle promotional signage that is not on an ESL. Assuming total elimination of re-pricing labour overstates the saving by roughly one sixth.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What is not included in the calculated saving?<span class="chev">+</span></button><div class="faq-a"><p>Four things, all of which are upside: elimination of shelf-versus-register pricing errors and the refunds and penalties they cause, paper and printer consumables, margin gained from faster and better-targeted markdowns, and labour saved on tasks beyond re-pricing such as stock-taking. The calculator counts re-pricing labour only.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Is a calculated payback under 12 months realistic?<span class="chev">+</span></button><div class="faq-a"><p>It is arithmetically possible in a high-wage, promotion-heavy operation, but treat it as a stress-test signal rather than a forecast. Check your price-change frequency first: figures below a year usually come from over-stating how often each individual label actually changes. Published industry ranges cluster between 12 and 36 months.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Does the calculator include installation and gateway costs?<span class="chev">+</span></button><div class="faq-a"><p>Yes. The $9 per labelled position is an all-in figure covering the label itself plus its share of gateways, software licensing and installation labour. Counting the label price alone is one of the most common ways an ESL business case understates real cost.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHARE ===== -->
+<section data-screen-label="ROI Calculator — Share">
+  <div class="wrap wide">
+    <div class="article-share-panel" data-article-share aria-label="Share this calculator">
+      <div class="article-share-eyebrow">Share this calculator</div>
+      <p>Send this labour-only model to your finance or retail operations team.</p>
+      <div class="article-share-actions" aria-label="Calculator sharing options"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="contact" style="background:var(--bg-soft);border-top:1px solid var(--line-soft)" data-screen-label="ROI Calculator — CTA">
+  <div class="wrap wide">
+    <div class="cta-band reveal">
+      <h2>Want this modelled on your actual estate?</h2>
+      <p>Send us your store count, label mix and re-pricing cadence. We'll return a costed model with your numbers, including the items this calculator leaves out.</p>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Request an ROI assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="Resources.html">Resources hub</a>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="esl-base-station-coverage-calculator.html">Coverage planner</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== QUOTE MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Number of stores</label><select name="stores" id="f-stores"><option value="1-5">1&ndash;5 stores</option><option value="6-20">6&ndash;20 stores</option><option value="21-100">21&ndash;100 stores</option><option value="100+">100+ stores</option></select></div>
+            <div class="form-field"><label>Primary interest</label><select name="interest" id="f-interest"><option value="ai-pricing">AI dynamic pricing</option><option value="middleware">Open middleware platform</option><option value="esl-hardware">ESL hardware / price tags</option><option value="full-solution">Full retail solution</option></select></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

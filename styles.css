@@ -635,3 +635,13 @@ footer { border-top: 1px solid var(--line-soft); padding: 56px 0 32px; }
 }
 @media (max-width: 560px) { .feat-grid, .steps, .signal-grid, .form-row { grid-template-columns: 1fr; } }
 @media (max-width: 380px) { .share-pill { flex-basis: 100%; } }
+
+/* ROI calculator honesty guard — shown when the modelled payback falls
+   outside the 12–36 month range the rest of the site standardises on. */
+.roi-caution{
+  margin-top:14px;padding:11px 14px;border-radius:8px;
+  background:rgba(255,176,32,.10);border:1px solid rgba(255,176,32,.32);
+  border-left:3px solid #ffb020;
+  font-size:12.5px;line-height:1.65;color:var(--ink-mid)
+}
+.roi-caution em{font-style:italic;color:var(--ink-hi)}

@@ -19,7 +19,7 @@
 <!--__ld_injected-->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AiESL","alternateName":"PanPanTech","url":"https://www.aiesl.com/","logo":"https://www.aiesl.com/assets/brand/aiesl-logo-512.png","description":"AiESL is the AI-native, open platform for retail electronic shelf labels (ESL) and dynamic pricing, supporting 5+ brand integrations across 30+ countries.","foundingDate":"2015","address":{"@type":"PostalAddress","streetAddress":"Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District","addressLocality":"Guangzhou","addressRegion":"Guangdong","addressCountry":"CN"},"contactPoint":{"@type":"ContactPoint","email":"info@einksmart.com","telephone":"+86-13925118851","contactType":"sales"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AiESL","url":"https://www.aiesl.com/"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an AI ESL (AI electronic shelf label)?","acceptedAnswer":{"@type":"Answer","text":"An AI ESL is an electronic shelf label whose pricing and content are driven by an AI decision engine. Instead of only mirroring the POS price, it analyzes demand, inventory and competitor data to recommend or automatically apply dynamic prices at the shelf edge in real time."}},{"@type":"Question","name":"Can we keep our existing ESL hardware?","acceptedAnswer":{"@type":"Answer","text":"Yes. AiESL's open-platform middleware runs on standard MQTT, supporting mixed-vendor environments across 5+ hardware brand integrations, cutting migration cost by over 50%."}},{"@type":"Question","name":"How long do the batteries last?","acceptedAnswer":{"@type":"Answer","text":"AiESL labels use ultra-low-power e-paper that consumes energy only during updates. A typical label runs 7 to 10 years on a single battery under standard 3-changes-per-day operation."}},{"@type":"Question","name":"How fast can prices be updated across all stores?","acceptedAnswer":{"@type":"Answer","text":"Approved price changes propagate to every connected label in under one second, across thousands of SKUs and all locations simultaneously."}},{"@type":"Question","name":"Which retail formats does AiESL support?","acceptedAnswer":{"@type":"Answer","text":"AiESL is deployed across supermarkets, convenience stores, electronics retail, pharmacies, warehouses and food service, with label sizes from 1.5 inch to 13.3 inch."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an AI ESL (AI electronic shelf label)?","acceptedAnswer":{"@type":"Answer","text":"An AI ESL is an electronic shelf label whose pricing and content are driven by an AI decision engine. Instead of only mirroring the POS price, the system analyzes demand, inventory and competitor data to recommend or automatically apply dynamic prices at the shelf edge in real time."}},{"@type":"Question","name":"Can we keep our existing ESL hardware?","acceptedAnswer":{"@type":"Answer","text":"Yes. AiESL's open-platform middleware runs on standard MQTT, supporting mixed-vendor environments across 5+ hardware brand integrations. Keep existing labels on standard shelves and deploy high-resolution AiESL labels only where they add value - cutting migration cost by over 50%."}},{"@type":"Question","name":"How long do the batteries last?","acceptedAnswer":{"@type":"Answer","text":"AiESL labels use ultra-low-power e-paper that consumes energy only during updates. A typical label runs 7-10 years on a single battery under standard 3-changes-per-day operation."}},{"@type":"Question","name":"How fast can prices be updated across all stores?","acceptedAnswer":{"@type":"Answer","text":"Approved price changes propagate to every connected label in under one second. A chain can update thousands of SKUs across all locations simultaneously, eliminating the gap between register and shelf pricing."}},{"@type":"Question","name":"Which retail formats does AiESL support?","acceptedAnswer":{"@type":"Answer","text":"AiESL is deployed across supermarkets, convenience stores, electronics retail, pharmacies, warehouses and food service. Label sizes from 1.5\" to 13.3\" cover everything from small shelf tags to large promotional displays."}}]}</script>
 </head>
 <body>
 
@@ -49,7 +49,7 @@
       <div class="has-menu"><a href="Resources.html">Resources &#9662;</a>
         <div class="nav-menu">
           <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
-          <a href="#roi"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
           <a href="#faq"><b>FAQ &amp; Guides</b><small>What is an AI ESL?</small></a>
         </div>
       </div>
@@ -268,7 +268,7 @@
         <p>Drag the sliders to match your numbers.</p>
         <div class="field"><label>Number of stores <b id="vStores">10</b></label><input type="range" id="stores" min="1" max="200" value="10" step="1"></div>
         <div class="field"><label>SKUs (price tags) per store <b id="vSkus">8,000</b></label><input type="range" id="skus" min="500" max="40000" value="8000" step="500"></div>
-        <div class="field"><label>Price changes per week <b id="vChanges">3</b></label><input type="range" id="changes" min="1" max="20" value="3" step="1"></div>
+        <div class="field"><label>Price changes per label per year <b id="vChanges">20</b></label><input type="range" id="changes" min="5" max="100" value="20" step="1"></div>
         <div class="field"><label>Staff hourly cost (USD) <b id="vWage">$18</b></label><input type="range" id="wage" min="8" max="45" value="18" step="1"></div>
       </div>
       <div class="roi-results">
@@ -280,7 +280,8 @@
         <div class="roi-row"><span>Annual labor saved</span><span class="blue" id="laborSaved">$0</span></div>
         <div class="roi-row"><span>Manual hours eliminated / year</span><span id="hoursSaved">0</span></div>
         <div class="roi-row"><span>3-year net savings</span><span class="blue" id="netSavings">$0</span></div>
-        <p class="roi-note">Indicative estimate only. Excludes pricing-error reduction, paper savings and dynamic-pricing margin uplift &mdash; request a detailed quote for a full model.</p>
+        <p class="roi-caution" id="roiCaution" style="display:none"></p>
+        <p class="roi-note">Conservative labour-only model: 90 s per manual re-tag, 85% labour reduction, $9 all-in per labelled position. Excludes pricing-error reduction, paper savings and dynamic-pricing margin uplift &mdash; those are upside. See <a href="esl-roi-calculator-payback.html">how the payback formula works</a> or <a href="esl-roi-calculator.html">open the full calculator</a>.</p>
       </div>
     </div>
   </div>
@@ -297,7 +298,7 @@
     <div class="res-grid">
       <a href="blog.html" class="res-card reveal"><div class="res-kind">Guide</div><h3>What is an AI ESL?</h3><p>How AI decision engines turn electronic shelf labels into a dynamic pricing surface.</p><span class="res-link">Read the guide &rarr;</span></a>
       <a href="blog.html" class="res-card reveal"><div class="res-kind">Comparison</div><h3>ESL vs. paper labels</h3><p>Total cost, accuracy and labor compared over a 5-year horizon.</p><span class="res-link">See the breakdown &rarr;</span></a>
-      <a href="#roi" class="res-card reveal"><div class="res-kind">Tool</div><h3>ROI Calculator</h3><p>Model your payback period and 3-year net savings in seconds.</p><span class="res-link">Open the calculator &rarr;</span></a>
+      <a href="esl-roi-calculator.html" class="res-card reveal"><div class="res-kind">Tool</div><h3>ROI Calculator</h3><p>Model your payback period and 3-year net savings in seconds.</p><span class="res-link">Open the calculator &rarr;</span></a>
     </div>
   </div>
 </section>
@@ -354,7 +355,7 @@
         <h4>Resources</h4>
         <a href="#industries">Industries</a>
         <a href="blog.html">Insights &amp; Blog</a>
-        <a href="#roi">ROI calculator</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
         <a href="#faq">FAQ</a>
         <a href="about.html">About us</a>
       </div>

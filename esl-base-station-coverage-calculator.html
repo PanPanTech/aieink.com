@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://www.aiesl.com/esl-base-station-coverage-calculator.html">
+<meta property="og:url" content="https://www.aiesl.com/esl-base-station-coverage-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ESL Base Station Coverage Calculator — How Many Gateways Do You Need?">
+<meta property="og:description" content="Calculate how many electronic shelf label base stations (gateways) a store or warehouse needs. Corrects for mounting height, compares square and triangular grids, and adds the density uplift for UWB positioning.">
+<title>ESL Base Station Coverage Calculator: How Many Gateways? | AiESL</title>
+<meta name="description" content="Free ESL base station coverage calculator. Enter your floor dimensions, comms range and mounting height to see how many electronic shelf label gateways you need, with a live coverage diagram and the geometry explained.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ESL Base Station Coverage Calculator","url":"https://www.aiesl.com/esl-base-station-coverage-calculator.html","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","description":"An interactive planner that estimates how many electronic shelf label base stations a floor area needs, correcting the rated slant range for mounting height and comparing square against triangular gateway grids.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"AiESL","url":"https://www.aiesl.com/"},"isAccessibleForFree":true}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Resources","item":"https://www.aiesl.com/Resources.html"},{"@type":"ListItem","position":3,"name":"Base Station Coverage Calculator","item":"https://www.aiesl.com/esl-base-station-coverage-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many base stations does an ESL system need?","acceptedAnswer":{"@type":"Answer","text":"It depends on floor area and effective coverage radius, not on label count. Divide the floor by the area each gateway can serve: with a square grid, one station covers roughly 2r^2, where r is the coverage radius measured at the label plane. A 120 x 60 m space with a 24 m effective radius needs about 6-8 stations for coverage. Very high label density or metal racking can require more."}},{"@type":"Question","name":"Why does mounting height reduce base station coverage?","acceptedAnswer":{"@type":"Answer","text":"A rated range is a slant distance measured through the air in a straight line, but labels sit on a lower plane. The usable floor radius is the horizontal leg of a right triangle: r = sqrt(d^2 - h^2), where d is the rated range and h is the height difference between the gateway and the labels. Mounting a 25 m gateway 4.5 m above the shelf plane leaves about 24.6 m of floor radius; mount it 18.5 m above the labels and only about 16.8 m remain."}},{"@type":"Question","name":"Should I use a square grid or a triangular grid?","acceptedAnswer":{"@type":"Answer","text":"It depends on the size and shape of the floor. Triangular placement is more area-efficient on an infinite plane, but finite-floor edges and fixed mounting points can reverse the count. With this planner's default radio assumptions, a 2,000 x 500 m distribution centre uses about 24% fewer triangular-grid stations, while a 60 x 40 m store uses about 25% more. Start with square on a typical retail floor, compare both on a large open footprint, and validate the result with an RF survey."}},{"@type":"Question","name":"Why does UWB positioning need more base stations?","acceptedAnswer":{"@type":"Answer","text":"Coverage only asks whether one gateway can reach a label. Positioning asks that several gateways see the same label at once, because a location is computed by trilateration from multiple simultaneous measurements. This planner applies a 1.6x density uplift as a planning allowance for that overlap requirement."}},{"@type":"Question","name":"Does this account for walls, shelving and metal racking?","acceptedAnswer":{"@type":"Answer","text":"No. It models free-space geometry only. Dense metal racking, cold rooms, fire doors, lift shafts and reinforced concrete all attenuate signal and can meaningfully reduce the effective radius. Treat the result as a planning baseline and confirm it with an on-site survey before ordering hardware."}},{"@type":"Question","name":"What comms range should I enter?","acceptedAnswer":{"@type":"Answer","text":"Use the range your gateway is rated for in an environment resembling yours, not the best-case open-field figure on a datasheet. If you are unsure, model a range you are confident about and a pessimistic one, then plan for the gap. Halving the assumed radius roughly quadruples the number of stations, so this input matters more than any other."}}]}</script>
+<style>
+.tool-note{font-size:13px;line-height:1.7;color:var(--ink-mid);margin-top:14px}
+.tool-table-wrap{overflow-x:auto;margin:26px 0;border:1px solid var(--line-soft);border-radius:12px}
+.tool-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+.tool-table th,.tool-table td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tool-table th{background:var(--bg-soft);font-weight:650;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink-mid)}
+.tool-table tr:last-child td{border-bottom:none}
+.tool-formula{background:var(--bg-soft);border:1px solid var(--line-soft);border-left:3px solid var(--blue-hi);border-radius:10px;padding:22px 24px;margin:26px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;line-height:2}
+.prose{max-width:800px}
+.prose h3{font-size:22px;margin:38px 0 12px}
+.prose p{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:16px}
+.prose ul{margin:0 0 18px 20px}
+.prose li{font-size:16px;line-height:1.85;color:var(--ink-mid);margin-bottom:9px}
+.prose strong{color:var(--ink-hi);font-weight:640}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav data-screen-label="Coverage Planner — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="page-hero" data-screen-label="Coverage Planner — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="sec-tag">// FREE TOOL</div>
+    <h1>ESL base station coverage calculator</h1>
+    <p>Work out how many electronic shelf label gateways a store, warehouse or distribution centre needs. The tool corrects for mounting height &mdash; a base station fixed high above the shelf plane covers a smaller floor footprint than its rated slant range suggests.</p>
+  </div>
+</div>
+
+<!-- ===== PLANNER ===== -->
+<section id="station-planner" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Coverage Planner — Tool">
+  <div class="wrap wide">
+    <div class="calc reveal">
+      <div class="calc-panel">
+        <h3>Site parameters</h3>
+        <p class="calc-lede">Enter the space and link budget. Results update live.</p>
+        <div class="calc-fields">
+          <div class="calc-field"><label>Length L (m)</label><input id="scLength" type="number" value="120" min="1" step="1"></div>
+          <div class="calc-field"><label>Width W (m)</label><input id="scWidth" type="number" value="60" min="1" step="1"></div>
+          <div class="calc-field"><label>Comms range d (m)</label><input id="scDist" type="number" value="25" min="1" step="0.5"></div>
+          <div class="calc-field"><label>Mount height (m)</label><input id="scMount" type="number" value="6" min="0" step="0.5"></div>
+          <div class="calc-field"><label>Label height (m)</label><input id="scTag" type="number" value="1.5" min="0" step="0.5"></div>
+          <div class="calc-field"><label>Layout</label><select id="scLayout"><option value="square">Square grid (easy install)</option><option value="hex">Triangular grid (efficient packing)</option></select></div>
+          <div class="calc-field full"><label>Purpose</label><select id="scUse"><option value="cover">Signal coverage (&times;1)</option><option value="pos">UWB positioning (&times;1.6)</option></select></div>
+        </div>
+        <p class="calc-formula" id="scFormula"></p>
+      </div>
+      <div class="calc-out">
+        <div class="calc-cards" id="scCards"></div>
+        <div class="calc-viz">
+          <svg id="scSvg" viewBox="0 0 760 420"></svg>
+          <div class="calc-legend">&bull; base station &nbsp;&nbsp; &cir; floor coverage circle &nbsp;&nbsp; dashed = space boundary</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a deployment quote</a>
+          <a href="products.html" class="btn btn-ghost">View the AES-B001 gateway &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METHOD ===== -->
+<section data-screen-label="Coverage Planner — Method">
+  <div class="wrap wide">
+    <div class="sec-head reveal"><div class="sec-tag">// METHOD</div><h2>How the planner works</h2><p>Four inputs, one piece of geometry, and two multipliers. Nothing here is proprietary &mdash; you can reproduce it on paper.</p></div>
+    <div class="prose reveal">
+
+      <h3>Mounting height is the input people forget</h3>
+      <p>Gateway datasheets quote a range as a straight-line distance through the air. But labels do not sit at ceiling height &mdash; they sit on a shelf edge, typically a metre or two off the floor. The distance that matters for planning is the <strong>horizontal</strong> one, and it is always shorter than the rated figure.</p>
+      <p>Treat it as a right triangle. The rated range is the hypotenuse, the height difference between gateway and labels is one leg, and the usable floor radius is the other:</p>
+      <div class="tool-formula">
+        <strong>r = &radic;( d&sup2; &minus; h&sup2; )</strong><br>
+        r = usable floor radius at the label plane<br>
+        d = rated comms range (slant distance)<br>
+        h = |mount height &minus; label height|
+      </div>
+      <p>In a supermarket the penalty is small: a 25 m gateway mounted 6 m up, with labels at 1.5 m, gives h = 4.5 m and r = 24.6 m &mdash; barely 2% lost. In a high-bay warehouse it is not small. Mount that same gateway on a 20 m ceiling and h becomes 18.5 m, leaving r = 16.8 m &mdash; a third of the reach, and 55% of the covered <em>area</em>, gone. Mount it high enough that h exceeds d and the coverage circle collapses to nothing, which is exactly what the tool warns about when it returns a zero radius.</p>
+
+      <h3>Square grid or triangular grid?</h3>
+      <div class="tool-table-wrap">
+        <table class="tool-table">
+          <thead><tr><th>Layout</th><th>Spacing</th><th>Trade-off</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Square grid</strong></td><td>r &times; &radic;2 between stations</td><td>Needs a few more units, but the positions land on ceiling grids, lighting rows and existing cable trays. Faster to install, easier to document, easier for a third-party contractor to get right.</td></tr>
+            <tr><td><strong>Triangular grid</strong></td><td>&radic;3&nbsp;r between columns, 1.5&nbsp;r between rows</td><td>The efficient circle packing in the abstract, but the benefit only appears at scale. Offset rows need an extra station at each end to close the edges, so on small or near-square floors it costs <em>more</em> hardware, not less.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Triangular placement is more area-efficient on an infinite plane, but a real floor has edges, cable routes and fixed mounting points. Neither layout is automatically smaller. The planner keeps the same radio assumptions for both layouts so you can compare the finite-floor effect directly.</p>
+      <p>The counts below use this page&rsquo;s default coverage inputs: a 25 m rated range, a 6 m mount height and 1.5 m label height, giving a 24.6 m floor radius. They are coverage-planning counts only, before the UWB positioning uplift and before an RF site survey.</p>
+      <div class="tool-table-wrap">
+        <table class="tool-table">
+          <thead><tr><th>Floor size</th><th>Square grid</th><th>Triangular grid</th><th>Difference</th></tr></thead>
+          <tbody>
+            <tr><td>2,000 &times; 500 m distribution centre</td><td>870</td><td>665</td><td>Triangular &minus;24%</td></tr>
+            <tr><td>500 &times; 300 m high-bay site</td><td>135</td><td>112</td><td>Triangular &minus;17%</td></tr>
+            <tr><td>200 &times; 120 m large-format store</td><td>24</td><td>22</td><td>Triangular &minus;8%</td></tr>
+            <tr><td>120 &times; 60 m supermarket</td><td>8</td><td>7</td><td>Triangular &minus;13%</td></tr>
+            <tr><td>100 &times; 100 m square floor</td><td>9</td><td>10</td><td>Triangular +11%</td></tr>
+            <tr><td>60 &times; 40 m small store</td><td>4</td><td>5</td><td>Triangular +25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The practical rule: start with the square grid on a retail floor, where positions can align with ceiling grids, lighting rows and cable trays. Compare both layouts for a large, open footprint, then validate the apparent saving against power, network and RF constraints before ordering hardware.</p>
+
+      <h3>Coverage versus positioning</h3>
+      <p>These are different problems and they need different densities. <strong>Coverage</strong> asks a single question: can at least one gateway reach this label? <strong>Positioning</strong> asks something much harder: can several gateways measure this label at the same moment, so a location can be trilaterated from the overlap?</p>
+      <p>Selecting UWB positioning applies a <strong>1.6&times; planning allowance</strong> on top of the coverage count. That is a planning heuristic, not a guarantee of a given accuracy figure &mdash; real positioning performance depends on anchor geometry, multipath in the aisle and the specific radio stack. Use it to budget, then validate on site. If indoor location is the actual goal, our note on <a href="retail-indoor-positioning.html">retail indoor positioning</a> covers what the technology can and cannot do.</p>
+
+      <h3>What this model does not include</h3>
+      <ul>
+        <li><strong>Obstruction.</strong> The calculation is free-space geometry. Metal racking, cold rooms, fire doors, lift shafts, reinforced concrete and stacked pallets all attenuate signal. Dense metal environments are the most common reason a real site needs more stations than the model predicts.</li>
+        <li><strong>Label density.</strong> Coverage is an area problem, not a count problem, so the tool asks for floor dimensions rather than SKU count. Very high label density can raise the airtime load per gateway independently of geometry &mdash; that is a throughput question, not a coverage one.</li>
+        <li><strong>Vertical separation.</strong> Multi-floor sites should be planned floor by floor, not as one combined area.</li>
+        <li><strong>Redundancy.</strong> The result is the minimum grid for stated coverage. Estates that cannot tolerate an outage should plan overlap so that a single gateway failure does not orphan a zone.</li>
+      </ul>
+
+      <h3>Sanity-checking your inputs</h3>
+      <p>One input dominates everything else: the comms range. Because coverage scales with the square of the radius, <strong>halving your assumed range roughly quadruples the station count</strong>. If your figure comes from an open-field datasheet number rather than an environment like yours, the result will be optimistic by a wide margin.</p>
+      <p>The safest approach is to model twice &mdash; once with a range you are confident about, once with a pessimistic one &mdash; and treat the gap as your procurement risk. Then confirm with a site survey before ordering. Gateway placement in a live store is also constrained by power availability and network drops, which no geometric model can see.</p>
+
+      <p class="tool-note">This planner produces a geometric baseline for budgeting and layout discussion. It is not a substitute for an RF site survey. For a validated design of your own site &mdash; including racking, power and network constraints &mdash; <a href="javascript:void(0)" onclick="openModal()">ask for a deployment assessment</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== RELATED ===== -->
+<section style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Coverage Planner — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal"><div class="sec-tag">// GO DEEPER</div><h2>Plan the rest of the deployment</h2></div>
+    <div class="res-grid">
+      <a href="esl-roi-calculator.html" class="res-card reveal"><div class="res-kind">Interactive</div><h3>ESL ROI calculator</h3><p>Model payback period and three-year net savings, with every assumption published.</p><span class="res-link">Open the calculator &rarr;</span></a>
+      <a href="warehouse-shelf-labels.html" class="res-card reveal"><div class="res-kind">Guide</div><h3>Warehouse shelf labels</h3><p>Why high-bay and cold-chain sites plan gateways differently from retail floors.</p><span class="res-link">Read the guide &rarr;</span></a>
+      <a href="esl-integration-pos-erp-api-mqtt-database.html" class="res-card reveal"><div class="res-kind">Integration</div><h3>Connecting POS, ERP and databases</h3><p>What has to be in place before the first gateway comes online.</p><span class="res-link">See integration paths &rarr;</span></a>
+      <a href="products.html" class="res-card reveal"><div class="res-kind">Reference</div><h3>Gateways &amp; label sizes</h3><p>The AES-B001 base station and the label range it drives, from peg hooks to pallets.</p><span class="res-link">Browse products &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" data-screen-label="Coverage Planner — FAQ">
+  <div class="wrap wide">
+    <div class="faq-2col">
+      <div class="faq-sticky reveal">
+        <div class="sec-tag">// FAQ</div>
+        <h2 style="font-size:34px;margin-bottom:14px">Questions about gateway planning</h2>
+        <p style="font-size:15px;color:var(--ink-mid)">Send us a floor plan and we'll return a placement layout with power and network requirements marked.</p>
+        <a href="javascript:void(0)" class="btn btn-primary" style="margin-top:20px" onclick="openModal()">Talk to an engineer</a>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">How many base stations does an ESL system need?<span class="chev">+</span></button><div class="faq-a"><p>It depends on floor area and effective coverage radius, not on label count. Divide the floor by the area each gateway can serve: with a square grid, one station covers roughly 2r&sup2;, where r is the coverage radius measured at the label plane. A 120 &times; 60 m space with a 24 m effective radius needs about 6&ndash;8 stations for coverage. Very high label density or metal racking can require more.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Why does mounting height reduce base station coverage?<span class="chev">+</span></button><div class="faq-a"><p>A rated range is a slant distance measured through the air in a straight line, but labels sit on a lower plane. The usable floor radius is the horizontal leg of a right triangle: r = &radic;(d&sup2; &minus; h&sup2;), where d is the rated range and h is the height difference between the gateway and the labels. Mounting a 25 m gateway 4.5 m above the shelf plane leaves about 24.6 m of floor radius; mount it 18.5 m above the labels and only about 16.8 m remain.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Should I use a square grid or a triangular grid?<span class="chev">+</span></button><div class="faq-a"><p>It depends on the size and shape of the floor. Triangular placement is more area-efficient on an infinite plane, but finite-floor edges and fixed mounting points can reverse the count. With this planner&rsquo;s default radio assumptions, a 2,000 &times; 500 m distribution centre uses about 24% fewer triangular-grid stations, while a 60 &times; 40 m store uses about 25% more. Start with square on a typical retail floor, compare both on a large open footprint, and validate the result with an RF survey.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Why does UWB positioning need more base stations?<span class="chev">+</span></button><div class="faq-a"><p>Coverage only asks whether one gateway can reach a label. Positioning asks that several gateways see the same label at once, because a location is computed by trilateration from multiple simultaneous measurements. This planner applies a 1.6&times; density uplift as a planning allowance for that overlap requirement.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Does this account for walls, shelving and metal racking?<span class="chev">+</span></button><div class="faq-a"><p>No. It models free-space geometry only. Dense metal racking, cold rooms, fire doors, lift shafts and reinforced concrete all attenuate signal and can meaningfully reduce the effective radius. Treat the result as a planning baseline and confirm it with an on-site survey before ordering hardware.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What comms range should I enter?<span class="chev">+</span></button><div class="faq-a"><p>Use the range your gateway is rated for in an environment resembling yours, not the best-case open-field figure on a datasheet. If you are unsure, model a range you are confident about and a pessimistic one, then plan for the gap. Halving the assumed radius roughly quadruples the number of stations, so this input matters more than any other.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHARE ===== -->
+<section data-screen-label="Coverage Planner — Share">
+  <div class="wrap wide">
+    <div class="article-share-panel" data-article-share aria-label="Share this coverage planner">
+      <div class="article-share-eyebrow">Share this planner</div>
+      <p>Send the coverage baseline to your facilities, network or store-operations team.</p>
+      <div class="article-share-actions" aria-label="Coverage planner sharing options"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="contact" style="background:var(--bg-soft);border-top:1px solid var(--line-soft)" data-screen-label="Coverage Planner — CTA">
+  <div class="wrap wide">
+    <div class="cta-band reveal">
+      <h2>Send us a floor plan</h2>
+      <p>We'll return a gateway placement layout for your site, with power and network drops marked, plus the label mix each zone needs.</p>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Request a deployment assessment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="Resources.html">Resources hub</a>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="esl-base-station-coverage-calculator.html">Coverage planner</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== QUOTE MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Number of stores</label><select name="stores" id="f-stores"><option value="1-5">1&ndash;5 stores</option><option value="6-20">6&ndash;20 stores</option><option value="21-100">21&ndash;100 stores</option><option value="100+">100+ stores</option></select></div>
+            <div class="form-field"><label>Primary interest</label><select name="interest" id="f-interest"><option value="ai-pricing">AI dynamic pricing</option><option value="middleware">Open middleware platform</option><option value="esl-hardware">ESL hardware / price tags</option><option value="full-solution">Full retail solution</option></select></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script src="station-calc.js"></script>
+</body>
+</html>

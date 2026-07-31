@@ -28,6 +28,15 @@
 - ESL Cost Guide: https://www.aiesl.com/electronic-shelf-label-cost.html
 - Warehouse Shelf Labels: https://www.aiesl.com/warehouse-shelf-labels.html
 - Grocery Store Digital Price Tags: https://www.aiesl.com/grocery-store-digital-price-tags.html
+- Open vs Closed ESL Systems: https://www.aiesl.com/open-vs-closed-esl-systems.html
+- ESL Integration with POS, ERP, API, MQTT and Databases: https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html
+- How to Calculate ESL ROI and Payback: https://www.aiesl.com/esl-roi-calculator-payback.html
+- Walmart Digital Shelf Labels: https://www.aiesl.com/walmart-digital-shelf-labels.html
+
+## Interactive Tools
+
+- ESL ROI Calculator (payback period and 3-year net savings; conservative labour-only model, all assumptions published): https://www.aiesl.com/esl-roi-calculator.html
+- ESL Base Station Coverage Calculator (how many gateways a floor area needs, with mounting-height correction): https://www.aiesl.com/esl-base-station-coverage-calculator.html
 
 ## AI Crawler Policy
 

@@ -169,11 +169,17 @@ function initROI() {
     document.getElementById('vChanges').textContent = c;
     document.getElementById('vWage').textContent = '$' + w;
 
-    var secPerTag = 12;
-    var tagsPerYear = k * c * 52;
-    var hoursPerYear = (tagsPerYear * secPerTag / 3600) * s;
+    /* Conservative model — kept consistent with
+       /esl-roi-calculator-payback.html:
+         90 s per manual re-tag (print, walk, locate, swap)
+         85% labour reduction (not 100% — some manual work remains)
+         $9 all-in per labelled position (tags + gateways + software + install) */
+    var secPerTag = 90;
+    var labourReduction = 0.85;
+    var costPerLabel = 9;
+    var tagsPerYear = k * c; /* c = price changes per label per YEAR */
+    var hoursPerYear = (tagsPerYear * secPerTag / 3600) * s * labourReduction;
     var laborSaved = hoursPerYear * w;
-    var costPerLabel = 7;
     var investment = k * s * costPerLabel;
     var paybackMonths = investment / (laborSaved / 12);
     var netSavings = laborSaved * 3 - investment;
@@ -184,6 +190,21 @@ function initROI() {
     document.getElementById('hoursSaved').textContent = fmtN(hoursPerYear) + ' hrs';
     document.getElementById('invest').textContent = fmt(investment);
     document.getElementById('netSavings').textContent = fmt(netSavings);
+
+    /* Honesty guard: the site standardises on a 12–36 month payback range.
+       If the sliders produce a result outside it, say so rather than let the
+       headline number imply a promise we would not make in a proposal. */
+    var caution = document.getElementById('roiCaution');
+    if (caution) {
+      var msg = '';
+      if (paybackMonths < 12) {
+        msg = 'Below the 12&ndash;36 month range commonly quoted in ESL business cases. Before trusting this, check your price-change frequency &mdash; most estates over-state how often an <em>individual</em> label changes.';
+      } else if (paybackMonths > 36) {
+        msg = 'Above the 12&ndash;36 month range commonly quoted in ESL business cases. Labour savings alone will not carry this case; accuracy and markdown benefits would have to be modelled explicitly.';
+      }
+      caution.innerHTML = msg;
+      caution.style.display = msg ? 'block' : 'none';
+    }
 
     var pb = document.querySelector('.roi-cbox.payback');
     if (pb) { pb.classList.remove('flash'); void pb.offsetWidth; pb.classList.add('flash'); }

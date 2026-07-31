@@ -39,20 +39,29 @@
       for (var i = 0; i < nx; i++) for (var j = 0; j < ny; j++) pts.push([(i + 0.5) * L / nx, (j + 0.5) * W / ny]);
       spacingTxt = 'spacing ' + s.toFixed(1) + ' m (' + nx + ' &times; ' + ny + ')';
     } else {
+      /* Hexagonal (triangular) packing: columns spaced sqrt(3)*r, rows spaced 1.5*r,
+         alternate rows offset by half a column. Row/column counts use ceil() so the
+         realised spacing never exceeds the theoretical maximum. Offset rows carry one
+         extra station to close the two edges — which is why this layout only beats the
+         square grid on large open floors, and loses on small or near-square ones. */
       var dx = Math.sqrt(3) * r, dy = 1.5 * r;
-      var rows = Math.max(1, Math.round(W / dy) + 1);
+      var rows = Math.max(1, Math.ceil(W / dy));
+      var cols = Math.max(1, Math.ceil(L / dx));
       for (var rI = 0; rI < rows; rI++) {
-        var y = (rI + 0.5) * W / rows, off = (rI % 2) ? 0.5 : 0;
-        var cols = Math.max(1, Math.round(L / dx) + 1);
-        for (var c = 0; c < cols; c++) { var x = (c + 0.5 + off * 0.5) * L / (cols + off * 0.5); if (x <= L) pts.push([Math.min(x, L), y]); }
+        var y = (rI + 0.5) * W / rows, odd = rI % 2;
+        var nC = odd ? cols + 1 : cols;
+        for (var c = 0; c < nC; c++) {
+          var x = odd ? (c * L / cols) : ((c + 0.5) * L / cols);
+          pts.push([Math.min(Math.max(x, 0), L), y]);
+        }
       }
-      spacingTxt = 'row ' + dy.toFixed(1) + ' / col ' + dx.toFixed(1) + ' m';
+      spacingTxt = 'row ' + (W / rows).toFixed(1) + ' / col ' + (L / cols).toFixed(1) + ' m';
     }
 
     var base = pts.length, mult = (use === 'pos') ? 1.6 : 1.0, total = Math.ceil(base * mult), area = L * W;
 
     $('scCards').innerHTML =
-      cell('Base stations', total + '', (use === 'pos' ? base + ' coverage &times; 1.6 positioning' : 'gateways required'), 'accent') +
+      cell('Planning count', total + '', (use === 'pos' ? base + ' coverage &times; 1.6 positioning' : 'estimated gateways'), 'accent') +
       cell('Floor coverage radius', r.toFixed(2) + ' m', 'height diff ' + dh.toFixed(1) + ' m', (r < d - 0.05 ? 'warn' : '')) +
       cell('Floor area', Math.round(area).toLocaleString() + ' m&sup2;', L + ' &times; ' + W + ' m') +
       cell('Area per station', Math.round(area / total) + ' m&sup2;', spacingTxt);

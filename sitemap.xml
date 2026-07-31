@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.aiesl.com/Cases.html</loc></url>
-  <url><loc>https://www.aiesl.com/Industries.html</loc></url>
-  <url><loc>https://www.aiesl.com/Resources.html</loc></url>
+  <url><loc>https://www.aiesl.com/</loc></url>
   <url><loc>https://www.aiesl.com/about.html</loc></url>
   <url><loc>https://www.aiesl.com/ai-dynamic-pricing-esl.html</loc></url>
   <url><loc>https://www.aiesl.com/blog.html</loc></url>
+  <url><loc>https://www.aiesl.com/Cases.html</loc></url>
   <url><loc>https://www.aiesl.com/electronic-price-tags.html</loc></url>
   <url><loc>https://www.aiesl.com/electronic-shelf-label-cost.html</loc></url>
   <url><loc>https://www.aiesl.com/electronic-shelf-label-pharmacy.html</loc></url>
+  <url><loc>https://www.aiesl.com/esl-base-station-coverage-calculator.html</loc></url>
   <url><loc>https://www.aiesl.com/esl-battery-life.html</loc></url>
   <url><loc>https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html</loc></url>
+  <url><loc>https://www.aiesl.com/esl-roi-calculator-payback.html</loc></url>
+  <url><loc>https://www.aiesl.com/esl-roi-calculator.html</loc></url>
   <url><loc>https://www.aiesl.com/esl-vs-paper-labels.html</loc></url>
   <url><loc>https://www.aiesl.com/grocery-store-digital-price-tags.html</loc></url>
-  <url><loc>https://www.aiesl.com/</loc></url>
+  <url><loc>https://www.aiesl.com/Industries.html</loc></url>
   <url><loc>https://www.aiesl.com/industry-convenience.html</loc></url>
   <url><loc>https://www.aiesl.com/industry-diy.html</loc></url>
   <url><loc>https://www.aiesl.com/industry-electronics.html</loc></url>
@@ -22,6 +24,7 @@
   <url><loc>https://www.aiesl.com/industry-warehouse.html</loc></url>
   <url><loc>https://www.aiesl.com/open-vs-closed-esl-systems.html</loc></url>
   <url><loc>https://www.aiesl.com/products.html</loc></url>
+  <url><loc>https://www.aiesl.com/Resources.html</loc></url>
   <url><loc>https://www.aiesl.com/retail-indoor-positioning.html</loc></url>
   <url><loc>https://www.aiesl.com/top-electronic-shelf-label-manufacturers.html</loc></url>
   <url><loc>https://www.aiesl.com/types-of-electronic-shelf-labels.html</loc></url>
