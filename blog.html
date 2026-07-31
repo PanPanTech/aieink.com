@@ -28,8 +28,8 @@
 <body>
 
 <!-- ===== NAV ===== -->
-<nav>
-  <div class="wrap nav-in">
+<nav data-screen-label="Blog — Nav">
+  <div class="wrap wide nav-in">
     <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
     <div class="nav-links">
       <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
@@ -41,9 +41,23 @@
         </div>
       </div>
       <a href="products.html">Products</a>
-      <a href="blog.html" class="active">Blog</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
       <a href="about.html">About</a>
-      <a href="esl-roi-calculator.html">ROI Calculator</a>
       <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
     </div>
     <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -51,12 +65,12 @@
 </nav>
 <div class="drawer" id="drawer">
   <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
-  <a href="index.html">Home</a>
-  <a href="index.html#features">Solutions</a>
+  <a href="index.html#platform">Platform</a>
   <a href="products.html">Products</a>
-  <a href="blog.html">Blog</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
   <a href="about.html">About</a>
-  <a href="esl-roi-calculator.html">ROI Calculator</a>
   <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
 </div>
 
