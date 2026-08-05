@@ -15,6 +15,27 @@
 
   const SERIES = [
     {
+      key: 'swift', name: 'Swift Series', cat: 'READY-STOCK ESL',
+      tagline: 'Swift X series for fast delivery projects, with white or black housings across compact shelf tags, large promotional displays and its matching AP01 base station.',
+      best: 'Fast rollout projects / distributors / pilot stores / mixed-size deployments',
+      models: [
+        { m:'AES-0154X', src:'S-ET0154-33', size:'1.54"', sizeIn:1.54, res:'200 x 200', dpi:'188 DPI', dim:'49 x 37.6 x 13 mm', active:'27.51 x 27.51 mm', wt:'20 g', batt:'1 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0213X', src:'S-ET0213-36', size:'2.13"', sizeIn:2.13, res:'250 x 122', dpi:'130 DPI', dim:'71.3 x 35.6 x 12 mm', active:'48.55 x 23.71 mm', wt:'32 g', batt:'2 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0266X', src:'S-ET0266-3A', size:'2.66"', sizeIn:2.66, res:'296 x 152', dpi:'125 DPI', dim:'85.8 x 41.8 x 12 mm', active:'60.09 x 30.70 mm', wt:'38 g', batt:'2 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0290X', src:'S-ET0290-3D', size:'2.90"', sizeIn:2.90, res:'296 x 128', dpi:'112 DPI', dim:'91.2 x 41 x 12 mm', active:'66.9 x 29.06 mm', wt:'40 g', batt:'2 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0350X', src:'S-ET0350-55', size:'3.50"', sizeIn:3.50, res:'384 x 184', dpi:'122 DPI', dim:'100.5 x 48.5 x 12 mm', active:'79.68 x 38 mm', wt:'47 g', batt:'2 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0420X', src:'S-ET0420-40', size:'4.20"', sizeIn:4.20, res:'400 x 300', dpi:'119 DPI', dim:'99.2 x 89 x 12 mm', active:'84.8 x 63.6 mm', wt:'75 g', batt:'3 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0583X', src:'S-ET0580-4F', size:'5.83"', sizeIn:5.83, res:'648 x 480', dpi:'138 DPI', dim:'134.5 x 114 x 9 mm', active:'118.78 x 88.22 mm', wt:'135 g', batt:'6 x CR2450', color:'bwry', caseColor:'White / black' },
+        { m:'AES-0750X', src:'S-ET0750-44', size:'7.50"', sizeIn:7.50, res:'800 x 480', dpi:'124 DPI', dim:'178 x 127 x 9 mm', active:'163.2 x 97.92 mm', wt:'188 g', batt:'6 x CR2430', color:'bwry', caseColor:'White / black' },
+        { m:'AES-1020X', src:'ET1020', size:'10.2"', sizeIn:10.2, res:'960 x 640', dpi:'183 DPI', dim:'170.9 x 233 x 9 mm', active:'215.52 x 143.68 mm', wt:'TBC', batt:'12 x CR2430', color:'bwry', caseColor:'White' },
+        { m:'AES-1248X', src:'ET1250-58', size:'12.48"', sizeIn:12.48, res:'1304 x 984', dpi:'131 DPI', dim:'281.3 x 229 x 17.8 mm', active:'252.98 x 190.90 mm', wt:'607 g', batt:'12 x CR2450', color:'bwr', caseColor:'White', note:'Displayed as 12.5 inch in the supplier quotation; model code follows the 12.48 inch naming standard.' },
+        { m:'AES-1330X', src:'ET1330', size:'13.3"', sizeIn:13.3, res:'960 x 680', dpi:'183 DPI', dim:'230 x 295 x 9 mm', active:'275 x 195 mm', wt:'TBC', batt:'12 x CR2450', color:'bwr', caseColor:'White' },
+        { m:'AES-AP01', src:'Demo lite base station', size:'Gateway', sizeIn:9.99, res:'4-digit LED', dpi:'-', dim:'155 x 155 x 35 mm', wt:'332 g', batt:'PoE / 12V DC / USB-C', color:'gw', caseColor:'White', isGateway:true,
+          note:'Swift Series matching base station; white-background product photo sourced from Zhuhai Sunyco Demo lite materials.' },
+      ],
+      specs: { color:'BW / BWR / BWRY', housing:'White / black; white shown as the primary product photo', tech:'Dot-matrix E-ink / e-paper display', angle:'Close to 180 deg', rf:'2.4 GHz private protocol', range:'13-15 m', nfc:'Optional NFC communication', life:'>=10 years', temp:'0 to +40 C', humidity:'45-70 %RH', cert:'RoHS / CE / FCC' },
+    },
+    {
       key: 'classic', name: 'Classic Series', cat: 'FOUR-COLOR ESL',
       tagline: 'White-cover four-color ESL for mainstream retail, supermarket and warehouse shelves. BLE 5.2 via base station.',
       best: 'Supermarket · grocery · warehouse · picking',
@@ -71,23 +92,32 @@
       specs: { color:'BW / BWR / BWRY', housing:'White / black', batt:'Universal single-button, replaceable', tech:'EINK e-paper, full refresh', angle:'>170°', dpi:'183 DPI', nfc:'ISO/IEC 14443 Type A, 200B NDEF, ≤10mm', led:'7-colour LED', rf:'2.4 GHz (2402–2480 MHz)', life:'5–10 yrs @ 2–4 updates/day', temp:'0–40 °C', humidity:'30–70 %RH', ip:'IP54', cert:'RoHS · CE · FCC' },
     },
     {
-      key: 'freezer', name: 'Freezer Series', cat: 'COLD-CHAIN ESL',
-      tagline: 'Sealed IP67 label rated to −20 °C for freezers and cold chain. Sealed polymer battery.',
-      best: 'Freezers · cold chain · chilled aisles',
+      key: 'coldproof', name: 'Freezer & Waterproof', cat: 'COLD-CHAIN / IP67 ESL',
+      tagline: 'Cold-chain freezer labels and waterproof shelf labels split out from Swift for easier model selection.',
+      best: 'Freezers / chilled aisles / wet retail areas',
       models: [
-        { m:'AES-0266/F', size:'2.66"', sizeIn:2.66, res:'296 × 152', dpi:'183 DPI', dim:'85.9 × 41.9 × 9.1 mm', wt:'32 g', batt:'1200 mAh polymer (sealed)', color:'bw', moq:'2000', ip:'IP67', temp:'−20 to +40 °C', note:'Non-removable battery; black & white display' },
+        { m:'AES-0213F', src:'S-ET0213-39', size:'2.13"', sizeIn:2.13, res:'250 x 122', dpi:'130 DPI', dim:'71.3 x 35.6 x 12 mm', active:'48.55 x 23.71 mm', wt:'32 g', batt:'2 x CR2450', color:'bw', caseColor:'Cold-chain housing', temp:'-25 to +15 C', note:'Freezer model, black and white display' },
+        { m:'AES-0266F', src:'ET0266 freezer', size:'2.66"', sizeIn:2.66, res:'296 x 152', dpi:'125 DPI', dim:'85.8 x 41.8 x 12 mm', active:'60.09 x 30.70 mm', wt:'38 g', batt:'2 x CR2450', color:'bw', caseColor:'Cold-chain housing', temp:'-25 to +15 C', note:'Freezer model, black and white display' },
+        { m:'AES-0420W', src:'S-ET0420-43', size:'4.20"', sizeIn:4.20, res:'400 x 300', dpi:'119 DPI', dim:'99.2 x 89 x 12 mm', active:'84.8 x 63.6 mm', wt:'75 g', batt:'3 x CR2450', color:'bwr', caseColor:'Waterproof housing', ip:'IP67', note:'Waterproof model, black/white/red display' },
       ],
-      specs: { color:'Black & White', housing:'White', ip:'IP67', temp:'−20 to +40 °C', batt:'1200 mAh polymer, non-removable',
-        tech:'EINK e-paper, full refresh', angle:'>170°', dpi:'183 DPI', nfc:'ISO/IEC 14443 Type A, 200B NDEF', rf:'2.4 GHz (2402–2480 MHz)', life:'5–10 yrs @ 2–4/day', humidity:'30–70 %RH', cert:'RoHS · CE · FCC' },
+      specs: { color:'BW / BWR', housing:'Cold-chain or waterproof housing', ip:'IP67 for waterproof model', temp:'-25 to +15 C freezer; 0 to +40 C waterproof', tech:'Dot-matrix E-ink / e-paper display', angle:'Close to 180 deg', rf:'2.4 GHz private protocol', life:'>=10 years', cert:'RoHS / CE / FCC' },
     },
     {
-      key: 'special', name: '7-Color & Gateway', cat: 'SPECIALTY',
-      tagline: 'Full-color 7-shade promotional label, plus the base station that drives the whole estate.',
-      best: 'Promo displays · system infrastructure',
+      key: 'e6', name: 'E6 Spectra 6 Color', cat: 'E INK SPECTRA 6 FULL COLOR',
+      tagline: 'E6 means E Ink Spectra 6 full-color electronic paper for high-impact promotional displays.',
+      best: 'Full-color promotions / aisle endcaps / premium merchandising',
       models: [
-        { m:'AES-0730/SC', size:'7.30"', sizeIn:7.30, res:'800 × 480', dpi:'183 DPI', dim:'183 × 118 × 11.2 mm', wt:'201 g', batt:'4×600 mAh CR2450', color:'7c', moq:'—', note:'7 colors: black, white, red, yellow, blue, green, orange' },
-        { m:'AES-B001', size:'Gateway', sizeIn:9.99, res:'4-digit LED', dpi:'—', dim:'155 × 155 × 35 mm', wt:'332 g', batt:'PoE / 12V DC / USB-C', color:'gw', moq:'—', isGateway:true,
-          note:'Quad-core ARM Cortex-A35, 1 GB DDR3, 16 GB eMMC · Wi-Fi 2.4G + RJ45 + BLE 5.2 + 4-ch RF · 0–25 m range' },
+        { m:'AES-0730E6', src:'AES-0730/SC', size:'7.30"', sizeIn:7.30, res:'800 x 480', dpi:'183 DPI', dim:'183 x 118 x 11.2 mm', wt:'201 g', batt:'4 x 600 mAh CR2450', color:'e6', moq:'-', note:'E Ink Spectra 6 full color: black, white, red, yellow, blue, green and orange' },
+      ],
+      specs: { color:'E Ink Spectra 6 full color', tech:'Spectra 6 e-paper', note:'Full-color promotional electronic paper label' },
+    },
+    {
+      key: 'gateway', name: 'Gateway', cat: 'BASE STATION',
+      tagline: 'The existing AiESL base station remains available for the broader product range.',
+      best: 'System infrastructure / mixed label estates',
+      models: [
+        { m:'AES-B001', size:'Gateway', sizeIn:9.99, res:'4-digit LED', dpi:'-', dim:'155 x 155 x 35 mm', wt:'332 g', batt:'PoE / 12V DC / USB-C', color:'gw', moq:'-', isGateway:true,
+          note:'Existing AiESL gateway retained for current catalog compatibility.' },
       ],
       specs: { note:'See individual model details' },
     },
@@ -96,25 +126,22 @@
   const ALL = [];
   SERIES.forEach(s => s.models.forEach(m => ALL.push(Object.assign({ series: s.key, seriesName: s.name }, m))));
 
-  const COLOR_LABEL = { bw:'B/W', bwr:'B/W/R', bwry:'B/W/R/Y', '7c':'7-color', gw:'Gateway' };
-  const COLOR_CHIPS = { bw:['B','W'], bwr:['B','W','R'], bwry:['B','W','R','Y'], '7c':['B','W','R','Y','Bl','Gr','Or'], gw:[] };
+  const COLOR_LABEL = { bw:'B/W', bwr:'B/W/R', bwry:'B/W/R/Y', '7c':'7-color', e6:'E6 full color', gw:'Gateway' };
+  const COLOR_CHIPS = { bw:['B','W'], bwr:['B','W','R'], bwry:['B','W','R','Y'], '7c':['B','W','R','Y','Bl','Gr','Or'], e6:['E6','Spectra 6'], gw:[] };
 
   function tagMockHtml(m) {
     if (m.isGateway) {
       return `<div class="tag-mock c-bw" style="width:74px;height:74px;align-items:center;justify-content:center">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#333;text-align:center;line-height:1.4">BASE<br>STATION<br>AES-B001</div></div>`;
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#333;text-align:center;line-height:1.4">BASE<br>STATION<br>AES-AP01</div></div>`;
     }
     const base = Math.max(16, Math.min(118, 14 + m.sizeIn * 13));
     const p = m.res.split('×').map(s=>parseFloat(s));
     const ratio = (p[1]/p[0]) || 0.5;
     const w = base, h = Math.max(20, Math.round(base * ratio));
-    const key = m.sizeIn.toFixed(2);
-    const priceMap = { '1.54':'4.9','2.13':'3.49','2.66':'5.99','2.90':'11.39','3.50':'8.50','4.20':'19.9','5.83':'24.5','7.30':'29.9','7.50':'34.9','10.20':'129' };
-    const price = priceMap[key] || '9.99';
     const fs = Math.max(11, Math.min(26, h * 0.5));
     return `<div class="tag-mock c-${m.color}" style="width:${w}px;height:${h}px">
       <span class="tm-name">AES ${m.size}</span>
-      <span class="tm-price" style="font-size:${fs}px"><small>$</small>${price}</span>
+      <span class="tm-price" style="font-size:${fs}px">${m.m}</span>
       <span class="tm-strip"></span></div>`;
   }
 
@@ -122,12 +149,18 @@
   function photoFor(m) {
     var code = (m.m.match(/AES-([A-Za-z0-9]+)/) || [])[1] || '';
     switch (m.series) {
+      case 'swift': {
+        if (m.isGateway) return 'assets/products/swift-ap01.jpg';
+        var swiftCode = code.toLowerCase().replace(/x$/, '');
+        return 'assets/products/swift-' + swiftCode + '.jpg';
+      }
       case 'classic': return 'assets/products/classic-' + code + '.jpg';
       case 'lite':    return 'assets/products/lite-' + code + '.png';
       case 'slim':    return 'assets/products/slim-' + code + '.png';
       case 'rock':    return 'assets/products/rock-' + code + (code === '0102' ? '.jpg' : '.png');
-      case 'freezer': return 'assets/products/freezer-' + code + '.jpg';
-      case 'special': return m.isGateway ? 'assets/products/gateway-b001.jpg' : 'assets/products/sevencolor-0730.png';
+      case 'coldproof': return 'assets/products/swift-' + code.toLowerCase() + '.jpg';
+      case 'e6': return 'assets/products/sevencolor-0730.png';
+      case 'gateway': return 'assets/products/gateway-b001.jpg';
     }
     return '';
   }
@@ -135,7 +168,8 @@
   function cardHtml(m) {
     const chips = (COLOR_CHIPS[m.color]||[]).map(c=>`<span class="cchip">${c}</span>`).join('');
     const photo = photoFor(m);
-    return `<div class="prod-card model-card reveal" data-series="${m.series}" onclick="AiESLcat.open('${m.m}')">
+    const title = m.isGateway ? (m.series === 'swift' ? 'Swift AP01 Base Station' : 'ESL Gateway') : (m.series === 'coldproof' ? 'AiESL ' + m.size + ' ' + (m.m.endsWith('W') ? 'Waterproof ESL' : 'Freezer ESL') : (m.series === 'e6' ? 'AiESL E6 Spectra 6 ESL' : 'AiESL ' + m.size + ' ESL'));
+    return `<div class="prod-card model-card reveal" data-series="${m.series}" data-model="${m.m.replace(/[^A-Za-z0-9]/g,'')}" onclick="AiESLcat.open('${m.m}')">
       <div class="mc-top photo">
         <span class="mc-badge">${m.seriesName}</span>
         <img src="${photo}" alt="AiESL ${m.m} ${m.isGateway?'ESL gateway':m.size+' electronic shelf label'}" loading="lazy">
@@ -143,7 +177,7 @@
       </div>
       <div class="prod-body">
         <div class="pmodel">${m.m}</div>
-        <h3>${m.isGateway ? 'ESL Gateway' : 'AiESL ' + m.size + ' ESL'}</h3>
+        <h3>${title}</h3>
         <div class="prod-specs">
           <div><span>Resolution</span><span>${m.res}</span></div>
           <div><span>Dimensions</span><span>${m.dim.replace(/ /g,'')}</span></div>
@@ -172,7 +206,8 @@
       ['Op. current', '<350 mA'], ['Op. temp', '0–50 °C'], ['Housing', 'ABS + PC, white'],
       ['Mounting', 'Desktop · vertical · ceiling'],
     ] : [
-      ['Model', m.m], ['Display size', m.size], ['Resolution', m.res], ['Pixel density', m.dpi],
+      ['Model', m.m], ['Source SKU', m.src],
+      ['Display size', m.size], ['Active area', m.active], ['Resolution', m.res], ['Pixel density', m.dpi],
       ['Display colors', COLOR_LABEL[m.color]], ['Dimensions', m.dim], ['Weight', m.wt],
       ['Case color', m.caseColor || common.housing || 'White'], ['Battery', m.batt],
       ['Battery life', m.life || common.life || '5–10 yrs @ 2–4/day'],
@@ -206,7 +241,7 @@
     const s = SERIES.find(x=>x.key===key);
     const intro = document.getElementById('catIntro');
     if (intro) intro.innerHTML = key==='all'
-      ? `<b>${ALL.length} models</b> across ${SERIES.length} families — from a 1.54&Prime; accessory tag to a 10.2&Prime; rock label and the base station. Click any model for the full spec sheet.`
+      ? `<b>${ALL.length} models</b> across Swift, Classic, Lite, Slim, Rock, Freezer and specialty catalog groups — from a 1.54&Prime; accessory tag to 13.3&Prime; large-format displays and the base station. Click any model for the full spec sheet.`
       : `<b>${s.name}</b> · ${s.tagline} &nbsp;<span style="color:var(--ink-dim)">Best for: ${s.best}</span>`;
   }
 
