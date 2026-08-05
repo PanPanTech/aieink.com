@@ -31,6 +31,7 @@
 - Open vs Closed ESL Systems: https://www.aiesl.com/open-vs-closed-esl-systems.html
 - ESL Integration with POS, ERP, API, MQTT and Databases: https://www.aiesl.com/esl-integration-pos-erp-api-mqtt-database.html
 - How to Calculate ESL ROI and Payback: https://www.aiesl.com/esl-roi-calculator-payback.html
+- ESL Pricing Accuracy: What Official US Price-Verification Data Shows: https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html
 - Walmart Digital Shelf Labels: https://www.aiesl.com/walmart-digital-shelf-labels.html
 
 ## Interactive Tools

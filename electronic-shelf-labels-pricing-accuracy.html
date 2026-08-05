@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>ESL Pricing Accuracy: What 30 Years of Official Data Show | AiESL</title>
+<meta name="description" content="What 30 years of FTC and NIST price-verification data show about how often shelf prices are wrong, which of the three common ESL claims are actually evidenced, and what electronic shelf labels do and do not fix.">
+<meta name="keywords" content="electronic shelf labels pricing accuracy, esl pricing accuracy, shelf price errors, price verification, esl worker efficiency, esl merchandising, digital shelf labels accuracy">
+<link rel="canonical" href="https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How Do Electronic Shelf Labels Impact Pricing Accuracy, Merchandising and Worker Efficiency?">
+<meta property="og:description" content="23% of US stores fail the federal 98% price-accuracy standard. What electronic shelf labels fix, what they don't, and which of the three common claims are actually evidenced.">
+<meta property="og:image" content="https://www.aiesl.com/assets/blog/esl-pricing-accuracy-official-data.svg">
+<meta property="og:url" content="https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How Do Electronic Shelf Labels Impact Pricing Accuracy, Merchandising and Worker Efficiency?","description":"What 30 years of FTC and NIST price-verification data show about how often shelf prices are wrong, which of the three common ESL claims are actually evidenced, and what electronic shelf labels do and do not fix.","datePublished":"2026-08-05","dateModified":"2026-08-05","author":{"@type":"Organization","name":"AiESL"},"publisher":{"@type":"Organization","name":"AiESL"},"image":"https://www.aiesl.com/assets/blog/esl-pricing-accuracy-official-data.svg","mainEntityOfPage":"https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.aiesl.com/blog.html"},{"@type":"ListItem","position":3,"name":"ESL Pricing Accuracy","item":"https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do electronic shelf labels improve pricing accuracy?","acceptedAnswer":{"@type":"Answer","text":"They eliminate one documented cause of pricing errors and leave another untouched. US Federal Trade Commission inspectors found that errors largely occur when shelf tags and signs are not updated to match the price in the store's computer. Labels driven from a single price source remove that synchronisation gap by design. They do not fix a price that was wrong in the system of record to begin with - in that case electronic labels propagate the error faster and more consistently than paper would."}},{"@type":"Question","name":"How often are retail shelf prices wrong?","acceptedAnswer":{"@type":"Answer","text":"In the 2024 NCWM National Price Verification Survey, 23% of inspected stores failed the 98% accuracy standard, and roughly one item in 43 was charged at a price different from the one displayed. The survey covered 7,462 inspections and 419,237 individual item prices across 26 states. Accuracy has improved over three decades - the equivalent figure was one item in 21 in 1996 - but roughly one store in four still fails."}},{"@type":"Question","name":"What is the 2% pricing error rule?","acceptedAnswer":{"@type":"Answer","text":"It comes from the Examination Procedure for Price Verification published in NIST Handbook 130. A store fails an inspection when more than 2% of verified prices differ from the price charged, so passing means at least 98% matched. NIST is explicit that this is a guideline for evaluating a store's overall pricing practices, not permission to misprice 2% of products - advertising an inaccurate price is unlawful in all 50 states."}},{"@type":"Question","name":"Which retail formats have the worst pricing accuracy?","acceptedAnswer":{"@type":"Answer","text":"In the 2024 survey, convenience stores were worst at 4.9% of items priced incorrectly, followed by dollar and discount stores at 3.5% and automotive parts at 3.1%. Grocery and supermarkets were at 1.7% with 83% of stores passing, and warehouse clubs best at 0.9%. Five of the eleven store categories exceeded the 2% limit on average, and even in the best categories more than one store in ten failed."}},{"@type":"Question","name":"Are promotional prices more error-prone than regular prices?","acceptedAnswer":{"@type":"Answer","text":"Yes, and the errors skew against the shopper. The FTC's 1998 study found errors in one of every 28 sale items compared with one in 32 non-sale items. On sale items almost two-thirds of the errors were overcharges, versus about one-third on non-sale items. Inspectors attributed this to sale prices having to agree across shelf tags, item prices, signage and the store computer simultaneously - any one of which can break the chain."}},{"@type":"Question","name":"Do electronic shelf labels improve shelf merchandising or planogram compliance?","acceptedAnswer":{"@type":"Answer","text":"There is no credible independent evidence that they do. The peer-reviewed research on automated planogram compliance concerns computer-vision systems rather than shelf labels - for example a 2025 Scientific Reports study covering more than 7,000 convenience stores. Claims attributing merchandising gains to labels themselves generally trace back to vendor marketing. If shelf compliance is the objective, vision-based monitoring is the technology with published evidence behind it."}}]}</script>
+<style>
+.article-layout{display:grid;grid-template-columns:minmax(0,820px) 270px;gap:52px;align-items:start}
+.article-layout>*{min-width:0}
+.article{width:100%;max-width:100%}
+.article-cover{width:100%}
+.article-cover img{height:auto;object-fit:contain}
+.article-toc{position:sticky;top:96px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.article-toc b{display:block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue-hi);letter-spacing:.05em;margin-bottom:12px;text-transform:uppercase}
+.article-toc a{display:block;font-size:13.5px;color:var(--ink-mid);padding:8px 0;border-top:1px solid var(--line-soft)}
+.article-toc a:hover{color:var(--blue-hi)}
+.article-body .answer-box{background:linear-gradient(135deg,rgba(77,124,255,.12),rgba(77,124,255,.03));border:1px solid rgba(77,124,255,.28);border-radius:14px;padding:22px 24px;margin:0 0 28px;color:var(--ink);font-size:18px;line-height:1.7}
+.article-body .answer-box strong{color:var(--ink)}
+.article-body .formula{background:var(--bg-soft);border:1px solid var(--line);border-left:4px solid var(--blue-hi);border-radius:10px;padding:18px 22px;margin:24px 0;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.8;color:var(--ink);overflow-x:auto}
+.article-body figure{margin:30px 0}
+.article-body figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;background:#f4f5f7}
+.article-body figcaption{font-size:12px;color:var(--ink-dim);text-align:center;margin-top:9px}
+.article-body .source-note{font-size:13px;color:var(--ink-dim);margin-top:-12px}
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.data-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.data-card .num{font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:700;color:var(--blue-hi);line-height:1.1}
+.data-card .lbl{font-size:13px;color:var(--ink-mid);margin-top:8px}
+.article-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:28px 0;background:var(--bg-card)}
+.article-table{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+.article-table th,.article-table td{padding:14px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft)}
+.article-table thead th{background:var(--bg-soft);border-top:none;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim)}
+.article-table td:first-child{color:var(--ink);font-weight:600}
+.article-body .source-list{padding-left:0;list-style:none;display:grid;gap:10px}
+.article-body .source-list li{display:block}
+.article-body .source-list li:before{display:none}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr}.article-toc{position:static;order:-1}.data-strip{grid-template-columns:1fr}}
+@media(max-width:640px){.article-layout,.article,.article-body,.article-body .answer-box,.article-toc{width:100%;max-width:min(calc(100vw - 40px),350px);min-width:0}.article-body,.article-body *{overflow-wrap:break-word}.article-body .answer-box{font-size:16px}.article-table{min-width:620px}.article-body .formula{font-size:12.5px}.page-hero h1{font-size:32px}.article-meta{gap:7px 10px;font-size:12px}.article-meta span:nth-child(even){display:none}.wrap,.wrap.wide{padding-left:20px;padding-right:20px}.article-cover{max-width:350px}.article-cover img{height:auto}}
+</style>
+</head>
+<body>
+
+<nav data-screen-label="Article — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<div class="page-hero" data-screen-label="Article esl-accuracy — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="article-hero">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:16px"><a href="blog.html" style="color:var(--blue-hi)">Blog</a> / EVIDENCE &amp; OPERATIONS</div>
+      <h1>How Do Electronic Shelf Labels Impact Pricing Accuracy, Merchandising and Worker Efficiency?</h1>
+      <div class="article-meta">
+        <span>August 5, 2026</span><span>&middot;</span><span>14 min read</span><span>&middot;</span><span>AiESL Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap wide"><div class="article-cover reveal"><img src="assets/blog/esl-pricing-accuracy-official-data.svg" alt="Charts of US price-verification inspection results from 1996, 1998 and 2024 showing store pass rates and item error rates by store type"></div></div>
+
+<section data-screen-label="Article esl-accuracy — Body">
+  <div class="wrap wide">
+    <div class="article-layout">
+      <article class="article">
+        <div class="article-body">
+          <div class="answer-box"><strong>Of these three claims, only one rests on large-scale official measurement. US regulators have inspected retail pricing accuracy for thirty years, and in the most recent national survey 23% of stores failed the 98% accuracy standard &mdash; so the problem electronic shelf labels are sold against is real and quantified.</strong> Worker efficiency can be modelled honestly but has not been measured at that scale. Merchandising is the weakest of the three: we could not find credible independent evidence that shelf labels improve it, and we say so below rather than fill the gap with a vendor claim.</div>
+
+          <p>This article separates the three because they are usually sold as one. A supplier deck will show accuracy, efficiency and merchandising as a single row of icons, implying the same weight of proof behind each. There is not. Below, each claim is graded by the evidence that actually exists, and the numbers come from the US Federal Trade Commission, the National Institute of Standards and Technology (NIST) and the National Conference on Weights and Measures (NCWM) &mdash; not from ESL vendors.</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Claim</th><th>Evidence available</th><th>What you can defend</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Pricing accuracy</strong></td><td><strong>Strong on the problem, absent on the fix.</strong> Three decades of government inspection data quantify how often shelf prices are wrong. No official study has compared ESL stores with paper-label stores.</td><td>That the failure mode exists, how common it is in your store type, and that ESL structurally removes one documented cause of it</td></tr>
+                <tr><td><strong>Worker efficiency</strong></td><td><strong>Modellable, not measured.</strong> The arithmetic is simple and reproducible; there is no equivalent public dataset.</td><td>A transparent model with your own inputs &mdash; not a borrowed percentage</td></tr>
+                <tr><td><strong>Shelf merchandising</strong></td><td><strong>Weak.</strong> The peer-reviewed work on planogram compliance is about computer vision, not labels.</td><td>Very little. Treat any specific number here with suspicion, including ours</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 id="how-often">How often are shelf prices actually wrong?</h2>
+          <p><strong>In the 2024 national survey, 23% of inspected stores failed the pricing-accuracy standard, and about one item in 43 was charged at a price different from the one displayed.</strong> That is not a vendor estimate. It comes from 7,462 inspections at 7,367 stores across 26 states, in which weights-and-measures officials checked 419,237 individual items by comparing the advertised or displayed price against the price charged at the register.</p>
+
+          <p>The standard being applied is the Examination Procedure for Price Verification (EPPV), published in NIST Handbook 130. Its rule is blunt: a store fails when more than 2% of verified prices differ from the price charged. Pass means at least 98% matched at the moment of inspection.</p>
+
+          <div class="data-strip">
+            <div class="data-card"><div class="num">23%</div><div class="lbl">of stores inspected in the 2024 national survey failed the 98% accuracy standard.</div></div>
+            <div class="data-card"><div class="num">419,237</div><div class="lbl">individual item prices checked across 7,462 inspections in 26 states.</div></div>
+            <div class="data-card"><div class="num">1 in 43</div><div class="lbl">items priced incorrectly &mdash; improved from 1 in 21 in 1996, but not solved.</div></div>
+          </div>
+
+          <figure>
+            <img src="assets/blog/esl-pricing-accuracy-official-data.svg" alt="Two charts: store pass rates against the 98 percent price accuracy standard in 1996, 1998 and 2024, and 2024 item-level pricing error rates by store type against the 2 percent limit">
+            <figcaption>Thirty years of US government price-verification data. Left: share of inspections passing the 98% standard. Right: 2024 item-level error rates by store type.</figcaption>
+          </figure>
+
+          <h3>Has it been getting better?</h3>
+          <p><strong>Yes, substantially &mdash; and it is still not fixed.</strong> The FTC ran two national studies in the 1990s using the same procedure, which makes a long-run comparison possible:</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Study</th><th>Scale</th><th>Inspections passing</th><th>Items priced wrong</th></tr></thead>
+              <tbody>
+                <tr><td>FTC &ldquo;Price Check&rdquo; (1996)</td><td>17,928 items, 7 jurisdictions</td><td>45%</td><td>1 in 21</td></tr>
+                <tr><td>FTC &ldquo;Price Check II&rdquo; (1998)</td><td>107,096 items, 37 jurisdictions</td><td>71%</td><td>1 in 30</td></tr>
+                <tr><td>NCWM National Survey (2024)</td><td>419,237 items, 26 states</td><td>77%</td><td>1 in 43*</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Sources: FTC <em>Price Check</em> (1996) and <em>Price Check II</em> (1998); 2024 NCWM National Price Verification Survey, conducted with NIST. *The 2024 item-level figure is a weighted average we calculated from the survey&rsquo;s per-store-type table (the item counts reconcile exactly to the published 419,237); the 1996 and 1998 figures are as published. <strong>None of the three studies compared electronic labels against paper labels.</strong></p>
+
+          <h3>Which store types have the worst pricing accuracy?</h3>
+          <p><strong>Convenience stores, at 4.9% of items priced incorrectly &mdash; nearly two and a half times the EPPV limit.</strong> Five of the eleven categories exceeded the 2% threshold on average. Grocery and supermarket, the format most associated with ESL adoption, sat at 1.7%, with 83% of stores passing. The gap is worth noting for anyone weighing a rollout: the format with the worst measured accuracy is also the one with the smallest labour base to absorb manual re-pricing, which is part of why <a href="industry-convenience.html">convenience formats</a> tend to be evaluated differently.</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Store type</th><th>Items priced incorrectly</th><th>Inspections passing</th></tr></thead>
+              <tbody>
+                <tr><td>Convenience</td><td>4.9%</td><td>66%</td></tr>
+                <tr><td>Dollar / Discount</td><td>3.5%</td><td>71%</td></tr>
+                <tr><td>Automotive</td><td>3.1%</td><td>73%</td></tr>
+                <tr><td>Big Box / Department</td><td>2.1%</td><td>74%</td></tr>
+                <tr><td>Home Center</td><td>2.1%</td><td>76%</td></tr>
+                <tr><td>Drug / Pharmacy</td><td>1.9%</td><td>79%</td></tr>
+                <tr><td>Supercenter</td><td>1.8%</td><td>76%</td></tr>
+                <tr><td>Grocery / Supermarket</td><td>1.7%</td><td>83%</td></tr>
+                <tr><td>Clothing</td><td>1.1%</td><td>88%</td></tr>
+                <tr><td>Warehouse / Club</td><td>0.9%</td><td>88%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Source: 2024 NCWM National Price Verification Survey, Table 2. The &ldquo;Other&rdquo; category (1.7%, 85% passing) is omitted here. Note that even in the best-performing categories, more than one store in ten failed.</p>
+
+          <h3>Does passing an inspection mean a store&rsquo;s pricing is clean?</h3>
+          <p><strong>No, and this is the most useful detail in the 2024 data.</strong> Of the 5,751 stores that passed, 1,508 still had pricing errors &mdash; they simply had few enough to stay under the 2% line. Only 57% of all inspections found zero errors.</p>
+          <p>There is a sharper version of this. The EPPV notes that when overcharges outnumber undercharges by 2:1 or 3:1, that pattern may indicate a systematic problem rather than random slippage. Among large-sample inspections, 264 stores showed a 2:1 to 3:1 overcharge ratio &mdash; and <strong>124 of them still met the 2% requirement</strong>. A store can pass the test while running a skewed, structural pricing fault. If your own internal audits use a single pass/fail threshold, you are likely missing the same thing.</p>
+
+          <h2 id="cause">What actually causes a pricing error?</h2>
+          <p><strong>The FTC asked inspectors to record causes, and the answer was mostly a synchronisation failure: shelf tags and signs that had not been updated to match the price in the store&rsquo;s computer.</strong> The 1998 report describes it plainly &mdash; store employees maintain tags and signs throughout the store, and errors occur when those displays fall out of step with the system of record, or when the system itself is updated late or incorrectly.</p>
+
+          <p>That distinction matters more than any single statistic in this article, because it splits the problem into two halves that need completely different fixes:</p>
+          <ul>
+            <li><strong>Sync failure</strong> &mdash; the system of record is right, the shelf is wrong. Someone missed a tag, printed the wrong batch, or put the right tag on the wrong facing. This is a physical-process problem.</li>
+            <li><strong>Source-data failure</strong> &mdash; the shelf faithfully displays a price that was wrong in the first place. A bad promotion end-date, a mis-keyed margin, a feed that failed halfway through.</li>
+          </ul>
+
+          <h3>Are promotions worse than everyday prices?</h3>
+          <p><strong>Yes, on both counts.</strong> The 1998 study separated sale from non-sale items and found errors in one of every 28 sale items versus one in 32 non-sale items. The more telling split is direction: for sale items, almost two-thirds of errors were overcharges, while for non-sale items only about one-third were.</p>
+          <p>In other words, the shopper is most likely to be overcharged precisely on the item that was advertised as a discount. Inspectors attributed sale-item errors to a longer list of causes &mdash; shelf tags, item prices, sign prices, out-of-date signage and the computer price all had to agree, and any one of them could break the chain.</p>
+          <p>This connects directly to the economics. The single biggest driver of ESL payback is how often each label&rsquo;s price changes, as we set out in <a href="esl-roi-calculator-payback.html">how to calculate ESL ROI</a>. The same variable that determines your payback period also determines your exposure to pricing errors. A promotion-heavy operation is the one that benefits most on both lines &mdash; which is a genuine argument, and a rare case where two independent benefits point the same way.</p>
+
+          <h2 id="does-esl-fix">Do electronic shelf labels actually fix this?</h2>
+          <p><strong>They structurally eliminate the first failure mode and do nothing about the second.</strong> This is the honest answer, and it is more useful than a percentage.</p>
+          <p>When labels are driven from a single price source, the sync failure the FTC documented largely stops being possible. There is no batch to print, no aisle to walk, no tag to miss on a busy Friday, and no window in which the shelf and the register disagree because a human has not caught up yet. The class of error is removed by design rather than by diligence.</p>
+          <p>The second failure mode is untouched &mdash; and arguably gets worse. If the price in your system of record is wrong, electronic labels propagate that error to every facing in every store, instantly and consistently. Paper is slow enough that someone sometimes notices before the whole estate is wrong. <strong>Electronic labels make your price master the single point of failure.</strong> That is a good trade, but only if you treat the integration and the data governance behind it as seriously as the hardware, which is why we wrote a separate guide on <a href="esl-integration-pos-erp-api-mqtt-database.html">connecting ESL to POS, ERP and legacy databases</a>.</p>
+
+          <div class="answer-box"><strong>The claim we will not make:</strong> that ESL reduces pricing errors by some specific percentage. No official study has measured it. The NCWM&rsquo;s own 2024 report closes with the observation that electronic shelf labels are being implemented gradually across the country, and that it <em>&ldquo;may prove insightful for future surveys to compare the accuracy of businesses using electronic shelf labels to businesses using traditional paper shelf labels.&rdquo;</em> The standards body that runs the survey is saying the comparison has not been done. Any vendor quoting a hard percentage is not citing that data, because it does not exist yet.</div>
+
+          <h2 id="cost">What does a pricing error cost?</h2>
+          <p><strong>More than the price difference, and in both directions.</strong> The 1998 study captured something most business cases miss: undercharges cost the retailer more per event than overcharges cost the shopper.</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Cost</th><th>Who pays</th><th>What the data shows</th></tr></thead>
+              <tbody>
+                <tr><td>Overcharge</td><td>Shopper</td><td>Averaged $3.20 per event in the 1998 study. Triggers refunds, goodwill gestures and complaints.</td></tr>
+                <tr><td>Undercharge</td><td>Retailer</td><td>Averaged $5.28 per event &mdash; <strong>65% more than the average overcharge.</strong> Pure margin leakage, and nobody complains about it.</td></tr>
+                <tr><td>Regulatory</td><td>Retailer</td><td>Misrepresenting a displayed price is unlawful in all 50 states. Enforcement sits with state weights-and-measures authorities; the FTC has jurisdiction over advertising and pricing practices. Exposure is highest in <a href="electronic-shelf-label-pharmacy.html">regulated categories such as pharmacy</a>.</td></tr>
+                <tr><td>Trust</td><td>Retailer</td><td>Not quantified in any of these studies. A shopper who catches a mismatch once starts checking every price.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Sources: FTC <em>Price Check II</em> (1998) for the per-event averages; NIST Office of Weights and Measures for the regulatory position. Dollar figures are from 1998 and are not inflation-adjusted &mdash; treat them as showing the <em>relationship</em> between the two error types, not current values.</p>
+
+          <p>The undercharge finding deserves a moment. Every ESL business case we have seen frames pricing accuracy as a customer-experience or compliance benefit. The 1998 data suggests the larger direct financial exposure ran the other way: the retailer quietly selling below its own intended price, on items nobody flags. If you want to size this for your own estate, the honest method is to audit a sample of your own facings rather than apply anyone&rsquo;s national average. Our <a href="esl-vs-paper-labels.html">paper-versus-electronic cost comparison</a> treats this as a standing cost line rather than a one-off.</p>
+
+          <h2 id="efficiency">Worker efficiency: what the numbers support</h2>
+          <p><strong>This leg is arithmetic, not measurement.</strong> There is no government dataset on re-pricing labour equivalent to the price-verification surveys, so anyone quoting a labour-saving percentage is either modelling it or repeating a vendor figure.</p>
+          <p>Modelling it is legitimate as long as the assumptions are visible. The version we publish assumes 90 seconds for a complete manual re-tag &mdash; generating and printing the batch, walking the aisle, locating the facing, swapping the tag and correcting mistakes found later &mdash; and an 85% labour reduction rather than total elimination, because shelf audits, damaged units and non-ESL promotional signage do not go away. You can change both in our <a href="esl-roi-calculator.html">ESL ROI calculator</a> and watch the payback move.</p>
+          <p>We are deliberately not repeating that analysis here. The full derivation, including why store size largely cancels out of the payback formula and how statutory wage rates shift the answer across thirteen jurisdictions, is in <a href="esl-roi-calculator-payback.html">the ROI guide</a>.</p>
+          <p>One point does belong in this article. Labour saving and pricing accuracy are not independent benefits &mdash; they are the same mechanism counted twice. The reason manual re-pricing costs 90 seconds is the same reason it sometimes gets missed. If you claim both the full labour saving <em>and</em> a large accuracy benefit, check that you are not double-counting one improvement in two rows of the same spreadsheet.</p>
+
+          <h2 id="merchandising">Shelf merchandising: the weakest of the three claims</h2>
+          <p><strong>We could not find credible independent evidence that electronic shelf labels improve merchandising or planogram compliance.</strong> That is a finding, not an omission.</p>
+          <p>What does exist is evidence for a different technology solving that problem. A 2025 study in <em>Scientific Reports</em> describes an automated shelf-monitoring system deployed across more than 7,000 7-Eleven stores in Taiwan, using computer vision and deep learning to detect shelves, recognise products and compare actual layouts against digital planograms &mdash; with reported savings in manual inspection time. That is a real, peer-reviewed result, and it is about cameras and models, not about labels.</p>
+          <p>The claims we found attributing merchandising gains to ESL itself traced back to vendor blogs and supplier marketing, including a widely repeated shopper-perception statistic whose underlying methodology we could not verify. We have left it out.</p>
+          <p>The defensible version of this claim is narrow: a label fixed to the shelf edge and addressable from a central system makes it easier to <em>locate</em> a facing and to flag a mismatch, and some deployments use label indicators for picking and audit tasks. Whether that produces measurable planogram compliance is, on the public record, unproven. If shelf compliance is your actual objective, the technology with evidence behind it is vision-based monitoring &mdash; which is why we treat <a href="index.html#platform">shelf monitoring</a> as a separate platform capability rather than a side effect of buying labels.</p>
+
+          <h2 id="build-case">How to build the accuracy case for your own board</h2>
+          <p>The national data tells you the problem is real and roughly how big it is in your format. It cannot tell you what it is worth in your stores. Four steps that survive scrutiny:</p>
+          <ol>
+            <li><strong>Measure your own baseline using the official method.</strong> The EPPV is published in NIST Handbook 130 and is free. Run it as an internal audit: sample items across the store, compare displayed price to the price charged, and calculate your error rate. You will get a defensible number for your own estate instead of a national average that may not apply.</li>
+            <li><strong>Split your errors into sync failures and source-data failures.</strong> Only the first is addressed by electronic labels. If most of your errors trace back to bad promotion data or a broken feed, ESL is not the fix and the business case should say so.</li>
+            <li><strong>Count undercharges as well as overcharges.</strong> They are failures under the standard and they cost you directly. Most internal audits chase only the customer-facing half.</li>
+            <li><strong>Look at the overcharge-to-undercharge ratio, not just the pass rate.</strong> A skew toward overcharges points at a systematic process fault &mdash; and as the 2024 data shows, it can hide inside a technically passing store.</li>
+          </ol>
+          <p>Then hold the accuracy benefit separate from the labour benefit in your model. If the case only works when both are counted at full value, it is fragile. Our own position, stated in the <a href="esl-roi-calculator-payback.html">ROI guide</a>, is that a business case should clear its hurdle on labour alone, with conservative inputs, and treat accuracy as the margin of safety. This article does not change that. It just means the margin of safety is better documented than most people realise &mdash; by the government, not by us.</p>
+
+          <h2 id="verdict">The short version</h2>
+          <p>Electronic shelf labels address a documented, measured, thirty-year-old problem: displayed prices that do not match what the register charges, in 23% of stores badly enough to fail a federal-standard inspection. They remove one specific and well-documented cause of that problem by design. They do not remove the other cause, and they make good master data more important, not less.</p>
+          <p>On worker efficiency, model it yourself with visible assumptions and do not double-count it against accuracy. On merchandising, be sceptical of everyone, including us &mdash; and if that is the actual goal, look at vision systems rather than labels.</p>
+          <p>If your operation is promotion-heavy, in a high-wage market, and in one of the store formats where the national data shows accuracy problems clustering, the case is strong on two independent lines. If it is none of those, be honest that the case rests mostly on labour &mdash; and go run the numbers in the <a href="esl-roi-calculator.html">calculator</a> before anyone builds a slide.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ul class="source-list">
+            <li><a href="https://cdn.ncwm.com/userfiles/files/Resources/Price%20Verification%20Survey/National%20Price%20Verification%20Report-Final.pdf" target="_blank" rel="noopener">2024 NCWM National Price Verification Survey Report</a> &mdash; National Conference on Weights and Measures, with NIST Office of Weights and Measures. 7,462 inspections, 419,237 items, 26 states.</li>
+            <li><a href="https://www.nist.gov/news-events/news/2024/01/2024-national-price-verification-survey" target="_blank" rel="noopener">2024 National Price Verification Survey</a> &mdash; NIST Office of Weights and Measures. The EPPV inspection process and regulatory position on displayed prices.</li>
+            <li><a href="https://www.nist.gov/pml/owm/nist-handbook-130-current-edition" target="_blank" rel="noopener">NIST Handbook 130</a> &mdash; contains the Examination Procedure for Price Verification (EPPV) in full.</li>
+            <li><a href="https://www.ftc.gov/reports/price-check-ii-follow-report-accuracy-checkout-scanner-prices" target="_blank" rel="noopener">Price Check II: A Follow-up Report on the Accuracy of Checkout Scanner Prices</a> &mdash; US Federal Trade Commission, 1998. 107,096 items, 37 jurisdictions; sale vs non-sale analysis and per-event dollar averages.</li>
+            <li><a href="https://www.ftc.gov/sites/default/files/documents/reports/price-check-report-accuracy-checkout-scanners/scanners.pdf" target="_blank" rel="noopener">Price Check: A Report on the Accuracy of Checkout Scanners</a> &mdash; US Federal Trade Commission, 1996. The 1996 baseline.</li>
+            <li><a href="https://www.nature.com/articles/s41598-025-27773-5" target="_blank" rel="noopener">Real-time retail planogram compliance application using computer vision and virtual shelves</a> &mdash; <em>Scientific Reports</em>, 2025. Deployment across 7,000+ convenience stores; cited here as evidence for vision-based compliance, not for shelf labels.</li>
+          </ul>
+
+          <div class="article-share-panel" data-article-share aria-label="Share this article">
+            <div class="article-share-eyebrow">Share this article</div>
+            <p>Send the official price-verification data and ESL accuracy caveats to your retail operations, pricing or compliance team.</p>
+            <div class="article-share-actions" aria-label="Article sharing options"></div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-toc" aria-label="Article contents">
+        <b>In this guide</b>
+        <a href="#how-often">How often prices are wrong</a>
+        <a href="#cause">What causes an error</a>
+        <a href="#does-esl-fix">Do ESL actually fix it?</a>
+        <a href="#cost">What an error costs</a>
+        <a href="#efficiency">Worker efficiency</a>
+        <a href="#merchandising">Merchandising evidence</a>
+        <a href="#build-case">Build your own case</a>
+        <a href="#verdict">The short version</a>
+        <a href="#sources">Sources</a>
+        <a href="#faq">FAQ</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Article esl-accuracy — FAQ">
+  <div class="wrap wide">
+    <div class="article">
+      <div class="sec-tag">// FAQ</div>
+      <h2 style="font-size:28px;margin:8px 0 24px">Frequently asked</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">Do electronic shelf labels improve pricing accuracy?<span class="chev">+</span></button><div class="faq-a"><p>They eliminate one documented cause of pricing errors and leave another untouched. US Federal Trade Commission inspectors found that errors largely occur when shelf tags and signs are not updated to match the price in the store's computer. Labels driven from a single price source remove that synchronisation gap by design. They do not fix a price that was wrong in the system of record to begin with — in that case electronic labels propagate the error faster and more consistently than paper would.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">How often are retail shelf prices wrong?<span class="chev">+</span></button><div class="faq-a"><p>In the 2024 NCWM National Price Verification Survey, 23% of inspected stores failed the 98% accuracy standard, and roughly one item in 43 was charged at a price different from the one displayed. The survey covered 7,462 inspections and 419,237 individual item prices across 26 states. Accuracy has improved over three decades — the equivalent figure was one item in 21 in 1996 — but roughly one store in four still fails.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What is the 2% pricing error rule?<span class="chev">+</span></button><div class="faq-a"><p>It comes from the Examination Procedure for Price Verification published in NIST Handbook 130. A store fails an inspection when more than 2% of verified prices differ from the price charged, so passing means at least 98% matched. NIST is explicit that this is a guideline for evaluating a store's overall pricing practices, not permission to misprice 2% of products — advertising an inaccurate price is unlawful in all 50 states.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Which retail formats have the worst pricing accuracy?<span class="chev">+</span></button><div class="faq-a"><p>In the 2024 survey, convenience stores were worst at 4.9% of items priced incorrectly, followed by dollar and discount stores at 3.5% and automotive parts at 3.1%. Grocery and supermarkets were at 1.7% with 83% of stores passing, and warehouse clubs best at 0.9%. Five of the eleven store categories exceeded the 2% limit on average, and even in the best categories more than one store in ten failed.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Are promotional prices more error-prone than regular prices?<span class="chev">+</span></button><div class="faq-a"><p>Yes, and the errors skew against the shopper. The FTC's 1998 study found errors in one of every 28 sale items compared with one in 32 non-sale items. On sale items almost two-thirds of the errors were overcharges, versus about one-third on non-sale items. Inspectors attributed this to sale prices having to agree across shelf tags, item prices, signage and the store computer simultaneously — any one of which can break the chain.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Do electronic shelf labels improve shelf merchandising or planogram compliance?<span class="chev">+</span></button><div class="faq-a"><p>There is no credible independent evidence that they do. The peer-reviewed research on automated planogram compliance concerns computer-vision systems rather than shelf labels — for example a 2025 Scientific Reports study covering more than 7,000 convenience stores. Claims attributing merchandising gains to labels themselves generally trace back to vendor marketing. If shelf compliance is the objective, vision-based monitoring is the technology with published evidence behind it.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Article esl-accuracy — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal" style="margin-bottom:24px"><div class="sec-tag">// KEEP READING</div><h2>Related articles</h2></div>
+    <div class="related-grid">
+      <a class="res-card reveal" href="esl-roi-calculator-payback.html"><div class="res-kind">ROI</div><h3>How to Calculate ESL ROI</h3><p>The four variables that decide payback, and why store size cancels out.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="esl-vs-paper-labels.html"><div class="res-kind">COST ANALYSIS</div><h3>ESL vs Paper Labels</h3><p>Labour, paper, error and markdown costs over a five-year horizon.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="esl-integration-pos-erp-api-mqtt-database.html"><div class="res-kind">INTEGRATION</div><h3>Connecting ESL to POS, ERP and Databases</h3><p>Why your price master becomes the single source of truth &mdash; and the single point of failure.</p><span class="res-link">Read article &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="Resources.html">Resources hub</a>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="esl-base-station-coverage-calculator.html">Coverage planner</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
