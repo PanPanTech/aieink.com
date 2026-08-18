@@ -34,6 +34,8 @@
 - ESL Pricing Accuracy: What Official US Price-Verification Data Shows: https://www.aiesl.com/electronic-shelf-labels-pricing-accuracy.html
 - Walmart Digital Shelf Labels: https://www.aiesl.com/walmart-digital-shelf-labels.html
 
+- How Many ESL Can One Gateway Support (capacity, update windows, refresh times): https://www.aiesl.com/esl-labels-per-gateway-capacity.html
+
 ## Interactive Tools
 
 - ESL ROI Calculator (payback period and 3-year net savings; conservative labour-only model, all assumptions published): https://www.aiesl.com/esl-roi-calculator.html

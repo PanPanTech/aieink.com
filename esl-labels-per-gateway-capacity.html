@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>How Many ESL Can One Gateway Support? Capacity Explained | AiESL</title>
+<meta name="description" content="Why per-gateway capacity figures range from 2,000 to 15,000, the two limits that decide your gateway count, how to estimate capacity from your update window, and the display choice that quietly multiplies the infrastructure you need.">
+<meta name="keywords" content="how many esl per gateway, esl gateway capacity, labels per access point, esl update window, electronic shelf label base station capacity, esl refresh time">
+<link rel="canonical" href="https://www.aiesl.com/esl-labels-per-gateway-capacity.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How Many Electronic Shelf Labels Can One Gateway Support?">
+<meta property="og:description" content="Published figures range 2,000-15,000 per gateway. Here is why that spread exists, and the display choice that quietly multiplies your gateway count.">
+<meta property="og:image" content="https://www.aiesl.com/assets/blog/esl-gateway-capacity-refresh.svg">
+<meta property="og:url" content="https://www.aiesl.com/esl-labels-per-gateway-capacity.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How Many Electronic Shelf Labels Can One Gateway Support?","description":"Why per-gateway capacity figures range from 2,000 to 15,000, the two limits that decide your gateway count, how to estimate capacity from your update window, and the display choice that quietly multiplies the infrastructure you need.","datePublished":"2026-08-18","dateModified":"2026-08-18","author":{"@type":"Organization","name":"AiESL"},"publisher":{"@type":"Organization","name":"AiESL"},"image":"https://www.aiesl.com/assets/blog/esl-gateway-capacity-refresh.svg","mainEntityOfPage":"https://www.aiesl.com/esl-labels-per-gateway-capacity.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.aiesl.com/blog.html"},{"@type":"ListItem","position":3,"name":"ESL Gateway Capacity","item":"https://www.aiesl.com/esl-labels-per-gateway-capacity.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many electronic shelf labels can one gateway support?","acceptedAnswer":{"@type":"Answer","text":"There is no single correct number. Published figures range from roughly 2,000 to 15,000 labels per gateway, because capacity is not a fixed property of the hardware \u2014 it is your update window divided by the time each label consumes. A gateway serving monochrome labels overnight supports many times more than the same gateway serving colour labels that must all update within minutes. The useful question is how long it takes to update all of your labels, not how many a gateway can hold."}},{"@type":"Question","name":"What is the difference between coverage and capacity when planning gateways?","acceptedAnswer":{"@type":"Answer","text":"Coverage asks whether a gateway can physically reach a label, and is decided by floor area, radio range and mounting height. Capacity asks whether every label can finish updating within your time window, and is decided by label count, per-label update time and retries. They are independent, and your gateway count is whichever demands more. A dense small store can be fully covered by one gateway yet still need two for capacity; a large warehouse is often the reverse."}},{"@type":"Question","name":"Do colour electronic shelf labels need more gateways than monochrome?","acceptedAnswer":{"@type":"Answer","text":"Usually yes, for the same update window. Published component specifications put monochrome e-paper redraw at roughly 2 to 5 seconds, while tri-colour panels take roughly 15 to 25 seconds, and Spectra 6 references commonly put six-colour full refresh at 10 to 30 seconds. Monochrome also supports fast and partial refresh modes that multi-colour panels generally do not. Because the display redraw is a physical floor that no network design removes, choosing colour estate-wide can multiply the infrastructure required."}},{"@type":"Question","name":"What update window should I specify for electronic shelf labels?","acceptedAnswer":{"@type":"Answer","text":"Specify two, because they test different things. A throughput requirement covers the whole estate, such as all labels updated before opening. A latency requirement covers a subset during trading, such as any 200 labels updated within 10 minutes. A system can satisfy one and fail the other. The intraday latency requirement is usually the one that carries business value, because an afternoon markdown only helps if the shelf price changes before staff act on it."}},{"@type":"Question","name":"Does temperature affect how many labels a gateway can update?","acceptedAnswer":{"@type":"Answer","text":"Indirectly, yes. E-paper redraws more slowly at low temperatures, and full-colour panels are typically rated for operation between 0 and 50 degrees Celsius. Chilled and freezer zones therefore consume more of your update window per label than the ambient aisle does, and should be sized separately rather than averaged in with the rest of the store."}},{"@type":"Question","name":"How do I verify a supplier's capacity claim?","acceptedAnswer":{"@type":"Answer","text":"Put it in the acceptance criteria rather than the specification. A clause requiring that 100% of labels in each store complete a full content update within a stated number of minutes, verified on site at handover, is testable and shifts the sizing risk to the party who controls it. Set the number from your intraday requirement, not your overnight one, and ask separately what happens to a zone when its gateway fails."}}]}</script>
+<style>
+.article-layout{display:grid;grid-template-columns:minmax(0,820px) 270px;gap:52px;align-items:start}
+.article-layout>*{min-width:0}
+.article{width:100%;max-width:100%}
+.article-cover{width:100%}
+.article-cover img{height:auto;object-fit:contain}
+.article-toc{position:sticky;top:96px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.article-toc b{display:block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue-hi);letter-spacing:.05em;margin-bottom:12px;text-transform:uppercase}
+.article-toc a{display:block;font-size:13.5px;color:var(--ink-mid);padding:8px 0;border-top:1px solid var(--line-soft)}
+.article-toc a:hover{color:var(--blue-hi)}
+.article-body .answer-box{background:linear-gradient(135deg,rgba(77,124,255,.12),rgba(77,124,255,.03));border:1px solid rgba(77,124,255,.28);border-radius:14px;padding:22px 24px;margin:0 0 28px;color:var(--ink);font-size:18px;line-height:1.7}
+.article-body .answer-box strong{color:var(--ink)}
+.article-body .formula{background:var(--bg-soft);border:1px solid var(--line);border-left:4px solid var(--blue-hi);border-radius:10px;padding:18px 22px;margin:24px 0;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.8;color:var(--ink);overflow-x:auto}
+.article-body figure{margin:30px 0}
+.article-body figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;background:#f4f5f7}
+.article-body figcaption{font-size:12px;color:var(--ink-dim);text-align:center;margin-top:9px}
+.article-body .source-note{font-size:13px;color:var(--ink-dim);margin-top:-12px}
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.data-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.data-card .num{font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:700;color:var(--blue-hi);line-height:1.1}
+.data-card .lbl{font-size:13px;color:var(--ink-mid);margin-top:8px}
+.article-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:28px 0;background:var(--bg-card)}
+.article-table{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+.article-table th,.article-table td{padding:14px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft)}
+.article-table thead th{background:var(--bg-soft);border-top:none;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim)}
+.article-table td:first-child{color:var(--ink);font-weight:600}
+.article-body .source-list{padding-left:0;list-style:none;display:grid;gap:10px}
+.article-body .source-list li{display:block}
+.article-body .source-list li:before{display:none}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr}.article-toc{position:static;order:-1}.data-strip{grid-template-columns:1fr}}
+@media(max-width:640px){.article-layout,.article,.article-body,.article-body .answer-box,.article-toc{width:100%;max-width:min(calc(100vw - 40px),350px);min-width:0}.article-body,.article-body *{overflow-wrap:break-word}.article-body .answer-box{font-size:16px}.article-table{min-width:620px}.article-body .formula{font-size:12.5px}.page-hero h1{font-size:32px}.article-meta{gap:7px 10px;font-size:12px}.article-meta span:nth-child(even){display:none}.wrap,.wrap.wide{padding-left:20px;padding-right:20px}.article-cover{max-width:350px}.article-cover img{height:auto}}
+</style>
+</head>
+<body>
+
+<nav data-screen-label="Article — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<div class="page-hero" data-screen-label="Article esl-capacity — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="article-hero">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:16px"><a href="blog.html" style="color:var(--blue-hi)">Blog</a> / DEPLOYMENT PLANNING</div>
+      <h1>How Many Electronic Shelf Labels Can One Gateway Support?</h1>
+      <div class="article-meta">
+        <span>August 18, 2026</span><span>&middot;</span><span>12 min read</span><span>&middot;</span><span>AiESL Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap wide"><div class="article-cover reveal"><img src="assets/blog/esl-gateway-capacity-refresh.svg" alt="Charts comparing e-paper redraw times by panel type and showing how gateway capacity falls as per-label update time rises"></div></div>
+
+<section data-screen-label="Article esl-capacity — Body">
+  <div class="wrap wide">
+    <div class="article-layout">
+      <article class="article">
+        <div class="article-body">
+          <div class="answer-box"><strong>There is no single number, and any supplier who gives you one without asking questions first is quoting an assumption rather than a specification.</strong> Published per-gateway capacities range from roughly 2,000 to 15,000 labels &mdash; a sevenfold spread that exists because the figure depends entirely on how fast you need every label to finish updating. In practice the binding constraint is almost never the label count. It is your update window. And the single biggest factor is a procurement decision most buyers make on appearance alone: colour or monochrome.</div>
+
+          <p>This article is about the constraint the coverage question leaves out. Working out how many gateways it takes to <em>reach</em> every label is a geometry problem, and we built a <a href="esl-base-station-coverage-calculator.html">coverage calculator</a> for it. Working out how many labels one gateway can actually <em>serve</em> is a timing problem, and it has a different answer.</p>
+
+          <h2 id="why-misleading">Why &ldquo;one gateway supports N labels&rdquo; misleads</h2>
+          <p><strong>Because capacity is not a property of the gateway. It is the result of dividing your update window by the time each label consumes.</strong> Change the window or change the label, and the same hardware supports a different number.</p>
+          <p>Think of it like asking how many people fit in a lift. The plate on the wall says fifteen. But if everyone is going from the ground floor to the thirtieth and back, the lift moves far fewer people per hour than if they are all going up one floor. The capacity figure is real; it just answers a different question from the one you have.</p>
+          <p>This is why published figures disagree so badly. Industry sources commonly cite anywhere from about 2,000 to 15,000 labels per access point. Both ends are probably honest under their own assumptions. Neither states them.</p>
+
+          <div class="data-strip">
+            <div class="data-card"><div class="num">7&times;</div><div class="lbl">spread between the lowest and highest per-gateway capacities commonly quoted in the industry.</div></div>
+            <div class="data-card"><div class="num">&asymp;4&times;</div><div class="lbl">longer for a tri-colour label to redraw than a monochrome one &mdash; before any radio time.</div></div>
+            <div class="data-card"><div class="num">0</div><div class="lbl">of that difference appears in a coverage calculation. It is invisible until you plan for time.</div></div>
+          </div>
+
+          <h2 id="two-limits">The two limits, and which one binds</h2>
+          <p><strong>Every deployment has to satisfy two independent constraints, and your gateway count is whichever demands more.</strong></p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Limit</th><th>The question</th><th>What decides it</th><th>When it binds</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Coverage</strong></td><td>Can a gateway <em>reach</em> this label at all?</td><td>Floor area, radio range, mounting height, obstruction</td><td>Large, tall or awkwardly shaped spaces &mdash; high-bay warehouses, multi-floor stores</td></tr>
+                <tr><td><strong>Capacity</strong></td><td>Can every label <em>finish updating</em> in time?</td><td>Update window, label count, per-label time, retries</td><td>Dense stores with tight windows &mdash; supermarkets with high SKU counts, promo-heavy operations, colour labels</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>A small, dense convenience store can be fully covered by one gateway and still need two, because one cannot get through the label list fast enough. A large open warehouse can be the reverse: plenty of time, but the geometry demands more units. Sizing on one constraint and ignoring the other is the most common planning error we see, and it usually surfaces after installation.</p>
+
+          <h2 id="update-window">The real question: what is your update window?</h2>
+          <p><strong>This is the input nobody writes down, and it decides everything downstream.</strong> Two operating patterns dominate, and they differ by an order of magnitude in what they demand.</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Pattern</th><th>Typical window</th><th>Scope</th><th>What it implies</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Overnight batch</strong></td><td>Hours</td><td>Every label in the store</td><td>Generous. Even slow colour labels usually fit. Capacity rarely binds</td></tr>
+                <tr><td><strong>Intraday rolling</strong></td><td>Minutes</td><td>A subset &mdash; a category, an aisle, a promotion</td><td>Tight. This is where capacity planning actually matters</td></tr>
+                <tr><td><strong>Emergency correction</strong></td><td>Immediate</td><td>A handful of labels</td><td>Rarely a capacity problem, but tests whether the queue can be pre-empted</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Write your requirement as a sentence with a number in it. &ldquo;All 8,000 labels updated before the doors open at 07:00&rdquo; is a very different system from &ldquo;any 200 labels updated within 10 minutes, at any point during trading.&rdquo; The first is a throughput requirement; the second is a latency requirement, and a system can pass one while failing the other.</p>
+          <p>The intraday case is the one worth stress-testing, because it is where the business value sits. An afternoon markdown on fresh produce only helps if the shelf price changes before staff start pulling stock. If the update takes forty minutes to propagate, you have bought the hardware without buying the outcome.</p>
+
+          <h2 id="capacity-math">How to estimate capacity</h2>
+          <p><strong>The arithmetic is simple; the inputs are what you have to extract from your supplier.</strong> At concept level:</p>
+
+          <div class="formula">
+            Labels one gateway can serve &asymp; ( W &times; P ) &divide; ( A + R + r )<br><br>
+            W = update window, in seconds<br>
+            P = parallel streams the gateway sustains (often 1 &mdash; confirm this)<br>
+            A = radio airtime to deliver one label&rsquo;s image<br>
+            R = time the display itself takes to redraw<br>
+            r = retry and acknowledgement allowance
+          </div>
+
+          <p>Two things about this formula matter more than the formula itself.</p>
+          <p><strong>First: whether A and R add or overlap is a protocol design decision, and it changes the answer by a large factor.</strong> If the gateway transmits to one label, waits for it to redraw, waits for confirmation, and only then moves on, the two costs serialise and capacity collapses. If it pipelines &mdash; streaming to the next label while the previous one redraws &mdash; the display time largely disappears behind the radio time. This is a specific, answerable question. Ask it.</p>
+          <p><strong>Second: R is a hard physical floor that no amount of network engineering removes.</strong> A tri-colour label cannot redraw faster than its panel allows, no matter how good the gateway is. Which brings us to the factor that dominates everything else.</p>
+
+
+          <h3>A worked example, and why it lands where it does</h3>
+          <p>Take a supermarket with 8,000 monochrome labels, already covered geometrically by a single gateway. Assume 5 seconds consumed per label &mdash; a plausible figure once a 2&ndash;5 second redraw is combined with transmission and a modest retry allowance.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Requirement</th><th>Window</th><th>Fully serialised</th><th>With 4&times; pipelining</th></tr></thead>
+              <tbody>
+                <tr><td>All labels before opening</td><td>6 hours (21,600 s)</td><td>4,320 labels &mdash; <strong>fails</strong></td><td>17,280 labels &mdash; comfortable</td></tr>
+                <tr><td>200 labels mid-trading</td><td>10 minutes (600 s)</td><td>120 labels &mdash; <strong>fails</strong></td><td>480 labels &mdash; passes</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Illustrative arithmetic on stated assumptions, not a measurement of any product. The point is the gap between the two right-hand columns, not the absolute figures.</p>
+          <p>Notice what this shows. On a fully serialised design, one gateway cannot even finish an overnight run on a mid-size supermarket &mdash; a result most people find surprising, because the label count sits comfortably inside every published capacity figure. Add pipelining and the same hardware clears both requirements. <strong>The single architectural detail moves the answer by roughly four times, and it appears on no datasheet.</strong> That is why question two in the checklist below matters more than any capacity number a supplier quotes.</p>
+          <figure>
+            <img src="assets/blog/esl-gateway-capacity-refresh.svg" alt="Left chart comparing e-paper redraw times from monochrome partial refresh to six-colour panels; right chart showing how labels served per gateway falls as seconds per update rises">
+            <figcaption>Left: published redraw times by panel type. Right: why a single per-gateway capacity figure cannot exist &mdash; the same gateway serves very different label counts depending on what it is updating.</figcaption>
+          </figure>
+
+          <h2 id="what-consumes">What actually consumes capacity</h2>
+          <p><strong>Ranked roughly by impact, and the first one is a purchasing decision, not a network one.</strong></p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Factor</th><th>Effect on capacity</th><th>What to do about it</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Colour vs monochrome</strong></td><td><strong>Largest single factor.</strong> A monochrome panel redraws in roughly 2&ndash;5 seconds; tri-colour in roughly 15&ndash;25 seconds &mdash; about 4&times;. Spectra 6 references commonly put six-colour full refresh at 10&ndash;30 seconds</td><td>Use colour where it earns its place &mdash; promotions, end-caps, fresh &mdash; not estate-wide by default</td></tr>
+                <tr><td><strong>Refresh mode</strong></td><td>Monochrome supports fast full refresh (1&ndash;2 s) and partial refresh (0.3&ndash;1 s). Multi-colour panels generally support neither and must always full-refresh</td><td>Ask whether price-only changes can use partial refresh on your labels</td></tr>
+                <tr><td><strong>Panel size and image complexity</strong></td><td>Larger panels carry more data and take longer to redraw</td><td>Match <a href="types-of-electronic-shelf-labels.html">label size to the shelf</a> rather than standardising large</td></tr>
+                <tr><td><strong>Retries</strong></td><td>Stock, metal shelving, freezer doors and shoppers all block signal. Failed updates are re-sent, consuming the window twice</td><td>Plan a retry allowance rather than assuming first-time success</td></tr>
+                <tr><td><strong>Temperature</strong></td><td>E-paper redraws more slowly when cold. Full-colour panels are typically rated for 0&ndash;50&nbsp;&deg;C operation</td><td>Size chilled and freezer zones separately &mdash; they are slower than the ambient aisle</td></tr>
+                <tr><td><strong>Label wake interval</strong></td><td>Labels sleep to save power. A longer sleep means better battery life and a slower response to any given update</td><td>This is the same trade-off described in <a href="esl-battery-life.html">ESL battery life</a>, seen from the other side. You cannot maximise both</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">Redraw figures are published component-level specifications from e-paper module suppliers, not measurements from any particular ESL system. Actual per-update time in a deployed store also includes radio airtime, protocol overhead and retries, and will be longer. Treat these as the floor, not the expectation.</p>
+
+          <p>The colour row deserves emphasis because of how the decision is usually made. Colour labels are chosen in a showroom, on how they look. The capacity consequence shows up months later as a gateway count, and by then it reads as a network problem rather than what it is &mdash; the downstream cost of a display choice. If you are moving from monochrome to colour on an existing estate, re-run the capacity sizing before assuming the current gateways carry over.</p>
+
+
+          <h2 id="protocol">Does the radio protocol change the answer?</h2>
+          <p><strong>Yes, and it is the one place where a supplier&rsquo;s choice of wireless stack has a direct, physical consequence for your gateway count.</strong></p>
+          <p>ESL systems run on several different radio families &mdash; sub-GHz bands around 433 and 868/915&nbsp;MHz, and 2.4&nbsp;GHz including Bluetooth-based approaches. The trade-off between them is not a matter of vendor preference; it is basic radio physics. Lower frequencies propagate further and penetrate obstacles better for the same power, but carry less data per second. Higher frequencies carry more data but are absorbed more readily by stock, metal shelving, refrigeration glass and people.</p>
+          <p>For capacity planning, that trade-off inverts the two limits against each other:</p>
+          <ul>
+            <li><strong>A long-range, low-data-rate link</strong> improves coverage &mdash; fewer gateways to reach the floor &mdash; but spends longer transmitting each label&rsquo;s image, which reduces capacity. You may cover the store with one gateway and still need three to hit your window.</li>
+            <li><strong>A shorter-range, higher-data-rate link</strong> moves images faster, so each gateway serves more labels per hour, but you need more of them to cover the same area in the first place.</li>
+          </ul>
+          <p>Neither is better in the abstract. What matters is which constraint binds in <em>your</em> building. A high-bay warehouse with sparse labelling is coverage-bound and rewards range. A dense supermarket with a tight intraday window is capacity-bound and rewards throughput. Sizing the second kind of site with hardware chosen for the first is a common and expensive mismatch.</p>
+          <p>One practical note on standards. Most ESL systems have historically run proprietary protocols, and a standardised Bluetooth profile for electronic shelf labels now also exists. We are not going to tell you which to buy &mdash; but the capacity question is worth asking in the same conversation as the <a href="open-vs-closed-esl-systems.html">openness question</a>, because both are decided by the same choice of stack and both are expensive to reverse later.</p>
+
+          <h2 id="redundancy">Headroom and what happens when a gateway fails</h2>
+          <p><strong>A design that exactly fits its window has no headroom, and stores do not operate at average conditions.</strong></p>
+          <p>Three things break a tight design. Peak days: the promotional changeover before a holiday weekend is not a typical night. Growth: SKU counts rise, and every added facing is added airtime. Failure: if one gateway stops, its labels are not slowly served by neighbours &mdash; depending on the design, that zone may simply stop updating, and a zone that stops updating is a zone whose shelf prices are now drifting away from the register.</p>
+          <p>That last point connects capacity planning to something with a measurable cost. Shelf-versus-register mismatches are the failure mode US regulators inspect for, and roughly one store in four fails that standard &mdash; the data is in our piece on <a href="electronic-shelf-labels-pricing-accuracy.html">ESL and pricing accuracy</a>. A capacity design with no headroom quietly reintroduces the problem the system was bought to remove.</p>
+          <p>We are not going to publish a headroom percentage, because the honest answer depends on your failure tolerance and your peak-to-average ratio. What we will say is that sizing against your <em>peak</em> update day rather than a typical one, and asking your supplier what happens to a zone when its gateway drops, are both free.</p>
+
+          <h2 id="sizing-checklist">Sizing for your own store: what to ask</h2>
+          <p>You cannot answer this from a datasheet, but you can make the supplier answer it. Six questions, in the order that matters:</p>
+          <ol>
+            <li><strong>&ldquo;What is your measured time to update 100% of labels in a reference store of my size and label mix?&rdquo;</strong> This is the only question that matters. Everything else is a way of sanity-checking the answer. Ask for the store profile it was measured in.</li>
+            <li><strong>&ldquo;Does transmission pipeline with display refresh, or serialise?&rdquo;</strong> Determines whether the redraw times above add to your window or hide behind it.</li>
+            <li><strong>&ldquo;What is the redraw time for the exact panels I am buying, at my lowest operating temperature?&rdquo;</strong> The ambient-temperature figure is not the freezer-aisle figure.</li>
+            <li><strong>&ldquo;What retry rate do you see in a store like mine, and is it included in that timing?&rdquo;</strong> A first-time-success number is not a plan.</li>
+            <li><strong>&ldquo;What happens to a zone when its gateway fails?&rdquo;</strong> Ask for the behaviour, not the reassurance.</li>
+            <li><strong>&ldquo;Will you write the update window into the acceptance criteria?&rdquo;</strong> If the answer is yes, most of the preceding questions stop mattering &mdash; you have transferred the risk to the party who actually controls it.</li>
+          </ol>
+          <p>That last item is the highest-leverage line in any ESL contract. A clause reading <em>&ldquo;100% of labels in each store shall complete a full content update within X minutes, verified on site at handover&rdquo;</em> does more for you than any capacity specification, because it is testable and it makes the gateway count the supplier&rsquo;s problem rather than yours. Set X from your intraday requirement, not your overnight one.</p>
+          <p>Once you have a window and a label mix, the coverage side is the easier half &mdash; our <a href="esl-base-station-coverage-calculator.html">coverage planner</a> gives you the geometric minimum, and your capacity answer tells you whether to go above it. The gateway count that goes into your budget is the larger of the two, and it feeds directly into <a href="electronic-shelf-label-cost.html">the per-store cost model</a>, where gateways are the line item most often left out.</p>
+
+          <h2 id="verdict">The short version</h2>
+          <p>Stop asking how many labels a gateway supports. Ask how long it takes to update all of yours, at peak, in the coldest aisle, with the labels you actually intend to buy. The first question has a marketing answer. The second has a testable one.</p>
+          <p>If you take one thing from this: the largest capacity lever is not the network at all. It is whether you specified colour panels estate-wide because they looked better in a demo. Monochrome redraws in seconds, colour in tens of seconds, and that ratio propagates straight through to how much infrastructure you buy. Decide it deliberately &mdash; and if the update path from your pricing system is still being designed, our guide on <a href="esl-integration-pos-erp-api-mqtt-database.html">connecting ESL to POS, ERP and databases</a> covers what has to be in place before any of this timing applies.</p>
+
+          <h2 id="sources">Sources</h2>
+          <ul class="source-list">
+            <li><a href="https://www.good-display.com/news/158.html" target="_blank" rel="noopener">Understanding the Refresh Times of Monochrome and Tri-Color EPD</a> &mdash; Dalian Good Display, e-paper module manufacturer. Monochrome ~4 s, tri-colour ~16 s typical redraw.</li>
+            <li><a href="https://www.good-display.com/news/149.html" target="_blank" rel="noopener">Common refresh methods of e-paper display</a> &mdash; Dalian Good Display. Full, fast-full and partial refresh ranges, and which panel types support each.</li>
+            <li><a href="https://lcd-mikroelektronik.de/en/news/e-ink-spectra-6/" target="_blank" rel="noopener">E-Ink Spectra 6</a> &mdash; LCD-Mikroelektronik. Spectra 6 full-refresh guidance of 10&ndash;30 seconds by temperature and panel size.</li>
+            <li><a href="https://www.eink.com/brand/detail/Spectra6" target="_blank" rel="noopener">E Ink Spectra 6</a> &mdash; E Ink Corporation. Published characteristics of the six-colour e-paper platform used in retail signage and premium labels.</li>
+            <li>Per-gateway capacity figures of roughly 2,000&ndash;15,000 labels are cited by multiple ESL suppliers in public material. We deliberately do not link or attribute these: none of the sources we found states the update window, label type or retry assumptions behind the figure, which is the argument of this article.</li>
+          </ul>
+
+          <div class="article-share-panel" data-article-share aria-label="Share this article">
+            <div class="article-share-eyebrow">Share this article</div>
+            <p>Send the capacity formula, update-window checklist and display refresh caveats to your IT or store-planning team.</p>
+            <div class="article-share-actions" aria-label="Article sharing options"></div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-toc" aria-label="Article contents">
+        <b>In this guide</b>
+        <a href="#why-misleading">Why the number misleads</a>
+        <a href="#two-limits">The two limits</a>
+        <a href="#update-window">Your update window</a>
+        <a href="#capacity-math">Estimating capacity</a>
+        <a href="#what-consumes">What consumes capacity</a>
+        <a href="#protocol">Does the protocol matter?</a>
+        <a href="#redundancy">Headroom &amp; failure</a>
+        <a href="#sizing-checklist">What to ask suppliers</a>
+        <a href="#verdict">The short version</a>
+        <a href="#sources">Sources</a>
+        <a href="#faq">FAQ</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Article esl-capacity — FAQ">
+  <div class="wrap wide">
+    <div class="article">
+      <div class="sec-tag">// FAQ</div>
+      <h2 style="font-size:28px;margin:8px 0 24px">Frequently asked</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">How many electronic shelf labels can one gateway support?<span class="chev">+</span></button><div class="faq-a"><p>There is no single correct number. Published figures range from roughly 2,000 to 15,000 labels per gateway, because capacity is not a fixed property of the hardware — it is your update window divided by the time each label consumes. A gateway serving monochrome labels overnight supports many times more than the same gateway serving colour labels that must all update within minutes. The useful question is how long it takes to update all of your labels, not how many a gateway can hold.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What is the difference between coverage and capacity when planning gateways?<span class="chev">+</span></button><div class="faq-a"><p>Coverage asks whether a gateway can physically reach a label, and is decided by floor area, radio range and mounting height. Capacity asks whether every label can finish updating within your time window, and is decided by label count, per-label update time and retries. They are independent, and your gateway count is whichever demands more. A dense small store can be fully covered by one gateway yet still need two for capacity; a large warehouse is often the reverse.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Do colour electronic shelf labels need more gateways than monochrome?<span class="chev">+</span></button><div class="faq-a"><p>Usually yes, for the same update window. Published component specifications put monochrome e-paper redraw at roughly 2 to 5 seconds, while tri-colour panels take roughly 15 to 25 seconds, and Spectra 6 references commonly put six-colour full refresh at 10 to 30 seconds. Monochrome also supports fast and partial refresh modes that multi-colour panels generally do not. Because the display redraw is a physical floor that no network design removes, choosing colour estate-wide can multiply the infrastructure required.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What update window should I specify for electronic shelf labels?<span class="chev">+</span></button><div class="faq-a"><p>Specify two, because they test different things. A throughput requirement covers the whole estate, such as all labels updated before opening. A latency requirement covers a subset during trading, such as any 200 labels updated within 10 minutes. A system can satisfy one and fail the other. The intraday latency requirement is usually the one that carries business value, because an afternoon markdown only helps if the shelf price changes before staff act on it.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Does temperature affect how many labels a gateway can update?<span class="chev">+</span></button><div class="faq-a"><p>Indirectly, yes. E-paper redraws more slowly at low temperatures, and full-colour panels are typically rated for operation between 0 and 50 degrees Celsius. Chilled and freezer zones therefore consume more of your update window per label than the ambient aisle does, and should be sized separately rather than averaged in with the rest of the store.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">How do I verify a supplier's capacity claim?<span class="chev">+</span></button><div class="faq-a"><p>Put it in the acceptance criteria rather than the specification. A clause requiring that 100% of labels in each store complete a full content update within a stated number of minutes, verified on site at handover, is testable and shifts the sizing risk to the party who controls it. Set the number from your intraday requirement, not your overnight one, and ask separately what happens to a zone when its gateway fails.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Article esl-capacity — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal" style="margin-bottom:24px"><div class="sec-tag">// KEEP READING</div><h2>Related articles</h2></div>
+    <div class="related-grid">
+      <a class="res-card reveal" href="esl-base-station-coverage-calculator.html"><div class="res-kind">INTERACTIVE</div><h3>Base Station Coverage Calculator</h3><p>The other half of the sizing question &mdash; how many gateways it takes to reach every label.</p><span class="res-link">Open the planner &rarr;</span></a>
+      <a class="res-card reveal" href="esl-battery-life.html"><div class="res-kind">TECHNOLOGY</div><h3>ESL Battery Life Explained</h3><p>The wake-interval trade-off from the other side: responsiveness versus years on a cell.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="electronic-shelf-label-cost.html"><div class="res-kind">PRICING</div><h3>How Much Do Electronic Shelf Labels Cost?</h3><p>Where gateway count lands in the budget &mdash; the line item most often left out.</p><span class="res-link">Read article &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="Resources.html">Resources hub</a>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="esl-base-station-coverage-calculator.html">Coverage planner</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
