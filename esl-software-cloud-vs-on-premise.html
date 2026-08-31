@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/brand/favicon-48.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<title>ESL Software: Cloud vs Your Own Server &mdash; Cost &amp; Control | AiESL</title>
+<meta name="description" content="Cloud, on-premise or private cloud: what ESL software costs, who maintains it, who controls access, and whether gateways survive a change.">
+<meta name="keywords" content="esl software, esl cloud vs local server, esl server requirements, esl on-premise, esl software cost, esl data ownership, esl software escrow">
+<link rel="canonical" href="https://www.aiesl.com/esl-software-cloud-vs-on-premise.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESL Software Deployment: Cloud vs Your Own Server - Cost, Control and Data Ownership">
+<meta property="og:description" content="The question is not where the software runs - it is who holds the keys. Remote access, maintenance ownership, vendor continuity and hardware portability.">
+<meta property="og:image" content="https://www.aiesl.com/assets/blog/esl-deployment-models.svg">
+<meta property="og:url" content="https://www.aiesl.com/esl-software-cloud-vs-on-premise.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="platform.css">
+<link rel="stylesheet" href="buney-control.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ESL Software Deployment: Cloud vs Your Own Server - Cost, Control and Data Ownership","description":"Cloud, on-premise or private cloud: what ESL software costs, who maintains it, who controls access, and whether gateways survive a change.","datePublished":"2026-08-31","dateModified":"2026-08-31","author":{"@type":"Organization","name":"AiESL"},"publisher":{"@type":"Organization","name":"AiESL"},"image":"https://www.aiesl.com/assets/blog/esl-deployment-models.svg","mainEntityOfPage":"https://www.aiesl.com/esl-software-cloud-vs-on-premise.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.aiesl.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.aiesl.com/blog.html"},{"@type":"ListItem","position":3,"name":"ESL Software Deployment","item":"https://www.aiesl.com/esl-software-cloud-vs-on-premise.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need my own server to run electronic shelf labels?","acceptedAnswer":{"@type":"Answer","text":"No. Three models exist: the vendor's cloud, your own on-premise server, or a private instance in your own cloud account. On-premise is usually chosen because of a policy, connectivity or data-residency requirement rather than because it is technically necessary. The important thing to understand is that hosting the software yourself does not automatically give you operational control \u2014 many on-premise installations still depend on the vendor for updates, licence renewal and remote support."}},{"@type":"Question","name":"Do I need one server for each store?","acceptedAnswer":{"@type":"Answer","text":"Almost never. The normal arrangement is one system for the whole estate, with each store's gateways connecting to it over the network. Gateways are local because radio is local; the pricing system is not, because prices are usually not decided store by store. A local cache or edge node per store is sometimes used where connectivity is unreliable, but that is a resilience choice rather than an architectural requirement. If a supplier proposes one server per store for a chain, ask which specific problem it solves."}},{"@type":"Question","name":"What does ESL software actually cost?","acceptedAnswer":{"@type":"Answer","text":"Cost has five components and confusion almost always comes from a quote that bundles some and stays silent on the rest: the software licence, deployment and implementation, server hardware if on-premise, annual maintenance and updates, and remote support. Two questions prevent most disputes. First, at the end of the deployment fee, what exactly is working \u2014 software installed, or first store live and integrated? Second, does the annual fee buy updates only, or the right to run the system at all?"}},{"@type":"Question","name":"Who maintains the server after installation?","acceptedAnswer":{"@type":"Answer","text":"In a vendor cloud deployment the vendor does. On-premise splits into three jobs that different parties may own: the machine itself including operating system patches, disk space and backups, which is usually yours; the ESL application and its updates, usually the vendor's under the annual fee; and the integration with your POS or ERP, which breaks when either side changes and should have a named owner. Establish all three in the contract, along with the escalation path outside your business hours."}},{"@type":"Question","name":"What happens if the vendor stops supporting the software or goes out of business?","acceptedAnswer":{"@type":"Answer","text":"The established commercial answer is a software escrow agreement: a three-party arrangement in which the vendor deposits source code and build documentation with a neutral agent, who releases it to you if a defined trigger occurs such as insolvency or failure to provide contracted maintenance. Lighter measures are also worth securing: the ability to export your product data, templates and label mappings in a documented format without vendor help, documented interfaces rather than an undocumented private protocol, and a stated notice period if the product is discontinued."}},{"@type":"Question","name":"Will my existing base stations and labels work if I change software?","acceptedAnswer":{"@type":"Answer","text":"It depends which change you mean. Moving between cloud and on-premise with the same vendor is normally supported, and older gateways generally work with newer server versions within a stated support window. Moving to a different vendor's software while keeping your existing hardware is the difficult case, and depends entirely on whether that hardware speaks a documented protocol. Ask this in writing before purchase, because gateways and labels are the part of the system you are least likely to replace voluntarily."}}]}</script>
+<style>
+.article-layout{display:grid;grid-template-columns:minmax(0,820px) 270px;gap:52px;align-items:start}
+.article-layout>*{min-width:0}
+.article{width:100%;max-width:100%}
+.article-cover{width:100%}
+.article-cover img{height:auto;object-fit:contain}
+.article-toc{position:sticky;top:96px;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.article-toc b{display:block;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--blue-hi);letter-spacing:.05em;margin-bottom:12px;text-transform:uppercase}
+.article-toc a{display:block;font-size:13.5px;color:var(--ink-mid);padding:8px 0;border-top:1px solid var(--line-soft)}
+.article-toc a:hover{color:var(--blue-hi)}
+.article-body .answer-box{background:linear-gradient(135deg,rgba(77,124,255,.12),rgba(77,124,255,.03));border:1px solid rgba(77,124,255,.28);border-radius:14px;padding:22px 24px;margin:0 0 28px;color:var(--ink);font-size:18px;line-height:1.7}
+.article-body .answer-box strong{color:var(--ink)}
+.article-body .formula{background:var(--bg-soft);border:1px solid var(--line);border-left:4px solid var(--blue-hi);border-radius:10px;padding:18px 22px;margin:24px 0;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.8;color:var(--ink);overflow-x:auto}
+.article-body figure{margin:30px 0}
+.article-body figure img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);display:block;background:#f4f5f7}
+.article-body figcaption{font-size:12px;color:var(--ink-dim);text-align:center;margin-top:9px}
+.article-body .source-note{font-size:13px;color:var(--ink-dim);margin-top:-12px}
+.data-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.data-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.data-card .num{font-family:'Instrument Sans',sans-serif;font-size:26px;font-weight:700;color:var(--blue-hi);line-height:1.1}
+.data-card .lbl{font-size:13px;color:var(--ink-mid);margin-top:8px}
+.article-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:28px 0;background:var(--bg-card)}
+.article-table{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+.article-table th,.article-table td{padding:14px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft)}
+.article-table thead th{background:var(--bg-soft);border-top:none;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim)}
+.article-table td:first-child{color:var(--ink);font-weight:600}
+.article-body .source-list{padding-left:0;list-style:none;display:grid;gap:10px}
+.article-body .source-list li{display:block}
+.article-body .source-list li:before{display:none}
+@media(max-width:980px){.article-layout{grid-template-columns:1fr}.article-toc{position:static;order:-1}.data-strip{grid-template-columns:1fr}}
+@media(max-width:640px){.article-layout,.article,.article-body,.article-body .answer-box,.article-toc{width:100%;max-width:min(calc(100vw - 40px),350px);min-width:0}.article-body,.article-body *{overflow-wrap:break-word}.article-body .answer-box{font-size:16px}.article-table{min-width:620px}.article-body .formula{font-size:12.5px}.page-hero h1{font-size:32px}.article-meta{gap:7px 10px;font-size:12px}.article-meta span:nth-child(even){display:none}.wrap,.wrap.wide{padding-left:20px;padding-right:20px}.article-cover{max-width:350px}.article-cover img{height:auto}}
+</style>
+</head>
+<body>
+
+<nav data-screen-label="Article — Nav">
+  <div class="wrap wide nav-in">
+    <a href="index.html" class="logo" aria-label="AiESL home"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></a>
+    <div class="nav-links">
+      <div class="has-menu"><a href="index.html#platform">Platform &#9662;</a>
+        <div class="nav-menu">
+          <a href="index.html#platform"><b>AI Dynamic Pricing</b><small>Optimize prices at the shelf edge</small></a>
+          <a href="index.html#platform"><b>Shelf Monitoring</b><small>Detect gaps, mismatches, out-of-stocks</small></a>
+          <a href="index.html#platform"><b>Retail Media</b><small>Turn shelf labels into ad surfaces</small></a>
+          <a href="index.html#diff"><b>Open Middleware</b><small>One console, 5+ brand integrations</small></a>
+        </div>
+      </div>
+      <a href="products.html">Products</a>
+      <div class="has-menu"><a href="Industries.html">Industries &#9662;</a>
+        <div class="nav-menu">
+          <a href="industry-supermarket.html"><b>Supermarket &amp; Grocery</b><small>High-density everyday pricing</small></a>
+          <a href="industry-pharmacy.html"><b>Pharmacy &amp; Cosmetics</b><small>Compliance-grade accuracy</small></a>
+          <a href="industry-convenience.html"><b>Convenience</b><small>Fast rollout, low footprint</small></a>
+          <a href="industry-warehouse.html"><b>Warehouse &amp; DC</b><small>Pick-to-light, large displays</small></a>
+        </div>
+      </div>
+      <a href="Cases.html">Customers</a>
+      <div class="has-menu"><a href="Resources.html" class="active">Resources &#9662;</a>
+        <div class="nav-menu">
+          <a href="blog.html"><b>Insights &amp; Blog</b><small>Trends in AI retail pricing</small></a>
+          <a href="esl-roi-calculator.html"><b>ROI Calculator</b><small>Estimate your payback period</small></a>
+          <a href="esl-base-station-coverage-calculator.html"><b>Coverage Planner</b><small>Size your gateway network</small></a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="javascript:void(0)" class="btn btn-primary" onclick="openModal()">Get a Custom Quote</a>
+    </div>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="toggleDrawer()" aria-label="Close">&times;</button>
+  <a href="index.html#platform">Platform</a>
+  <a href="products.html">Products</a>
+  <a href="Industries.html">Industries</a>
+  <a href="Cases.html">Customers</a>
+  <a href="Resources.html">Resources</a>
+  <a href="about.html">About</a>
+  <a href="javascript:void(0)" style="color:var(--blue-hi)" onclick="openModal();toggleDrawer()">Get a Custom Quote &rarr;</a>
+</div>
+
+<div class="page-hero" data-screen-label="Article esl-deploy — Hero">
+  <div class="hero-grid"></div>
+  <div class="wrap wide" style="position:relative">
+    <div class="article-hero">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);margin-bottom:16px"><a href="blog.html" style="color:var(--blue-hi)">Blog</a> / PLATFORM &amp; DEPLOYMENT</div>
+      <h1>ESL Software Deployment: Cloud vs Your Own Server &mdash; Cost, Control and Data Ownership</h1>
+      <div class="article-meta">
+        <span>August 31, 2026</span><span>&middot;</span><span>13 min read</span><span>&middot;</span><span>AiESL Research</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap wide"><div class="article-cover reveal"><img src="assets/blog/esl-deployment-models.svg" alt="Diagram comparing vendor cloud, on-premise and private hosted ESL software deployment against who controls access, maintenance, continuity and hardware portability"></div></div>
+
+<section data-screen-label="Article esl-deploy — Body">
+  <div class="wrap wide">
+    <div class="article-layout">
+      <article class="article">
+        <div class="article-body">
+          <div class="answer-box"><strong>The question is not where the software runs. It is who holds the keys.</strong> Putting the server in your own building does not by itself give you control, and putting it in the cloud does not by itself take control away. What decides your position is a set of contract terms most buyers never ask about: who can reach the system remotely, who maintains it after handover, what happens if the people who wrote it move on, and whether the hardware you already own still works if you change any of it.</div>
+
+          <p>This guide is written from the questions retailers actually ask us before and after buying &mdash; the ones that come up repeatedly across six years and hundreds of customers, in English, Russian and Chinese. They are not the questions keyword tools surface. They are the ones people ask once money is involved. If you are still at the stage of working out what the hardware does, start with <a href="what-are-electronic-shelf-labels.html">what electronic shelf labels are</a> and come back to this once a supplier has sent you a quote.</p>
+          <p>We are a vendor, so read this with the appropriate scepticism. The most useful thing we can do is give you the questions to put to us as well as to everyone else, which is what the checklist at the end is for.</p>
+
+          <h2 id="options">What are the real deployment options?</h2>
+          <p><strong>Three, and the middle one is where most confusion lives.</strong></p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Model</th><th>Where it runs</th><th>Who operates it day to day</th><th>Typically chosen when</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Vendor cloud (SaaS)</strong></td><td>Vendor&rsquo;s infrastructure</td><td>Vendor</td><td>You have no IT team, want fastest start, and are comfortable with a recurring fee</td></tr>
+                <tr><td><strong>On-premise</strong></td><td>Your building, your hardware</td><td>You &mdash; or the vendor, remotely. <strong>This is the part to pin down</strong></td><td>Policy, connectivity or data-residency rules require it</td></tr>
+                <tr><td><strong>Private hosted</strong></td><td>Your cloud tenancy (your account with a cloud provider)</td><td>Usually shared</td><td>You want the data in your own account without running physical hardware</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The middle row is where buyers get surprised. &ldquo;On-premise&rdquo; is often assumed to mean independence. In practice a great many on-premise installations still depend on the vendor for updates, licence renewal and remote troubleshooting. That is a perfectly workable arrangement &mdash; but it is <em>hosting</em> independence, not <em>operational</em> independence, and the difference only becomes visible when something goes wrong.</p>
+
+          <div class="data-strip">
+            <div class="data-card"><div class="num">3</div><div class="lbl">questions that decide your real position: who can reach it, who maintains it, what happens if the vendor stops.</div></div>
+            <div class="data-card"><div class="num">Hardware</div><div class="lbl">outlives software. Label and gateway compatibility is the lock-in question people ask last and regret first.</div></div>
+            <div class="data-card"><div class="num">Controller</div><div class="lbl">under GDPR that is almost always you &mdash; in either model. Hosting choice does not transfer the obligation.</div></div>
+          </div>
+
+          <h2 id="per-store">Do I need one server per store?</h2>
+          <p><strong>Almost never. The normal pattern is one system for the estate, not one per site.</strong></p>
+          <p>This question comes up constantly from multi-store buyers, and it usually comes from a reasonable but mistaken mental model: that because each store has its own gateways and its own labels, it must also have its own server. It does not follow. Gateways are local because radio is local. The pricing system is not local, because prices are not decided store by store in most chains.</p>
+          <p>What actually varies by store is the network path, not the server count:</p>
+          <ul>
+            <li><strong>One central system, stores connect to it.</strong> The usual arrangement. Each store&rsquo;s gateways talk to a single instance over the network. Adding a store is a configuration change, not a new deployment.</li>
+            <li><strong>Local cache or edge node per store.</strong> Sometimes used where store connectivity is unreliable, so that a dropped link does not stop local updates. This is a resilience decision, not an architectural requirement.</li>
+            <li><strong>Genuinely separate systems per store.</strong> Occasionally required by franchise structures where each store is a separate legal entity with its own data. Expensive to run, and worth confirming you really need it.</li>
+          </ul>
+          <p>If a supplier proposes one server per store for a chain without explaining which of these applies, ask why. It multiplies both your hardware cost and your maintenance burden, and it is the kind of decision that is hard to unwind two years later.</p>
+          <p>The related question &mdash; <em>can several stores be joined into one network later?</em> &mdash; is worth asking before you buy the first store&rsquo;s worth of equipment, not after. Merging separately deployed systems is considerably harder than adding a store to a system that was designed for several.</p>
+
+          <h2 id="cost">What does the cost actually consist of?</h2>
+          <p><strong>Five components. Confusion almost always comes from a quote that bundles some of them and stays silent on the rest.</strong> We are not going to publish our own numbers here, because the useful thing is not our price &mdash; it is knowing what to make every supplier itemise, including us.</p>
+
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Cost component</th><th>What it covers</th><th>What to ask</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Software licence</strong></td><td>The right to run the system. May be one-time, subscription, or one-time plus annual maintenance</td><td>Is it perpetual or term? Priced per store, per label, per user, or per estate? What happens at renewal if my label count grows?</td></tr>
+                <tr><td><strong>Deployment &amp; implementation</strong></td><td>Installing, configuring, connecting to your POS or ERP, importing product data, testing</td><td>One-off or recurring? What exactly is included &mdash; and what is billed as extra once we start?</td></tr>
+                <tr><td><strong>Server hardware</strong></td><td>Only applies on-premise. A machine, or capacity in your own cloud account</td><td>What specification do you actually require? Do I buy it, or do you supply it &mdash; and does that change the software price?</td></tr>
+                <tr><td><strong>Annual maintenance &amp; updates</strong></td><td>Bug fixes, security patches, new versions, compatibility with future label models</td><td>Is it optional? What stops working if I do not renew &mdash; updates only, or the system itself?</td></tr>
+                <tr><td><strong>Remote support</strong></td><td>Someone available when a gateway drops or an integration breaks</td><td>Included or billed? What response time, in which time zone, in which language?</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Two of these cause most of the disputes we see, and both are avoidable.</p>
+          <p><strong>The first is the boundary of &ldquo;deployment&rdquo;.</strong> A deployment fee that covers installing the software is a different thing from one that covers connecting it to your ERP, mapping your product fields, and getting your first store live. Both are legitimate scopes. Trouble starts when the buyer assumed the second and the quote covered the first. Ask for the deliverable, not the activity: <em>at the end of this fee, what specifically is working?</em></p>
+          <p><strong>The second is what the annual fee is actually buying.</strong> There is a large practical difference between an annual fee that buys updates &mdash; where the system keeps running if you stop paying, just frozen &mdash; and one that buys the right to run at all. Neither is wrong. But you should know which you signed, because it determines whether your renewal conversation is a negotiation or an ultimatum.</p>
+          <p>For the hardware side of the budget &mdash; labels, gateways and installation &mdash; see our <a href="electronic-shelf-label-cost.html">ESL cost breakdown</a>. That article deliberately does not cover the software line, which is what this one is for. Both feed the same business case &mdash; our <a href="esl-roi-calculator-payback.html">guide to calculating ESL ROI</a> shows where software and deployment sit in the payback arithmetic, and why leaving them out is the most common way a case gets overstated.</p>
+
+          <h2 id="who-maintains">Who maintains the server after handover?</h2>
+          <p><strong>Ask this before installation, and get the answer in the contract rather than in an email.</strong> It is one of the most common post-purchase questions we receive and one of the least commonly documented at the point of sale.</p>
+          <p>In a vendor cloud deployment the answer is straightforward: the vendor does, and their uptime is your uptime. On-premise is where it gets vague, because three different jobs get bundled under the word &ldquo;maintenance&rdquo; and different parties may own each:</p>
+          <ul>
+            <li><strong>The machine</strong> &mdash; operating system patches, disk space, backups, physical failure. Usually yours, and frequently nobody realises this until a disk fills up.</li>
+            <li><strong>The application</strong> &mdash; the ESL software itself, its updates and fixes. Usually the vendor&rsquo;s, under the annual fee.</li>
+            <li><strong>The integration</strong> &mdash; the link to your POS or ERP, which breaks when either side changes. Genuinely shared, and worth naming an owner for. Our <a href="esl-integration-pos-erp-api-mqtt-database.html">integration guide</a> covers what that link involves.</li>
+          </ul>
+          <p>Write down which party owns each of the three, and what the path is when something fails outside business hours in your time zone. A support arrangement that exists only during the vendor&rsquo;s working day is not necessarily a problem &mdash; but it is a very different proposition for a store that re-prices at six in the morning.</p>
+
+          <h2 id="continuity">What if the people who built it move on, or the vendor disappears?</h2>
+          <p><strong>This is a legitimate question, it is asked more often than vendors admit, and there is a standard commercial answer to it.</strong></p>
+          <p>The concern is sharper for on-premise than for cloud, because an on-premise system that nobody can maintain keeps running until the day it does not &mdash; and by then the people who understood it are gone. It is sharpest of all in this category, because a shelf-label system is not a standalone tool: it sits between your pricing system and thousands of pieces of hardware you have already paid for.</p>
+          <p>The established mechanism is a <strong>software escrow agreement</strong> &mdash; a three-party arrangement between you, the vendor and a neutral escrow agent. The vendor deposits source code and build documentation with the agent, who releases it to you only if a defined trigger occurs, typically the vendor ceasing trading, entering insolvency, or failing to provide the maintenance it contracted to provide. It is a well-established instrument, not an exotic ask, and it exists precisely because this risk is real.</p>
+          <p>Escrow is not free and is not always proportionate. For a two-store pilot it is overkill. For a chain putting its shelf-edge pricing on one system for the next decade, it is a reasonable line item. Between those poles there are lighter measures worth asking for:</p>
+          <ul>
+            <li><strong>Documented export.</strong> Can you get your product data, templates and label-to-product mappings out, in a documented format, without vendor assistance? Test this during the pilot rather than assuming it.</li>
+            <li><strong>Documented interfaces.</strong> If the integration is built on published, standard interfaces rather than an undocumented private protocol, a successor can rebuild the link. This is one of the practical arguments in <a href="open-vs-closed-esl-systems.html">open versus closed ESL systems</a>.</li>
+            <li><strong>Named continuity terms.</strong> What notice period applies if the vendor discontinues the product? What happens to your licence?</li>
+          </ul>
+          <p>A vendor who reacts badly to being asked about continuity has told you something useful.</p>
+
+          <h2 id="control">If it runs on my server, can you still change it remotely &mdash; or switch me off?</h2>
+          <p><strong>The honest answer is that it depends entirely on what the contract and the technical setup allow, and buyers are entitled to have both stated explicitly.</strong></p>
+          <p>Technically, remote access to an on-premise system exists if it is configured to exist. Most vendors want some form of it, for a defensible reason: remote support is far faster than shipping an engineer, and updates have to reach the system somehow. The problem is not that remote access exists &mdash; it is that it is often never discussed, so the buyer discovers the arrangement only when they start wondering about it.</p>
+          <p>Four things worth settling in writing:</p>
+          <ol>
+            <li><strong>Does the vendor retain remote access by default, and can it be turned off?</strong> A common middle ground is access that you enable per support session rather than standing access.</li>
+            <li><strong>Is there a licence check that requires contacting the vendor?</strong> If yes, what happens if that check cannot complete &mdash; does the system degrade, or stop? This is the mechanism behind the &ldquo;can you switch me off&rdquo; question, and it deserves a plain answer.</li>
+            <li><strong>Who can see the data, and is that access logged?</strong> A support engineer able to open your pricing data is normal. Not being able to tell afterwards whether they did is not.</li>
+            <li><strong>What survives non-renewal?</strong> Covered above, and it belongs in the same clause.</li>
+          </ol>
+          <p>On data protection there is a point that is widely misunderstood. Choosing on-premise does not move your legal obligations somewhere else. Under the GDPR framework, the party that determines the purposes and means of processing is the <em>controller</em>, and for a retailer running its own pricing and shelf operations that is almost always the retailer &mdash; whether the software sits in its building or in a vendor&rsquo;s cloud. A vendor operating the system on your instructions is generally a <em>processor</em>. The <a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en" target="_blank" rel="noopener">EDPB guidelines on these concepts</a> set out how the roles are determined; the practical consequence is that self-hosting is a control and continuity decision, not a way to hand your compliance duties to a supplier.</p>
+          <p>This matters more than usual for shelf labels because most ESL deployments hold very little personal data &mdash; products, prices and templates, not shoppers. If a supplier presents on-premise primarily as a privacy necessity for this category, ask which personal data they mean. Usually the honest reason for on-premise is control, continuity or connectivity, and those reasons are good enough on their own.</p>
+
+          <h2 id="compatibility">Will my existing base stations and labels work with a new server?</h2>
+          <p><strong>This is the question that decides how expensive your next decision is, and it is usually asked too late.</strong></p>
+          <p>Software gets replaced. Hardware does not, or not cheaply &mdash; you may have thousands of labels and dozens of gateways already installed, mounted and commissioned. So the real question behind &ldquo;cloud or my own server?&rdquo; is often &ldquo;if I change my mind in three years, what do I have to throw away?&rdquo;</p>
+          <p>Three separate compatibility questions, and they have different answers:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>Change</th><th>Usual difficulty</th><th>What to establish up front</th></tr></thead>
+              <tbody>
+                <tr><td>Same vendor, cloud &harr; on-premise</td><td>Normally supported</td><td>Confirm it is possible in <em>both</em> directions, and what it costs. Many buyers start in the cloud and move later</td></tr>
+                <tr><td>Same vendor, older gateways with a newer server version</td><td>Usually yes, within a support window</td><td>How long are existing gateway and label models supported? What is the notice period before a model is dropped?</td></tr>
+                <tr><td>Different vendor, existing hardware</td><td><strong>The hard one.</strong> Depends entirely on whether the hardware speaks a documented protocol</td><td>Ask now, in writing, whether the labels and gateways can be driven by anything other than this vendor&rsquo;s software</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The third row is the one that turns a software decision into a decade-long commitment. It is also why gateway capacity and coverage planning &mdash; covered in <a href="esl-labels-per-gateway-capacity.html">how many labels one gateway can support</a> &mdash; is worth getting right early: the gateways are the part you are least likely to replace voluntarily.</p>
+
+          <h2 id="decide">How to decide</h2>
+          <p>Most buyers do not need a complex framework. Four factors settle it:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead><tr><th>If this is true of you</th><th>Lean toward</th><th>Because</th></tr></thead>
+              <tbody>
+                <tr><td>No internal IT team, few stores, want to start quickly</td><td>Vendor cloud</td><td>You are buying an operated service. Running a server you cannot maintain is the worse risk</td></tr>
+                <tr><td>Policy or contract requires data in your infrastructure</td><td>On-premise or your own cloud tenancy</td><td>The requirement decides it &mdash; but settle remote access and maintenance ownership explicitly</td></tr>
+                <tr><td>Unreliable store connectivity</td><td>Local resilience, whichever model</td><td>This is an availability problem, not a hosting problem. Ask what happens during an outage</td></tr>
+                <tr><td>Large estate, long horizon, hardware you intend to keep</td><td>Either &mdash; but negotiate continuity</td><td>Escrow, export and protocol documentation matter more than hosting location</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="answer-box"><strong>The short version:</strong> pick the hosting model that matches your IT reality, then spend your negotiating effort on the four things that actually determine control &mdash; remote access, maintenance ownership, continuity if the vendor stops, and hardware portability. Those are contract terms, not architecture, and they are where the real risk sits.</div>
+
+          <h2 id="ask-us">Questions to put to any supplier, including us</h2>
+          <ol>
+            <li>Is the licence perpetual or term, and what specifically stops working if I do not renew?</li>
+            <li>At the end of the deployment fee, what exactly is working &mdash; software installed, or first store live and integrated?</li>
+            <li>For an on-premise install: who patches the operating system, who backs it up, and who owns the integration when it breaks?</li>
+            <li>Do you retain remote access by default? Can I disable it? Is your access to my data logged and visible to me?</li>
+            <li>Will you agree to a software escrow arrangement, and on what triggers?</li>
+            <li>Can I export my product data, templates and label mappings in a documented format without your help? May I test that during the pilot?</li>
+            <li>How long will you support the gateway and label models I am buying today, and what notice will I get before support ends?</li>
+            <li>Can these labels and gateways be driven by any software other than yours?</li>
+          </ol>
+          <p>The last two are the ones to press hardest. Everything else can be renegotiated at renewal; the hardware in your ceilings and on your shelves cannot.</p>
+
+          <h2 id="sources">Sources &amp; method</h2>
+          <ul class="source-list">
+            <li><a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en" target="_blank" rel="noopener">EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR</a> &mdash; European Data Protection Board, final version. How controller and processor roles are determined, and why hosting location does not by itself transfer them.</li>
+            <li><a href="https://www.escode.com/software-escrow/software-escrow-agreement/" target="_blank" rel="noopener">Software escrow agreements</a> &mdash; Escode (NCC Group). How the three-party deposit and release mechanism works in practice.</li>
+            <li><a href="https://www.lowenstein.com/news-insights/publications/articles/source-code-escrow-agreements-are-reaching-for-the-cloud-kesslen-satlin" target="_blank" rel="noopener">Source Code Escrow Agreements Are Reaching For The Cloud</a> &mdash; Lowenstein Sandler LLP. Why traditional escrow terms need adapting for hosted software.</li>
+            <li><strong>Demand evidence.</strong> The questions this article is built around come from our own record of customer conversations &mdash; roughly 6,600 questions asked by around 836 customers between 2020 and 2026, in English, Russian and Chinese. Software deployment and cost was the single most-asked topic and the most active in the last twelve months. Questions have been rephrased into general form; no customer, conversation or commercial term is reproduced.</li>
+          </ul>
+          <div class="article-share-panel" data-article-share aria-label="Share this article">
+            <div class="article-share-eyebrow">Share this article</div>
+            <p>Send the deployment model, control checklist and continuity questions to your IT, procurement or store-operations team.</p>
+            <div class="article-share-actions" aria-label="Article sharing options"></div>
+          </div>
+        </div>
+      </article>
+
+      <aside class="article-toc" aria-label="Article contents">
+        <b>In this guide</b>
+        <a href="#options">The three deployment models</a>
+        <a href="#per-store">One server per store?</a>
+        <a href="#cost">What the cost consists of</a>
+        <a href="#who-maintains">Who maintains the server</a>
+        <a href="#continuity">If the vendor disappears</a>
+        <a href="#control">Remote access &amp; data ownership</a>
+        <a href="#compatibility">Will my hardware survive?</a>
+        <a href="#decide">How to decide</a>
+        <a href="#ask-us">Questions to ask suppliers</a>
+        <a href="#sources">Sources &amp; method</a>
+        <a href="#faq">FAQ</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-soft);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)" data-screen-label="Article esl-deploy — FAQ">
+  <div class="wrap wide">
+    <div class="article">
+      <div class="sec-tag">// FAQ</div>
+      <h2 style="font-size:28px;margin:8px 0 24px">Frequently asked</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal"><button class="faq-q">Do I need my own server to run electronic shelf labels?<span class="chev">+</span></button><div class="faq-a"><p>No. Three models exist: the vendor's cloud, your own on-premise server, or a private instance in your own cloud account. On-premise is usually chosen because of a policy, connectivity or data-residency requirement rather than because it is technically necessary. The important thing to understand is that hosting the software yourself does not automatically give you operational control — many on-premise installations still depend on the vendor for updates, licence renewal and remote support.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Do I need one server for each store?<span class="chev">+</span></button><div class="faq-a"><p>Almost never. The normal arrangement is one system for the whole estate, with each store's gateways connecting to it over the network. Gateways are local because radio is local; the pricing system is not, because prices are usually not decided store by store. A local cache or edge node per store is sometimes used where connectivity is unreliable, but that is a resilience choice rather than an architectural requirement. If a supplier proposes one server per store for a chain, ask which specific problem it solves.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What does ESL software actually cost?<span class="chev">+</span></button><div class="faq-a"><p>Cost has five components and confusion almost always comes from a quote that bundles some and stays silent on the rest: the software licence, deployment and implementation, server hardware if on-premise, annual maintenance and updates, and remote support. Two questions prevent most disputes. First, at the end of the deployment fee, what exactly is working — software installed, or first store live and integrated? Second, does the annual fee buy updates only, or the right to run the system at all?</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Who maintains the server after installation?<span class="chev">+</span></button><div class="faq-a"><p>In a vendor cloud deployment the vendor does. On-premise splits into three jobs that different parties may own: the machine itself including operating system patches, disk space and backups, which is usually yours; the ESL application and its updates, usually the vendor's under the annual fee; and the integration with your POS or ERP, which breaks when either side changes and should have a named owner. Establish all three in the contract, along with the escalation path outside your business hours.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">What happens if the vendor stops supporting the software or goes out of business?<span class="chev">+</span></button><div class="faq-a"><p>The established commercial answer is a software escrow agreement: a three-party arrangement in which the vendor deposits source code and build documentation with a neutral agent, who releases it to you if a defined trigger occurs such as insolvency or failure to provide contracted maintenance. Lighter measures are also worth securing: the ability to export your product data, templates and label mappings in a documented format without vendor help, documented interfaces rather than an undocumented private protocol, and a stated notice period if the product is discontinued.</p></div></div>
+        <div class="faq-item reveal"><button class="faq-q">Will my existing base stations and labels work if I change software?<span class="chev">+</span></button><div class="faq-a"><p>It depends which change you mean. Moving between cloud and on-premise with the same vendor is normally supported, and older gateways generally work with newer server versions within a stated support window. Moving to a different vendor's software while keeping your existing hardware is the difficult case, and depends entirely on whether that hardware speaks a documented protocol. Ask this in writing before purchase, because gateways and labels are the part of the system you are least likely to replace voluntarily.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Article esl-deploy — Related">
+  <div class="wrap wide">
+    <div class="sec-head reveal" style="margin-bottom:24px"><div class="sec-tag">// KEEP READING</div><h2>Related articles</h2></div>
+    <div class="related-grid">
+      <a class="res-card reveal" href="open-vs-closed-esl-systems.html"><div class="res-kind">PERSPECTIVE</div><h3>Open vs Closed ESL Systems</h3><p>Why documented interfaces decide whether a successor can ever take over.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="esl-integration-pos-erp-api-mqtt-database.html"><div class="res-kind">INTEGRATION</div><h3>Connecting ESL to POS, ERP and Databases</h3><p>What the integration actually involves &mdash; and who owns it when it breaks.</p><span class="res-link">Read article &rarr;</span></a>
+      <a class="res-card reveal" href="electronic-shelf-label-cost.html"><div class="res-kind">PRICING</div><h3>How Much Do Electronic Shelf Labels Cost?</h3><p>The hardware side of the budget: labels, gateways and installation.</p><span class="res-link">Read article &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo"><img src="assets/brand/icon-master.svg" alt="" class="logo-mark" width="40" height="40"><span class="logo-type">Ai<span>ESL</span></span></div>
+        <p>The AI-native open platform for retail shelf operations. Dynamic pricing, shelf monitoring and open middleware trusted in 30+ countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <a href="index.html#platform">AI Dynamic Pricing</a>
+        <a href="index.html#platform">Shelf Monitoring</a>
+        <a href="index.html#diff">Open Middleware</a>
+        <a href="products.html">Products</a>
+      </div>
+      <div class="foot-col">
+        <h4>Resources</h4>
+        <a href="Resources.html">Resources hub</a>
+        <a href="blog.html">Insights &amp; Blog</a>
+        <a href="esl-roi-calculator.html">ROI calculator</a>
+        <a href="esl-base-station-coverage-calculator.html">Coverage planner</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <div class="foot-contact">
+          Building A1, Yuexiu iPARK Yuegang Zhigu, Nansha District, Guangzhou, Guangdong Province, China
+          <b>Email</b><a href="mailto:info@panpantechnology.com">info@panpantechnology.com</a>
+          <b>Phone</b><a href="tel:+8613925118851">+86-13925118851</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-brand-row" aria-label="PanPanTech Group brands">
+      <span><a href="https://www.panpantechnology.com" target="_blank" rel="noopener">PanPanTech&reg;</a> &mdash; Group Site</span>
+      <span><a href="https://www.aieinksmart.com" target="_blank" rel="noopener">AiEInkSmart&trade;</a> &mdash; Electronic Shelf Labels</span>
+      <span><a href="https://www.pyroglaux.com" target="_blank" rel="noopener">Pyroglaux&reg;</a> &mdash; Footfall Analytics</span>
+      <span><a href="https://www.einksmart.com" target="_blank" rel="noopener">EinkSmart&trade;</a> &mdash; E-Ink Art Displays</span>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 AiESL&trade; | The Retail Data Platform of PanPanTech&reg; | Guangzhou PanPanTech Co., Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div id="formStage">
+      <div class="modal-head">
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <h3>Get a Custom Quote</h3>
+        <p>Tell us about your store network &mdash; we'll send tailored pricing and a free ROI assessment within one business day.</p>
+      </div>
+      <div class="modal-body">
+        <form id="quoteForm" novalidate>
+          <div class="form-row">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input type="text" name="name" id="f-name"><div class="form-err" id="e-name">Please enter your name</div></div>
+            <div class="form-field"><label>Work email <span class="req">*</span></label><input type="email" name="email" id="f-email"><div class="form-err" id="e-email">Please enter a valid email</div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>Company <span class="req">*</span></label><input type="text" name="company" id="f-company"><div class="form-err" id="e-company">Please enter your company</div></div>
+            <div class="form-field"><label>Country</label><input type="text" name="country" id="f-country" placeholder="e.g. Germany"></div>
+          </div>
+          <div class="form-field"><label>What are you trying to solve?</label><textarea name="message" id="f-message" placeholder="Tell us about your current setup, timeline, or any specific requirements..."></textarea></div>
+          <button type="submit" class="btn btn-primary">Send my request</button>
+          <p style="font-size:11px;color:var(--ink-dim);margin-top:12px;text-align:center">We reply within one business day. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+    <div id="successStage" style="display:none">
+      <div class="form-success">
+        <div class="ok-ic">&#10003;</div>
+        <h3>Request received</h3>
+        <p>Thanks &mdash; our retail solutions team will get back to you within one business day with tailored pricing and a free ROI assessment.</p>
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 620" width="1160" height="620" font-family="'Inter','Segoe UI',system-ui,sans-serif">
+  <rect width="1160" height="620" fill="#ffffff"/>
+  <text x="40" y="44" font-size="21" font-weight="700" fill="#12151c">Where the software runs is not what decides control</text>
+  <text x="40" y="70" font-size="13.5" fill="#5b6472">The three hosting models compared against the four terms that actually determine your position</text>
+
+  <!-- column headers -->
+  <g>
+    <rect x="330" y="92" width="266" height="46" rx="9" fill="#eef3ff" stroke="#c9d8ff"/>
+    <text x="463" y="114" font-size="14.5" font-weight="700" fill="#2f5fe0" text-anchor="middle">Vendor cloud</text>
+    <text x="463" y="130" font-size="11.5" fill="#5b6472" text-anchor="middle">SaaS, vendor infrastructure</text>
+
+    <rect x="606" y="92" width="266" height="46" rx="9" fill="#fff4e6" stroke="#f0d3a6"/>
+    <text x="739" y="114" font-size="14.5" font-weight="700" fill="#b4700f" text-anchor="middle">On-premise</text>
+    <text x="739" y="130" font-size="11.5" fill="#5b6472" text-anchor="middle">your building, your hardware</text>
+
+    <rect x="882" y="92" width="238" height="46" rx="9" fill="#eaf6f0" stroke="#bcdfcd"/>
+    <text x="1001" y="114" font-size="14.5" font-weight="700" fill="#1d7a4c" text-anchor="middle">Private hosted</text>
+    <text x="1001" y="130" font-size="11.5" fill="#5b6472" text-anchor="middle">your own cloud account</text>
+  </g>
+
+  <!-- rows -->
+  <g font-size="12.5" fill="#12151c">
+    <!-- row 1 -->
+    <rect x="40" y="150" width="280" height="60" rx="8" fill="#f6f7fa"/>
+    <text x="56" y="176" font-size="13" font-weight="650">Who operates it day to day</text>
+    <text x="56" y="195" font-size="11.5" fill="#5b6472">the routine running of the system</text>
+    <rect x="330" y="150" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="463" y="185" text-anchor="middle">Vendor</text>
+    <rect x="606" y="150" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="739" y="178" text-anchor="middle" font-weight="650" fill="#b4700f">You &#8212; or the vendor</text>
+    <text x="739" y="196" text-anchor="middle" font-size="11" fill="#5b6472">this is the row to pin down</text>
+    <rect x="882" y="150" width="238" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="1001" y="185" text-anchor="middle">Usually shared</text>
+
+    <!-- row 2 -->
+    <rect x="40" y="218" width="280" height="60" rx="8" fill="#f6f7fa"/>
+    <text x="56" y="244" font-size="13" font-weight="650">Vendor remote access</text>
+    <text x="56" y="263" font-size="11.5" fill="#5b6472">can they reach it, and can you switch that off?</text>
+    <rect x="330" y="218" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="463" y="253" text-anchor="middle">Inherent</text>
+    <rect x="606" y="218" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="739" y="246" text-anchor="middle">Only if configured</text>
+    <text x="739" y="264" text-anchor="middle" font-size="11" fill="#5b6472">often present, rarely discussed</text>
+    <rect x="882" y="218" width="238" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="1001" y="253" text-anchor="middle">Yours to grant</text>
+
+    <!-- row 3 -->
+    <rect x="40" y="286" width="280" height="60" rx="8" fill="#f6f7fa"/>
+    <text x="56" y="312" font-size="13" font-weight="650">Who patches the machine</text>
+    <text x="56" y="331" font-size="11.5" fill="#5b6472">OS updates, disk, backups</text>
+    <rect x="330" y="286" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="463" y="321" text-anchor="middle">Vendor</text>
+    <rect x="606" y="286" width="266" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="739" y="315" text-anchor="middle" font-weight="650" fill="#b4700f">You</text>
+    <text x="739" y="333" text-anchor="middle" font-size="11" fill="#5b6472">the most commonly missed line</text>
+    <rect x="882" y="286" width="238" height="60" rx="8" fill="#fbfcfe" stroke="#e4e8ef"/>
+    <text x="1001" y="321" text-anchor="middle">You</text>
+
+    <!-- row 4 -->
+    <rect x="40" y="354" width="280" height="60" rx="8" fill="#f6f7fa"/>
+    <text x="56" y="380" font-size="13" font-weight="650">GDPR role</text>
+    <text x="56" y="399" font-size="11.5" fill="#5b6472">who determines purpose and means</text>
+    <rect x="330" y="354" width="790" height="60" rx="8" fill="#eef3ff" stroke="#c9d8ff"/>
+    <text x="725" y="380" text-anchor="middle" font-size="13" font-weight="650" fill="#2f5fe0">You are almost always the controller &#8212; in all three models</text>
+    <text x="725" y="399" text-anchor="middle" font-size="11.5" fill="#5b6472">Hosting choice does not transfer the obligation. Source: EDPB Guidelines 07/2020</text>
+
+    <!-- row 5 -->
+    <rect x="40" y="422" width="280" height="60" rx="8" fill="#f6f7fa"/>
+    <text x="56" y="448" font-size="13" font-weight="650">Hardware portability</text>
+    <text x="56" y="467" font-size="11.5" fill="#5b6472">can another system drive your gateways?</text>
+    <rect x="330" y="422" width="790" height="60" rx="8" fill="#fdeeea" stroke="#f2c6ba"/>
+    <text x="725" y="448" text-anchor="middle" font-size="13" font-weight="650" fill="#c0452a">Decided by protocol documentation, not by hosting model</text>
+    <text x="725" y="467" text-anchor="middle" font-size="11.5" fill="#5b6472">The gateways and labels are the part you are least likely to replace voluntarily</text>
+  </g>
+
+  <!-- bottom callout -->
+  <rect x="40" y="504" width="1080" height="82" rx="10" fill="#f6f7fa" stroke="#e4e8ef"/>
+  <text x="60" y="530" font-size="13.5" font-weight="700" fill="#12151c">The four terms that actually decide your position &#8212; all of them are contract, not architecture:</text>
+  <g font-size="12.5" fill="#12151c">
+    <circle cx="68" cy="553" r="3.5" fill="#2f5fe0"/><text x="80" y="557">Remote access</text>
+    <circle cx="238" cy="553" r="3.5" fill="#2f5fe0"/><text x="250" y="557">Maintenance ownership</text>
+    <circle cx="468" cy="553" r="3.5" fill="#2f5fe0"/><text x="480" y="557">Continuity if the vendor stops</text>
+    <circle cx="738" cy="553" r="3.5" fill="#2f5fe0"/><text x="750" y="557">Hardware portability</text>
+  </g>
+  <text x="60" y="576" font-size="11.5" fill="#5b6472">Pick the hosting model that matches your IT reality, then spend the negotiation on these four.</text>
+</svg>

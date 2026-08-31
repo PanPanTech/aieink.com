@@ -36,6 +36,8 @@
 
 - How Many ESL Can One Gateway Support (capacity, update windows, refresh times): https://www.aiesl.com/esl-labels-per-gateway-capacity.html
 
+- ESL Software Deployment: Cloud vs Your Own Server (cost structure, control, continuity, hardware portability): https://www.aiesl.com/esl-software-cloud-vs-on-premise.html
+
 ## Interactive Tools
 
 - ESL ROI Calculator (payback period and 3-year net savings; conservative labour-only model, all assumptions published): https://www.aiesl.com/esl-roi-calculator.html
